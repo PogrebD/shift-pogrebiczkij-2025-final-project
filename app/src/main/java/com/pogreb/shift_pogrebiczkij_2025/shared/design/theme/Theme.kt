@@ -1,86 +1,60 @@
 package com.pogreb.shift_pogrebiczkij_2025.shared.design.theme
 
-import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.staticCompositionLocalOf
 
-private val DarkColorScheme = darkColorScheme(
-    primary = PermanentPrimary,
-    onPrimary = FontNightPrimary,
-    primaryContainer = PermanentPrimaryLight,
-    onPrimaryContainer = FontNightPrimary,
-    inversePrimary = PermanentPrimaryDark,
-
-    background = BgNightPrimary,
-    onBackground = FontNightPrimary,
-    surface = BgNightPrimary,
-    onSurface = FontNightPrimary,
-    surfaceVariant = BgNightSecondary,
-    onSurfaceVariant = FontNightSecondary,
-
-    error = IndicatorNightError,
-    onError = FontNightPrimaryInvert,
-    tertiary = IndicatorNightPositive,
-    onTertiary = FontNightPrimaryInvert,
-
-    outline = BorderNightPrimary,
-    outlineVariant = BorderNightSecondary,
-
-    surfaceDim = BgNightTertiary,
-    surfaceBright = BgNightPrimary,
-)
-
-private val LightColorScheme = lightColorScheme(
-    primary = PermanentPrimary,
-    onPrimary = FontDayPrimary,
-    primaryContainer = PermanentPrimaryLight,
-    onPrimaryContainer = FontDayPrimary,
-    inversePrimary = PermanentPrimaryDark,
-
-    background = BgDayPrimary,
-    onBackground = FontDayPrimary,
-    surface = BgDayPrimary,
-    onSurface = FontDayPrimary,
-    surfaceVariant = BgDaySecondary,
-    onSurfaceVariant = FontDaySecondary,
-
-    error = IndicatorDayError,
-    onError = FontDayPrimaryInvert,
-    tertiary = IndicatorDayPositive,
-    onTertiary = FontDayPrimaryInvert,
-
-    outline = BorderDayPrimary,
-    outlineVariant = BorderDaySecondary,
-
-    surfaceDim = BgDayTertiary,
-    surfaceBright = BgDayPrimary,
-)
+val LocalCustomColorScheme = staticCompositionLocalOf { LightCustomColorScheme }
 
 @Composable
 fun AppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
+    val customColors = if (darkTheme) DarkCustomColorScheme else LightCustomColorScheme
 
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
-
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
+    val materialColorScheme = ColorScheme(
+        primary = customColors.primary,
+        onPrimary = customColors.onPrimary,
+        primaryContainer = customColors.primaryContainer,
+        onPrimaryContainer = customColors.onPrimaryContainer,
+        inversePrimary = customColors.inversePrimary,
+        secondary = customColors.secondary,
+        onSecondary = customColors.onSecondary,
+        secondaryContainer = customColors.secondaryContainer,
+        onSecondaryContainer = customColors.onSecondaryContainer,
+        tertiary = customColors.tertiary,
+        onTertiary = customColors.onTertiary,
+        tertiaryContainer = customColors.tertiaryContainer,
+        onTertiaryContainer = customColors.onTertiaryContainer,
+        background = customColors.background,
+        onBackground = customColors.onBackground,
+        surface = customColors.surface,
+        onSurface = customColors.onSurface,
+        surfaceVariant = customColors.surfaceVariant,
+        onSurfaceVariant = customColors.onSurfaceVariant,
+        surfaceTint = customColors.surfaceTint,
+        inverseSurface = customColors.inverseSurface,
+        inverseOnSurface = customColors.inverseOnSurface,
+        error = customColors.error,
+        onError = customColors.onError,
+        errorContainer = customColors.errorContainer,
+        onErrorContainer = customColors.onErrorContainer,
+        outline = customColors.outline,
+        outlineVariant = customColors.outlineVariant,
+        scrim = customColors.scrim,
     )
+
+    CompositionLocalProvider(
+        LocalCustomColorScheme provides customColors
+    ) {
+        MaterialTheme(
+            colorScheme = materialColorScheme,
+            typography = Typography,
+            content = content
+        )
+    }
 }
