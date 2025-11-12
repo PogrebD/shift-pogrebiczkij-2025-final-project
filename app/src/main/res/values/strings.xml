@@ -17,4 +17,5 @@
     <string name="body_start_issued_loans">"Отслеживайте изменение статуса заявки.\nКогда займ будет одобрен, подойдите с паспортом в "</string>
     <string name="body_annotation_issued_loans">отделение банка</string>
     <string name="body_end_issued_loans">" для подписания договора"</string>
+    <string name="app_logo_content_description">app logo</string>
 </resources>
