@@ -3,4 +3,18 @@
     <string name="login_title">Вход</string>
     <string name="registration_title">Регистрация</string>
     <string name="hidden_content_description">hidden</string>
+    <string name="back_label">Назад</string>
+    <string name="close_label">Закрыть</string>
+    <string name="next_label">Далее</string>
+    <string name="home_page_illustration">Home page illustration</string>
+    <string name="close_content_description">Close</string>
+    <string name="title_create_loan">Оформить займ</string>
+    <string name="body_create_loan">Выберите сумму и нажмите «продолжить». Затем укажите свои данные.\nПосле нажатия «Оформить займ» заявка поступит в банк</string>
+    <string name="title_get_loan">Получить займ</string>
+    <string name="body_get_loan">Отслеживайте изменение статуса заявки.\nКогда займ будет одобрен, подойдите с паспортом в отделение банка для подписания договора</string>
+    <string name="title_Issued_loans">Оформленные займы</string>
+    <string name="body_Issued_loans">На главном экране приложения отображается список оформленных займов.</string>
+    <string name="body_start_issued_loans">"Отслеживайте изменение статуса заявки.\nКогда займ будет одобрен, подойдите с паспортом в "</string>
+    <string name="body_annotation_issued_loans">отделение банка</string>
+    <string name="body_end_issued_loans">" для подписания договора"</string>
 </resources>
