@@ -3,6 +3,8 @@ package com.pogreb.shift_pogrebiczkij_2025.feature.main_page.presentation.ui.com
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -22,7 +24,8 @@ import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
 fun LoanRepaymentCard() {
     Box(
         modifier = Modifier
-            .size(328.dp, 160.dp)
+            .height(160.dp)
+            .fillMaxWidth()
             .clip(ShapeDefaults.Large)
             .background(MaterialTheme.colorScheme.primary)
     ) {

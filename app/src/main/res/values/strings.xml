@@ -18,4 +18,18 @@
     <string name="body_annotation_issued_loans">отделение банка</string>
     <string name="body_end_issued_loans">" для подписания договора"</string>
     <string name="app_logo_content_description">app logo</string>
+    <string name="pattern_amount">"%1$s ₽"</string>
+    <string name="min_amount">"0 ₽"</string>
+    <string name="content_description_edit">Edit</string>
+    <string name="label_conditions">Условия</string>
+    <string name="pattern_percent_period_conditions">Под %1$s%% на %2$s дней</string>
+    <string name="label_continue">Продолжить</string>
+    <string name="title_my_loans">Мои займы</string>
+    <string name="body_my_loans">Здесь будут отображаться Ваши активные займы</string>
+    <string name="title_loan_amount">Сумма займа</string>
+    <string name="title_main_page">Главная</string>
+    <string name="content_description_home_page_navigation">Home Page Navigation</string>
+    <string name="label_main_page">Главная</string>
+    <string name="label_menu_page">Меню</string>
+    <string name="content_description_menu_page_navigation">Menu Navigation</string>
 </resources>

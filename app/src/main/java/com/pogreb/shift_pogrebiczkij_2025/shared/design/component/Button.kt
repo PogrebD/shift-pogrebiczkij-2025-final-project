@@ -26,13 +26,14 @@ import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.fontDisable
 fun PrimaryButton(
     onClick: () -> Unit,
     text: String,
+    modifier: Modifier,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val pressed by interactionSource.collectIsPressedAsState()
 
     Button(
         onClick = onClick,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth(),
         shape = ShapeDefaults.Small,
         colors = getColorsPrimaryButton(pressed),
@@ -144,7 +145,9 @@ fun getContentColorTertiaryButton(pressed: Boolean) = when {
 fun PreviewButton() {
     AppTheme {
         Column {
-            PrimaryButton({}, "Кнопка")
+            PrimaryButton(
+                {}, "Кнопка", Modifier
+            )
             SecondaryButton({}, "Кнопка")
             TertiaryButton({}, "Кнопка")
         }
