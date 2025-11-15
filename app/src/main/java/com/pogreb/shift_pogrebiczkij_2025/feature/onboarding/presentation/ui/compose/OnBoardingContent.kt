@@ -21,7 +21,7 @@ import com.pogreb.shift_pogrebiczkij_2025.R
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
 
 @Composable
-fun OnBoardingContent(
+internal fun OnBoardingContent(
     modifier: Modifier,
     currentPage: Int
 ) {
@@ -52,7 +52,7 @@ fun OnBoardingContent(
 }
 
 @Composable
-fun Content(illustration: Painter, titleInstruction: String, bodyInstruction: String) {
+private fun Content(illustration: Painter, titleInstruction: String, bodyInstruction: String) {
     Image(
         painter = illustration,
         contentDescription = "",
@@ -66,7 +66,7 @@ fun Content(illustration: Painter, titleInstruction: String, bodyInstruction: St
 }
 
 @Composable
-fun ContentWithAnnotatedInstruction(illustration: Painter, titleInstruction: String) {
+private fun ContentWithAnnotatedInstruction(illustration: Painter, titleInstruction: String) {
     Image(
         painter = illustration,
         contentDescription = "",
@@ -79,7 +79,7 @@ fun ContentWithAnnotatedInstruction(illustration: Painter, titleInstruction: Str
 }
 
 @Composable
-fun LaonInstructions(title: String, body: String) {
+private fun LaonInstructions(title: String, body: String) {
     Text(
         text = title,
         style = MaterialTheme.typography.headlineLarge,
@@ -92,7 +92,7 @@ fun LaonInstructions(title: String, body: String) {
 }
 
 @Composable
-fun LaonInstructionsWithAnnotation(title: String) {
+private fun LaonInstructionsWithAnnotation(title: String) {
     Text(
         text = title,
         style = MaterialTheme.typography.headlineLarge,
@@ -118,7 +118,7 @@ fun LaonInstructionsWithAnnotation(title: String) {
     backgroundColor = 0xFFFFFFFF
 )
 @Composable
-fun PreviewOnBoardingContent() {
+private fun PreviewOnBoardingContent() {
     AppTheme {
         OnBoardingContent(
             currentPage = 0,

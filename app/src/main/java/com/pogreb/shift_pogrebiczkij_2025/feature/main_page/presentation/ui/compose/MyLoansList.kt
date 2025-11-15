@@ -26,7 +26,7 @@ fun MyLoansList() {
     backgroundColor = 0xFFFFFFFF
 )
 @Composable
-fun PreviewMyLoansList() {
+private fun PreviewMyLoansList() {
     AppTheme {
         MyLoansList()
     }

@@ -49,14 +49,14 @@ fun PrimaryButton(
 }
 
 @Composable
-fun getColorsPrimaryButton(pressed: Boolean) = ButtonDefaults.buttonColors(
+private fun getColorsPrimaryButton(pressed: Boolean) = ButtonDefaults.buttonColors(
     containerColor = getContainerColorPrimaryButton(pressed),
     disabledContainerColor = MaterialTheme.colorScheme.bgDisable,
     disabledContentColor = MaterialTheme.colorScheme.fontDisable,
 )
 
 @Composable
-fun getContainerColorPrimaryButton(pressed: Boolean) = when {
+private fun getContainerColorPrimaryButton(pressed: Boolean) = when {
     pressed -> MaterialTheme.colorScheme.inversePrimary
     else -> MaterialTheme.colorScheme.primary
 }
@@ -87,14 +87,14 @@ fun SecondaryButton(
 }
 
 @Composable
-fun getColorsSecondaryButton(pressed: Boolean) = ButtonDefaults.buttonColors(
+private fun getColorsSecondaryButton(pressed: Boolean) = ButtonDefaults.buttonColors(
     containerColor = getContainerColorSecondaryButton(pressed),
     disabledContainerColor = MaterialTheme.colorScheme.bgDisable,
     disabledContentColor = MaterialTheme.colorScheme.fontDisable,
 )
 
 @Composable
-fun getContainerColorSecondaryButton(pressed: Boolean) = when {
+private fun getContainerColorSecondaryButton(pressed: Boolean) = when {
     pressed -> MaterialTheme.colorScheme.bgTertiary
     else -> MaterialTheme.colorScheme.surfaceVariant
 }
@@ -125,13 +125,13 @@ fun TertiaryButton(
 }
 
 @Composable
-fun getColorsTertiaryButton(pressed: Boolean) = ButtonDefaults.textButtonColors(
+private fun getColorsTertiaryButton(pressed: Boolean) = ButtonDefaults.textButtonColors(
     contentColor = getContentColorTertiaryButton(pressed),
     disabledContentColor = MaterialTheme.colorScheme.fontDisable,
 )
 
 @Composable
-fun getContentColorTertiaryButton(pressed: Boolean) = when {
+private fun getContentColorTertiaryButton(pressed: Boolean) = when {
     pressed -> MaterialTheme.colorScheme.primary
     else -> MaterialTheme.colorScheme.onPrimary
 }
@@ -142,7 +142,7 @@ fun getContentColorTertiaryButton(pressed: Boolean) = when {
     backgroundColor = 0xFFFFFFFF
 )
 @Composable
-fun PreviewButton() {
+private fun PreviewButton() {
     AppTheme {
         Column {
             PrimaryButton(

@@ -15,7 +15,7 @@ import com.pogreb.shift_pogrebiczkij_2025.R
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.TabBar
 
 @Composable
-fun MainPageScreen() {
+internal fun MainPageScreen() {
 
     Scaffold(
         topBar = {
@@ -47,7 +47,7 @@ fun MainPageScreen() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainPageTopBar(onQuestionClick: () -> Unit) {
+private fun MainPageTopBar(onQuestionClick: () -> Unit) {
     TopAppBar(
         title = { Text(stringResource(R.string.title_main_page)) },
         actions = {

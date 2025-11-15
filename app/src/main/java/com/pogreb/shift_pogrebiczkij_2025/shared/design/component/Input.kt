@@ -67,7 +67,7 @@ fun PasswordInput(
 }
 
 @Composable
-fun PasswordModeIcon(passwordHidden: Boolean, onVisibilityClick: () -> Unit) {
+private fun PasswordModeIcon(passwordHidden: Boolean, onVisibilityClick: () -> Unit) {
     IconButton(
         onClick = onVisibilityClick,
         content = {
@@ -80,13 +80,13 @@ fun PasswordModeIcon(passwordHidden: Boolean, onVisibilityClick: () -> Unit) {
 }
 
 @Composable
-fun getPasswordPainter(passwordHidden: Boolean) = when {
+private fun getPasswordPainter(passwordHidden: Boolean) = when {
     passwordHidden -> painterResource(R.drawable.hidden)
     else -> painterResource(R.drawable.visible)
 }
 
 @Composable
-fun getVisualTransformation(passwordHidden: Boolean) = when {
+private fun getVisualTransformation(passwordHidden: Boolean) = when {
     passwordHidden -> PasswordVisualTransformation(
         mask = '*'
     )
@@ -96,7 +96,7 @@ fun getVisualTransformation(passwordHidden: Boolean) = when {
 
 
 @Composable
-fun ErrorText(text: String, invalid: Boolean) = when {
+private fun ErrorText(text: String, invalid: Boolean) = when {
     invalid -> Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Start,
@@ -114,7 +114,7 @@ fun ErrorText(text: String, invalid: Boolean) = when {
     backgroundColor = 0xFFFFFFFF
 )
 @Composable
-fun PreviewInput() {
+private fun PreviewInput() {
     AppTheme {
         Column {
             PasswordInput(

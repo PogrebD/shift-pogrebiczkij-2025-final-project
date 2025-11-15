@@ -57,7 +57,7 @@ fun AuthorizationTab(
 }
 
 @Composable
-fun LoginTextButton(modifier: Modifier, onLoginClick: () -> Unit, signUpMode: Boolean) {
+private fun LoginTextButton(modifier: Modifier, onLoginClick: () -> Unit, signUpMode: Boolean) {
     Text(
         text = stringResource(R.string.login_title),
         modifier = modifier
@@ -70,7 +70,7 @@ fun LoginTextButton(modifier: Modifier, onLoginClick: () -> Unit, signUpMode: Bo
 
 
 @Composable
-fun RegistrationTextButton(
+private fun RegistrationTextButton(
     modifier: Modifier,
     onRegistrationClick: () -> Unit,
     signUpMode: Boolean
@@ -86,7 +86,7 @@ fun RegistrationTextButton(
 }
 
 @Composable
-fun getLoginTextColor(
+private fun getLoginTextColor(
     signUpMode: Boolean,
 ) = when {
     signUpMode ->
@@ -97,7 +97,7 @@ fun getLoginTextColor(
 }
 
 @Composable
-fun getRegistrationTextColor(
+private fun getRegistrationTextColor(
     signUpMode: Boolean,
 ) = when {
     signUpMode ->
@@ -114,7 +114,7 @@ fun getRegistrationTextColor(
     backgroundColor = 0xFFFFFFFF
 )
 @Composable
-fun PreviewAuthorizationTab() {
+private fun PreviewAuthorizationTab() {
     AppTheme {
         AuthorizationTab(
             onLoginClick = {},

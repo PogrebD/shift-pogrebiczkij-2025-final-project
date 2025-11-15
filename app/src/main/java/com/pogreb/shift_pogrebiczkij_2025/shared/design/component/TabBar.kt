@@ -50,7 +50,7 @@ fun TabBar(
 }
 
 @Composable
-fun MenuPageNavigationElement(onMenuPageClick: () -> Unit, color: Color) {
+private fun MenuPageNavigationElement(onMenuPageClick: () -> Unit, color: Color) {
     Column(
         modifier = Modifier
             .padding(horizontal = 16.dp)
@@ -73,7 +73,7 @@ fun MenuPageNavigationElement(onMenuPageClick: () -> Unit, color: Color) {
 }
 
 @Composable
-fun MainPageNavigationElement(onMainPageClick: () -> Unit, color: Color) {
+private fun MainPageNavigationElement(onMainPageClick: () -> Unit, color: Color) {
     Column(
         modifier = Modifier
             .padding(horizontal = 16.dp)
@@ -96,7 +96,7 @@ fun MainPageNavigationElement(onMainPageClick: () -> Unit, color: Color) {
 }
 
 @Composable
-fun getMainPageTextColor(
+private fun getMainPageTextColor(
     activeTab: ActiveTab,
 ) = when (activeTab) {
     ActiveTab.HOME ->
@@ -107,7 +107,7 @@ fun getMainPageTextColor(
 }
 
 @Composable
-fun getMenuPageTextColor(
+private fun getMenuPageTextColor(
     activeTab: ActiveTab,
 ) = when (activeTab) {
     ActiveTab.HOME ->
@@ -127,7 +127,7 @@ enum class ActiveTab {
     backgroundColor = 0xFFFFFFFF
 )
 @Composable
-fun PreviewTabBar() {
+private fun PreviewTabBar() {
     AppTheme {
         TabBar(
             onMainPageClick = {},

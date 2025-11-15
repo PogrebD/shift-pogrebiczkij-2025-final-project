@@ -17,7 +17,7 @@ import com.pogreb.shift_pogrebiczkij_2025.R
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
 
 @Composable
-fun MainPageContent(
+internal fun MainPageContent(
     modifier: Modifier,
     loanAmount: Double,
     maxAmount: Double,
@@ -57,7 +57,7 @@ fun MainPageContent(
 }
 
 @Composable
-fun Title(text: String) {
+private fun Title(text: String) {
     Text(
         text = text,
         modifier = Modifier
@@ -74,7 +74,7 @@ fun Title(text: String) {
     backgroundColor = 0xFFFFFFFF
 )
 @Composable
-fun PreviewMainPageContent() {
+private fun PreviewMainPageContent() {
     AppTheme {
         MainPageContent(
             loanAmount = 7000.00,

@@ -14,7 +14,7 @@ import com.pogreb.shift_pogrebiczkij_2025.R
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.BottomNavigation
 
 @Composable
-fun OnBoardingScreen() {
+internal fun OnBoardingScreen() {
 
     Scaffold(
         topBar = {
@@ -40,7 +40,7 @@ fun OnBoardingScreen() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OnBoardingTopBar(onCloseClick: () -> Unit) {
+private fun OnBoardingTopBar(onCloseClick: () -> Unit) {
     TopAppBar(
         title = {},
         navigationIcon = {

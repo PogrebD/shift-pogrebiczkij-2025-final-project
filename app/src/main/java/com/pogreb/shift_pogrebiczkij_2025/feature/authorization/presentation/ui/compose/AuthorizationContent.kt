@@ -18,7 +18,7 @@ import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
 
 
 @Composable
-fun AuthorizationContent(
+internal fun AuthorizationContent(
     signUpMode: Boolean,
     loginText: String,
     passwordText: String,
@@ -90,7 +90,7 @@ fun AuthorizationContent(
     backgroundColor = 0xFFFFFFFF
 )
 @Composable
-fun PreviewAuthorizationContent() {
+private fun PreviewAuthorizationContent() {
     AppTheme {
         AuthorizationContent(
             signUpMode = true,

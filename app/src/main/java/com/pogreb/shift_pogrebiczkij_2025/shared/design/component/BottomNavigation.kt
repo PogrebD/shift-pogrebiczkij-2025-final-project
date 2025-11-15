@@ -25,7 +25,7 @@ import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.bgDisable
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.iconPrimary
 
-const val PAGE_COUNT = 3
+private const val PAGE_COUNT = 3
 
 @Composable
 fun BottomNavigation(
@@ -70,7 +70,7 @@ fun BottomNavigation(
 }
 
 @Composable
-fun NextTextButton(text: String, modifier: Modifier, onNextClick: () -> Unit) {
+private fun NextTextButton(text: String, modifier: Modifier, onNextClick: () -> Unit) {
     Text(
         text = text,
         modifier = modifier
@@ -81,7 +81,7 @@ fun NextTextButton(text: String, modifier: Modifier, onNextClick: () -> Unit) {
 }
 
 @Composable
-fun PageStepper(
+private fun PageStepper(
     modifier: Modifier,
     currentPage: Int,
     pageCount: Int = PAGE_COUNT,
@@ -104,7 +104,7 @@ fun PageStepper(
 }
 
 @Composable
-fun BackTextButton(text: String, modifier: Modifier, onBackClick: () -> Unit) {
+private fun BackTextButton(text: String, modifier: Modifier, onBackClick: () -> Unit) {
     Text(
         text = text,
         modifier = modifier
@@ -115,19 +115,19 @@ fun BackTextButton(text: String, modifier: Modifier, onBackClick: () -> Unit) {
 }
 
 @Composable
-fun getNavIconColor(currentPage: Int, index: Int) = when (index) {
+private fun getNavIconColor(currentPage: Int, index: Int) = when (index) {
     currentPage -> MaterialTheme.colorScheme.iconPrimary
     else -> MaterialTheme.colorScheme.bgDisable
 }
 
 @Composable
-fun getBackButtonText(currentPage: Int) = when (currentPage) {
+private fun getBackButtonText(currentPage: Int) = when (currentPage) {
     0 -> ""
     else -> stringResource(R.string.back_label)
 }
 
 @Composable
-fun getNextButtonText(currentPage: Int) = when (currentPage) {
+private fun getNextButtonText(currentPage: Int) = when (currentPage) {
     2 -> stringResource(R.string.close_label)
     else -> stringResource(R.string.next_label)
 }
@@ -138,7 +138,7 @@ fun getNextButtonText(currentPage: Int) = when (currentPage) {
     backgroundColor = 0xFFFFFFFF
 )
 @Composable
-fun PreviewBottomNavigation() {
+private fun PreviewBottomNavigation() {
     AppTheme {
         BottomNavigation(
             onBackClick = {},

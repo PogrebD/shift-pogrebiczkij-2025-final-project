@@ -39,7 +39,7 @@ fun LoanRepaymentCard() {
 }
 
 @Composable
-fun LoanRepaymentCardText() {
+private fun LoanRepaymentCardText() {
     Column(
         modifier = Modifier
             .padding(start = 16.dp, top = 27.dp)
@@ -70,7 +70,7 @@ fun LoanRepaymentCardText() {
 }
 
 @Composable
-fun LoanRepaymentCardGradient(modifier: Modifier) {
+private fun LoanRepaymentCardGradient(modifier: Modifier) {
     Box(
         modifier = modifier
             .offset(x = 86.dp)
@@ -105,7 +105,7 @@ fun LoanRepaymentCardGradient(modifier: Modifier) {
     backgroundColor = 0xFFFFFFFF
 )
 @Composable
-fun PreviewAddCard() {
+private fun PreviewAddCard() {
     AppTheme {
         LoanRepaymentCard()
     }

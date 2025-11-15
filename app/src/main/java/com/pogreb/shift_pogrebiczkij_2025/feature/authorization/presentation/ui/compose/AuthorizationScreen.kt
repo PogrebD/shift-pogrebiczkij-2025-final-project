@@ -19,12 +19,12 @@ import com.pogreb.shift_pogrebiczkij_2025.R
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
 
 @Composable
-fun AuthorizationScreen() {
+internal fun AuthorizationScreen() {
     AuthorizationLogoWithLoading()
 }
 
 @Composable
-fun AuthorizationLogoWithLoading() {
+private fun AuthorizationLogoWithLoading() {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -46,7 +46,7 @@ fun AuthorizationLogoWithLoading() {
 }
 
 @Composable
-fun Logo() {
+private fun Logo() {
     Image(
         painter = getLogoPainter(),
         contentDescription = stringResource(R.string.app_logo_content_description),
@@ -54,7 +54,7 @@ fun Logo() {
 }
 
 @Composable
-fun getLogoPainter(darkTheme: Boolean = isSystemInDarkTheme()) = when {
+private fun getLogoPainter(darkTheme: Boolean = isSystemInDarkTheme()) = when {
     darkTheme -> painterResource(R.drawable.logo_night)
     else -> painterResource(R.drawable.logo_day)
 }
@@ -65,7 +65,7 @@ fun getLogoPainter(darkTheme: Boolean = isSystemInDarkTheme()) = when {
     backgroundColor = 0xFFFFFFFF
 )
 @Composable
-fun PreviewAuthorizationScreen() {
+private fun PreviewAuthorizationScreen() {
     AppTheme {
         AuthorizationScreen(
         )

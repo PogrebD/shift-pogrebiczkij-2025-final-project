@@ -80,7 +80,7 @@ fun LoanCalculatorCard(
 }
 
 @Composable
-fun LoanConditions(
+private fun LoanConditions(
     percent: Double,
     period: Int,
 ) {
@@ -107,7 +107,11 @@ fun LoanConditions(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoanAmountSlider(loanAmount: Double, maxAmount: Double, onSliderValueChange: (Float) -> Unit) {
+private fun LoanAmountSlider(
+    loanAmount: Double,
+    maxAmount: Double,
+    onSliderValueChange: (Float) -> Unit
+) {
     Slider(
         value = loanAmount.toFloat(),
         onValueChange = onSliderValueChange,
@@ -189,7 +193,7 @@ fun LoanAmountSlider(loanAmount: Double, maxAmount: Double, onSliderValueChange:
 }
 
 @Composable
-fun LoanAmount(loanAmount: Double) {
+private fun LoanAmount(loanAmount: Double) {
     Row(
         modifier = Modifier.padding(start = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -217,7 +221,7 @@ fun LoanAmount(loanAmount: Double) {
     backgroundColor = 0xFFFFFFFF
 )
 @Composable
-fun PreviewAuthorizationContent() {
+private fun PreviewAuthorizationContent() {
     AppTheme {
         LoanCalculatorCard(
             loanAmount = 7000.00,
