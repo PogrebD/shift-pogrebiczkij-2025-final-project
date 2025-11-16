@@ -5,30 +5,35 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import com.pogreb.shift_pogrebiczkij_2025.R
+import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.entity.InputErrorType
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
 
 @Composable
-fun DefaultInput(
+fun LoginInput(
     label: String,
     text: String,
     onValueChange: (String) -> Unit,
-    invalid: Boolean,
-    errorText: String,
+    loginErrorType: InputErrorType,
 ) {
+    val isError = loginErrorType != InputErrorType.NONE
+
     OutlinedTextField(
         value = text,
         onValueChange = onValueChange,
@@ -36,8 +41,26 @@ fun DefaultInput(
             .fillMaxWidth(),
         textStyle = MaterialTheme.typography.bodyMedium,
         label = { Text(text = label) },
-        supportingText = { ErrorText(errorText, invalid) },
-        isError = invalid,
+        supportingText = {
+            if (isError) {
+                ErrorText(loginErrorType)
+            }
+        },
+        isError = isError,
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Password,
+            imeAction = ImeAction.Done
+        ),
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+            focusedBorderColor = MaterialTheme.colorScheme.outline,
+            errorLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+            cursorColor = MaterialTheme.colorScheme.onPrimary,
+            selectionColors = TextSelectionColors(
+                handleColor = MaterialTheme.colorScheme.onPrimary,
+                backgroundColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.4f),
+            )
+        )
     )
 }
 
@@ -46,11 +69,12 @@ fun PasswordInput(
     label: String,
     text: String,
     onValueChange: (String) -> Unit,
-    invalid: Boolean,
-    errorText: String,
+    passwordErrorType: InputErrorType,
     passwordHidden: Boolean,
     onVisibilityClick: () -> Unit,
 ) {
+    val isError = passwordErrorType != InputErrorType.NONE
+
     OutlinedTextField(
         value = text,
         onValueChange = onValueChange,
@@ -59,10 +83,27 @@ fun PasswordInput(
         textStyle = MaterialTheme.typography.bodyMedium,
         label = { Text(text = label) },
         trailingIcon = { PasswordModeIcon(passwordHidden, onVisibilityClick) },
-        supportingText = { ErrorText(errorText, invalid) },
-        isError = invalid,
+        supportingText = {
+            if (isError) {
+                ErrorText(passwordErrorType)
+            }
+        },
+        isError = isError,
         visualTransformation = getVisualTransformation(passwordHidden),
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Password,
+            imeAction = ImeAction.Done
+        ),
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+            focusedBorderColor = MaterialTheme.colorScheme.outline,
+            errorLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+            cursorColor = MaterialTheme.colorScheme.onPrimary,
+            selectionColors = TextSelectionColors(
+                handleColor = MaterialTheme.colorScheme.onPrimary,
+                backgroundColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.4f),
+            )
+        )
     )
 }
 
@@ -96,16 +137,14 @@ private fun getVisualTransformation(passwordHidden: Boolean) = when {
 
 
 @Composable
-private fun ErrorText(text: String, invalid: Boolean) = when {
-    invalid -> Row(
+private fun ErrorText(errorType: InputErrorType) {
+    Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Start,
         content = {
-            Text(text = text)
+            Text(text = errorType.getErrorText())
         }
     )
-
-    else -> null
 }
 
 @Preview(
@@ -121,18 +160,16 @@ private fun PreviewInput() {
                 label = "Текст",
                 text = "Текст",
                 onValueChange = { },
-                invalid = false,
-                errorText = "Только русские буквы",
                 passwordHidden = false,
                 onVisibilityClick = {},
+                passwordErrorType = InputErrorType.NONE,
             )
 
-            DefaultInput(
+            LoginInput(
                 label = "Текст",
                 text = "Текст",
                 onValueChange = { },
-                invalid = false,
-                errorText = "Только русские буквы",
+                loginErrorType = InputErrorType.INVALID_LOGIN_FORMAT,
             )
         }
     }

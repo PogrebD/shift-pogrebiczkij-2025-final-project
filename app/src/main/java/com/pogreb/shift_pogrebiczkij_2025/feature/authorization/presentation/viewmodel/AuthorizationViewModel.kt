@@ -22,6 +22,7 @@ class AuthorizationViewModel @Inject constructor(
     private val _state = MutableStateFlow<AuthorizationState>(AuthorizationState.Initialize)
     val state: StateFlow<AuthorizationState> = _state.asStateFlow()
 
+
     fun loadLoin() {
         _state.update { AuthorizationState.Loading }
         _state.update {
@@ -30,36 +31,63 @@ class AuthorizationViewModel @Inject constructor(
                     name = "",
                     password = "",
                 ),
-                errorType = InputErrorType.NONE
+                loginErrorType = InputErrorType.NONE,
+                passwordErrorType = InputErrorType.NONE,
             )
         }
     }
 
-    fun login(authorizationData: AuthorizationData) {
+    fun login(authorizationData: AuthorizationData): String {
+        var authorizationKey = ""
         viewModelScope.launch {
-            loginUseCase(authorizationData)
+            authorizationKey =
+                try {
+                    loginUseCase(authorizationData)
+                } catch (e: Exception) {
+                    ""
+                }
         }
+        return authorizationKey
     }
 
     fun registration(authorizationData: AuthorizationData) {
         viewModelScope.launch {
-            registrationUseCase(authorizationData)
+            try {
+                val user = registrationUseCase(authorizationData)
+                _state.update {
+                    AuthorizationState.LoginContent(
+                        authorizationData = AuthorizationData(
+                            name = user.name,
+                            password = "",
+                        ),
+                        loginErrorType = InputErrorType.NONE,
+                        passwordErrorType = InputErrorType.NONE,
+                    )
+                }
+            } catch (e: Exception) {
+            }
+
         }
     }
 
     fun setLoginState() {
+        if (_state.value is AuthorizationState.LoginContent) return
+
         _state.update {
             AuthorizationState.LoginContent(
                 authorizationData = AuthorizationData(
                     name = "",
                     password = "",
                 ),
-                errorType = InputErrorType.NONE
+                loginErrorType = InputErrorType.NONE,
+                passwordErrorType = InputErrorType.NONE,
             )
         }
     }
 
     fun setRegistrationState() {
+        if (_state.value is AuthorizationState.RegistrationContent) return
+
         _state.update {
             AuthorizationState.RegistrationContent(
                 registrationData = RegistrationData(
@@ -69,7 +97,9 @@ class AuthorizationViewModel @Inject constructor(
                     ),
                     repeatPassword = "",
                 ),
-                errorType = InputErrorType.NONE
+                loginErrorType = InputErrorType.NONE,
+                passwordErrorType = InputErrorType.NONE,
+                repeatPasswordErrorType = InputErrorType.NONE
             )
         }
     }
@@ -84,7 +114,7 @@ class AuthorizationViewModel @Inject constructor(
                     }
                     currentState.copy(
                         authorizationData = currentState.authorizationData.copy(name = login),
-                        errorType = errorType,
+                        loginErrorType = errorType,
                     )
                 }
 
@@ -99,7 +129,7 @@ class AuthorizationViewModel @Inject constructor(
                                 name = login
                             )
                         ),
-                        errorType = errorType,
+                        loginErrorType = errorType,
                     )
                 }
 
@@ -112,18 +142,28 @@ class AuthorizationViewModel @Inject constructor(
         _state.update { currentState ->
             when (currentState) {
                 is AuthorizationState.LoginContent -> {
+                    var errorType = InputErrorType.NONE
+                    if (!validatePassword(password)) {
+                        errorType = InputErrorType.INVALID_LOGIN_FORMAT
+                    }
                     currentState.copy(
-                        authorizationData = currentState.authorizationData.copy(password = password)
+                        authorizationData = currentState.authorizationData.copy(password = password),
+                        passwordErrorType = errorType,
                     )
                 }
 
                 is AuthorizationState.RegistrationContent -> {
+                    var errorType = InputErrorType.NONE
+                    if (!validatePassword(password)) {
+                        errorType = InputErrorType.INVALID_LOGIN_FORMAT
+                    }
                     currentState.copy(
                         registrationData = currentState.registrationData.copy(
                             authorizationData = currentState.registrationData.authorizationData.copy(
                                 password = password
                             )
-                        )
+                        ),
+                        passwordErrorType = errorType,
                     )
                 }
 
@@ -136,12 +176,12 @@ class AuthorizationViewModel @Inject constructor(
         _state.update { currentState ->
             if (currentState is AuthorizationState.RegistrationContent) {
                 var errorType = InputErrorType.NONE
-                if (!validateRepeatPassword(currentState)) {
+                if (!validateRepeatPassword(currentState, repeatPassword)) {
                     errorType = InputErrorType.PASSWORDS_MISMATCH
                 }
                 currentState.copy(
                     registrationData = currentState.registrationData.copy(repeatPassword = repeatPassword),
-                    errorType = errorType
+                    repeatPasswordErrorType = errorType
                 )
             } else currentState
         }
@@ -152,8 +192,16 @@ class AuthorizationViewModel @Inject constructor(
         return regex.matches(login)
     }
 
-    private fun validateRepeatPassword(currentState: AuthorizationState.RegistrationContent): Boolean {
-        return currentState.registrationData.repeatPassword ==
+    private fun validatePassword(login: String): Boolean {
+        val regex = Regex("^[a-zA-Z0-9]+$")
+        return regex.matches(login)
+    }
+
+    private fun validateRepeatPassword(
+        currentState: AuthorizationState.RegistrationContent,
+        repeatPassword: String
+    ): Boolean {
+        return repeatPassword ==
                 currentState.registrationData.authorizationData.password
     }
 }

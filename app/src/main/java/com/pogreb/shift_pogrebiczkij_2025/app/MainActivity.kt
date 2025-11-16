@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity(), ComponentProvider {
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .add(R.id.fragment_container_view, AuthorizationFragment())
+                .add(R.id.fragment_container_view, AuthorizationFragment.newInstance())
                 .commit()
         }
     }

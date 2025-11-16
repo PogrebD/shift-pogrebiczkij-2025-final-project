@@ -4,5 +4,12 @@ enum class InputErrorType {
     PASSWORDS_MISMATCH,
     INVALID_LOGIN_FORMAT,
     USER_NOT_FOUND,
-    NONE,
+    NONE;
+
+    fun getErrorText(): String = when (this) {
+        PASSWORDS_MISMATCH -> "Пароли не совпадают"
+        INVALID_LOGIN_FORMAT -> "Только цифры и латинские буквы"
+        USER_NOT_FOUND -> "Пользователь не найден"
+        NONE -> ""
+    }
 }

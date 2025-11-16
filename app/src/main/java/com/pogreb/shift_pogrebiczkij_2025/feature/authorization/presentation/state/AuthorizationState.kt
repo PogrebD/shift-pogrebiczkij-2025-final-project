@@ -11,11 +11,14 @@ interface AuthorizationState {
 
     data class LoginContent(
         val authorizationData: AuthorizationData,
-        val errorType: InputErrorType,
+        val loginErrorType: InputErrorType,
+        val passwordErrorType: InputErrorType,
     ) : AuthorizationState
 
     data class RegistrationContent(
         val registrationData: RegistrationData,
-        val errorType: InputErrorType,
+        val loginErrorType: InputErrorType,
+        val passwordErrorType: InputErrorType,
+        val repeatPasswordErrorType: InputErrorType,
     ) : AuthorizationState
 }

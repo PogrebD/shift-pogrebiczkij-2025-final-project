@@ -1,7 +1,10 @@
 package com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.ui.compose
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -9,11 +12,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.pogreb.shift_pogrebiczkij_2025.R
+import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.entity.InputErrorType
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.AuthorizationTab
-import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.DefaultInput
+import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.LoginInput
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.PasswordInput
+import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.PrimaryButton
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
 
 
@@ -23,49 +30,50 @@ internal fun AuthorizationContent(
     loginText: String,
     passwordText: String,
     repeatPasswordText: String,
-    loginInvalid: Boolean,
-    loginErrorText: String,
-    passwordInvalid: Boolean,
-    passwordErrorText: String,
-    repeatPasswordInvalid: Boolean,
-    onLoginClick: () -> Unit,
-    onRegistrationClick: () -> Unit,
+    loginErrorType: InputErrorType,
+    passwordErrorType: InputErrorType,
+    repeatPasswordErrorType: InputErrorType,
+    onLoginTabClick: () -> Unit = {},
+    onRegistrationTabClick: () -> Unit = {},
+    onLoginClick: () -> Unit = {},
+    onRegistrationClick: () -> Unit = {},
     onLoginValueChange: (String) -> Unit,
     onPasswordValueChange: (String) -> Unit,
-    onRepeatPasswordValueCChange: (String) -> Unit,
+    onRepeatPasswordValueCChange: (String) -> Unit = {},
 ) {
     var passwordHidden by remember { mutableStateOf(true) }
     var repeatPasswordHidden by remember { mutableStateOf(true) }
 
     Column(
         modifier = Modifier
+            .background(MaterialTheme.colorScheme.inverseSurface)
             .clip(
                 RoundedCornerShape(
                     topStart = 16.dp,
                     topEnd = 16.dp
                 )
             )
+            .background(MaterialTheme.colorScheme.surface)
+            .padding(horizontal = 16.dp)
     ) {
         AuthorizationTab(
-            onLoginClick = onLoginClick,
-            onRegistrationClick = onRegistrationClick,
+            onLoginClick = onLoginTabClick,
+            onRegistrationClick = onRegistrationTabClick,
             signUpMode = signUpMode
         )
 
-        DefaultInput(
+        LoginInput(
             label = "Логин",
             text = loginText,
             onValueChange = onLoginValueChange,
-            invalid = loginInvalid,
-            errorText = loginErrorText,
+            loginErrorType = loginErrorType,
         )
 
         PasswordInput(
             label = "Пароль",
             text = passwordText,
             onValueChange = onPasswordValueChange,
-            invalid = passwordInvalid,
-            errorText = passwordErrorText,
+            passwordErrorType = passwordErrorType,
             passwordHidden = passwordHidden,
             onVisibilityClick = { passwordHidden = !passwordHidden },
         )
@@ -75,19 +83,48 @@ internal fun AuthorizationContent(
                 label = "Повторите пароль",
                 text = repeatPasswordText,
                 onValueChange = onRepeatPasswordValueCChange,
-                invalid = repeatPasswordInvalid,
-                errorText = "Пароли не совпадают",
+                passwordErrorType = repeatPasswordErrorType,
                 passwordHidden = repeatPasswordHidden,
                 onVisibilityClick = { repeatPasswordHidden = !repeatPasswordHidden },
             )
         }
+
+        ApplyButton(
+            signUpMode,
+            onLoginClick = onLoginClick,
+            onRegistrationClick = onRegistrationClick,
+        )
+    }
+}
+
+
+@Composable
+fun ApplyButton(
+    signUpMode: Boolean,
+    onLoginClick: () -> Unit,
+    onRegistrationClick: () -> Unit,
+) {
+    if (signUpMode) {
+        PrimaryButton(
+            onClick = { onRegistrationClick() },
+            text = stringResource(R.string.label_registration),
+            modifier = Modifier
+                .padding(vertical = 16.dp)
+        )
+    } else {
+        PrimaryButton(
+            onClick = { onLoginClick() },
+            text = stringResource(R.string.label_login),
+            modifier = Modifier
+                .padding(vertical = 16.dp)
+        )
     }
 }
 
 @Preview(
     name = "Light Theme",
     showBackground = true,
-    backgroundColor = 0xFFFFFFFF
+    backgroundColor = 0x88998899
 )
 @Composable
 private fun PreviewAuthorizationContent() {
@@ -97,16 +134,16 @@ private fun PreviewAuthorizationContent() {
             loginText = "sdfsd",
             passwordText = "sdfsd",
             repeatPasswordText = "sdfsd",
-            loginInvalid = false,
-            loginErrorText = "sdfsd",
-            passwordInvalid = false,
-            passwordErrorText = "sdfsd",
-            repeatPasswordInvalid = false,
             onLoginClick = { },
             onRegistrationClick = { },
             onLoginValueChange = { },
             onPasswordValueChange = { },
             onRepeatPasswordValueCChange = { },
+            loginErrorType = InputErrorType.NONE,
+            passwordErrorType = InputErrorType.NONE,
+            repeatPasswordErrorType = InputErrorType.NONE,
+            onLoginTabClick = {},
+            onRegistrationTabClick = {},
         )
     }
 }

@@ -9,6 +9,6 @@ import dagger.Provides
 class FeatureModule {
 
     @Provides
-    fun provideAuthorizationComponent(deps: AuthorizationComponent.Deps): AuthorizationComponent =
-        DaggerAuthorizationComponent.builder().deps(deps).build()
+    fun provideAuthorizationComponent(dependencies: AuthorizationComponent.Dependencies): AuthorizationComponent =
+        DaggerAuthorizationComponent.builder().dependencies(dependencies).build()
 }

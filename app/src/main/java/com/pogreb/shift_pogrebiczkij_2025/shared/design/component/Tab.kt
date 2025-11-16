@@ -1,11 +1,12 @@
 package com.pogreb.shift_pogrebiczkij_2025.shared.design.component
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
@@ -29,7 +30,7 @@ fun AuthorizationTab(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 10.dp, vertical = 17.dp),
+            .padding(horizontal = 10.dp),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -58,14 +59,23 @@ fun AuthorizationTab(
 
 @Composable
 private fun LoginTextButton(modifier: Modifier, onLoginClick: () -> Unit, signUpMode: Boolean) {
-    Text(
-        text = stringResource(R.string.login_title),
+    Button(
+        onClick = onLoginClick,
         modifier = modifier
-            .clickable(enabled = true, onClick = onLoginClick),
-        color = getLoginTextColor(signUpMode),
-        textAlign = TextAlign.Center,
-        style = MaterialTheme.typography.bodyMedium,
+            .fillMaxWidth(),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.background
+        ),
+        content = {
+            Text(
+                text = stringResource(R.string.login_title),
+                color = getLoginTextColor(signUpMode),
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.bodyMedium,
+            )
+        }
     )
+
 }
 
 
@@ -75,13 +85,21 @@ private fun RegistrationTextButton(
     onRegistrationClick: () -> Unit,
     signUpMode: Boolean
 ) {
-    Text(
-        text = stringResource(R.string.registration_title),
+    Button(
+        onClick = onRegistrationClick,
         modifier = modifier
-            .clickable(enabled = true, onClick = onRegistrationClick),
-        color = getRegistrationTextColor(signUpMode),
-        textAlign = TextAlign.Center,
-        style = MaterialTheme.typography.bodyMedium,
+            .fillMaxWidth(),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.background
+        ),
+        content = {
+            Text(
+                text = stringResource(R.string.registration_title),
+                color = getRegistrationTextColor(signUpMode),
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.bodyMedium,
+            )
+        }
     )
 }
 

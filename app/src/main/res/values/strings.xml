@@ -32,4 +32,6 @@
     <string name="label_main_page">Главная</string>
     <string name="label_menu_page">Меню</string>
     <string name="content_description_menu_page_navigation">Menu Navigation</string>
+    <string name="label_login">Войти</string>
+    <string name="label_registration">Зарегистрироваться</string>
 </resources>

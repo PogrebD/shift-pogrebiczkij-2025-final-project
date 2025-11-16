@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.pogreb.shift_pogrebiczkij_2025.databinding.FragmentAuthorizationBinding
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.di.AuthorizationComponentProvider
+import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.AuthorizationRouter
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.ui.compose.AuthorizationScreen
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.viewmodel.AuthorizationViewModel
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.viewmodel.AuthorizationViewModelFactory
@@ -16,8 +17,17 @@ import javax.inject.Inject
 
 class AuthorizationFragment : Fragment() {
 
+    companion object {
+        fun newInstance(): AuthorizationFragment {
+            return AuthorizationFragment()
+        }
+    }
+
     @Inject
     lateinit var factory: AuthorizationViewModelFactory
+
+    @Inject
+    lateinit var router: AuthorizationRouter
 
     private lateinit var binding: FragmentAuthorizationBinding
 
@@ -28,8 +38,8 @@ class AuthorizationFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val provider = requireActivity() as AuthorizationComponentProvider
 
-        val studentsListComponent = provider.provideAuthorizationComponent()
-        studentsListComponent.inject(this)
+        val authorizationComponent = provider.provideAuthorizationComponent()
+        authorizationComponent.inject(this)
 
         super.onCreate(savedInstanceState)
     }
@@ -51,6 +61,13 @@ class AuthorizationFragment : Fragment() {
             setContent {
                 AppTheme {
                     AuthorizationScreen(
+                        viewModel = viewModel,
+                        onLoginClick = {
+                            router.openOnboarding(parentFragmentManager)
+                        },
+                        onRegistrationClick = {
+                            router.openMainPage(parentFragmentManager)
+                        },
                     )
                 }
             }
