@@ -13,8 +13,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AuthorizationViewModel(
+class AuthorizationViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val registrationUseCase: RegistrationUseCase,
 ) : ViewModel() {
@@ -146,12 +147,12 @@ class AuthorizationViewModel(
         }
     }
 
-    fun validateLogin(login: String): Boolean {
+    private fun validateLogin(login: String): Boolean {
         val regex = Regex("^[a-zA-Z0-9]+$")
         return regex.matches(login)
     }
 
-    fun validateRepeatPassword(currentState: AuthorizationState.RegistrationContent): Boolean {
+    private fun validateRepeatPassword(currentState: AuthorizationState.RegistrationContent): Boolean {
         return currentState.registrationData.repeatPassword ==
                 currentState.registrationData.authorizationData.password
     }
