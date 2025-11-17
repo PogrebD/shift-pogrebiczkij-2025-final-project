@@ -7,6 +7,7 @@ import dagger.Module
     includes = [
         CoreModule::class,
         FeatureModule::class,
+        NavigationModule::class,
     ]
 )
 interface AppModule

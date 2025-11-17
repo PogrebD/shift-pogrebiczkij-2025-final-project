@@ -1,7 +1,6 @@
 package com.pogreb.shift_pogrebiczkij_2025.shared.design.component
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -9,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -29,9 +30,10 @@ private const val PAGE_COUNT = 3
 
 @Composable
 fun BottomNavigation(
+    currentPage: Int,
     onBackClick: () -> Unit,
     onNextClick: () -> Unit,
-    currentPage: Int,
+    onCloseClick: () -> Unit,
 ) {
     HorizontalDivider(
         modifier = Modifier
@@ -40,43 +42,54 @@ fun BottomNavigation(
         color = MaterialTheme.colorScheme.outlineVariant
     )
 
-    Row(
+    Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 16.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
+            .padding(vertical = 16.dp),
     ) {
         BackTextButton(
             text = getBackButtonText(currentPage),
             modifier = Modifier
-                .weight(1f),
+                .align(Alignment.CenterStart),
             onBackClick = onBackClick,
+            enabled = getEnabledBackButton(currentPage),
         )
 
         PageStepper(
             modifier = Modifier
-                .weight(1f),
+                .align(Alignment.Center),
             currentPage = currentPage,
         )
 
         NextTextButton(
             text = getNextButtonText(currentPage),
             modifier = Modifier
-                .weight(1f),
-            onNextClick = onNextClick,
+                .align(Alignment.CenterEnd),
+            onClick = getOnClickNextAction(
+                currentPage = currentPage,
+                onNextClick = onNextClick,
+                onCloseClick = onCloseClick
+            ),
         )
     }
 }
 
 @Composable
-private fun NextTextButton(text: String, modifier: Modifier, onNextClick: () -> Unit) {
-    Text(
-        text = text,
-        modifier = modifier
-            .clickable(enabled = text.isNotEmpty(), onClick = onNextClick),
-        textAlign = TextAlign.End,
-        style = MaterialTheme.typography.bodyMedium,
+private fun NextTextButton(text: String, modifier: Modifier, onClick: () -> Unit) {
+    Button(
+        onClick = onClick,
+        modifier = modifier,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.background
+        ),
+        content = {
+            Text(
+                text = text,
+                modifier = modifier,
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.bodyMedium,
+            )
+        }
     )
 }
 
@@ -104,13 +117,28 @@ private fun PageStepper(
 }
 
 @Composable
-private fun BackTextButton(text: String, modifier: Modifier, onBackClick: () -> Unit) {
-    Text(
-        text = text,
-        modifier = modifier
-            .clickable(enabled = true, onClick = onBackClick),
-        textAlign = TextAlign.Start,
-        style = MaterialTheme.typography.bodyMedium,
+private fun BackTextButton(
+    text: String,
+    modifier: Modifier,
+    enabled: Boolean,
+    onBackClick: () -> Unit
+) {
+    Button(
+        onClick = onBackClick,
+        modifier = modifier,
+        enabled = enabled,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.background,
+            disabledContainerColor = MaterialTheme.colorScheme.background,
+        ),
+        content = {
+            Text(
+                text = text,
+                modifier = modifier,
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.bodyMedium,
+            )
+        }
     )
 }
 
@@ -132,6 +160,24 @@ private fun getNextButtonText(currentPage: Int) = when (currentPage) {
     else -> stringResource(R.string.next_label)
 }
 
+private fun getOnClickNextAction(
+    currentPage: Int,
+    onNextClick: () -> Unit,
+    onCloseClick: () -> Unit,
+): () -> Unit = {
+    when (currentPage) {
+        2 -> onCloseClick()
+        else -> onNextClick()
+    }
+}
+
+private fun getEnabledBackButton(
+    currentPage: Int,
+): Boolean = when (currentPage) {
+    0 -> false
+    else -> true
+}
+
 @Preview(
     name = "Light Theme",
     showBackground = true,
@@ -143,7 +189,8 @@ private fun PreviewBottomNavigation() {
         BottomNavigation(
             onBackClick = {},
             onNextClick = {},
-            currentPage = 2,
+            currentPage = 1,
+            onCloseClick = {},
         )
     }
 }

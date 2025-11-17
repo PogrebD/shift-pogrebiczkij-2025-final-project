@@ -6,6 +6,7 @@ import com.pogreb.shift_pogrebiczkij_2025.R
 import com.pogreb.shift_pogrebiczkij_2025.app.di.ComponentProvider
 import com.pogreb.shift_pogrebiczkij_2025.databinding.ActivityMainBinding
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.ui.fragment.AuthorizationFragment
+import com.pogreb.shift_pogrebiczkij_2025.feature.onboarding.di.OnboardingComponent
 
 class MainActivity : AppCompatActivity(), ComponentProvider {
     private lateinit var binding: ActivityMainBinding
@@ -26,4 +27,7 @@ class MainActivity : AppCompatActivity(), ComponentProvider {
 
     override fun provideAuthorizationComponent() =
         appComponent.authorizationComponent()
+
+    override fun provideOnboardingComponent(): OnboardingComponent =
+        appComponent.onboardingComponent()
 }

@@ -1,5 +1,6 @@
 package com.pogreb.shift_pogrebiczkij_2025.feature.onboarding.presentation.ui.compose
 
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,28 +22,27 @@ import com.pogreb.shift_pogrebiczkij_2025.R
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
 
 @Composable
-internal fun OnBoardingContent(
+internal fun OnboardingContent(
     modifier: Modifier,
     currentPage: Int
 ) {
-    Column(
-        modifier = modifier
-            .padding(horizontal = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp),
-    ) {
+    Crossfade(targetState = currentPage) { currentPage ->
         when (currentPage) {
             0 -> Content(
+                modifier = modifier,
                 illustration = painterResource(R.drawable.opening_illustration),
                 titleInstruction = stringResource(R.string.title_create_loan),
                 bodyInstruction = stringResource(R.string.body_create_loan),
             )
 
             1 -> ContentWithAnnotatedInstruction(
+                modifier = modifier,
                 illustration = painterResource(R.drawable.second_illustration),
                 titleInstruction = stringResource(R.string.title_get_loan),
             )
 
             2 -> Content(
+                modifier = modifier,
                 illustration = painterResource(R.drawable.closing_illuctration),
                 titleInstruction = stringResource(R.string.title_Issued_loans),
                 bodyInstruction = stringResource(R.string.body_Issued_loans),
@@ -52,30 +52,53 @@ internal fun OnBoardingContent(
 }
 
 @Composable
-private fun Content(illustration: Painter, titleInstruction: String, bodyInstruction: String) {
-    Image(
-        painter = illustration,
-        contentDescription = "",
-        modifier = Modifier
-            .size(360.dp, 320.dp),
-    )
-    LaonInstructions(
-        title = titleInstruction,
-        body = bodyInstruction,
-    )
+private fun Content(
+    modifier: Modifier,
+    illustration: Painter,
+    titleInstruction: String,
+    bodyInstruction: String
+) {
+    Column(
+        modifier = modifier
+            .padding(horizontal = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        Image(
+            painter = illustration,
+            contentDescription = "",
+            modifier = Modifier
+                .size(360.dp, 320.dp),
+        )
+
+        LaonInstructions(
+            title = titleInstruction,
+            body = bodyInstruction,
+        )
+    }
 }
 
 @Composable
-private fun ContentWithAnnotatedInstruction(illustration: Painter, titleInstruction: String) {
-    Image(
-        painter = illustration,
-        contentDescription = "",
-        modifier = Modifier
-            .size(360.dp, 320.dp),
-    )
-    LaonInstructionsWithAnnotation(
-        title = titleInstruction,
-    )
+private fun ContentWithAnnotatedInstruction(
+    modifier: Modifier,
+    illustration: Painter,
+    titleInstruction: String
+) {
+    Column(
+        modifier = modifier
+            .padding(horizontal = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        Image(
+            painter = illustration,
+            contentDescription = "",
+            modifier = Modifier
+                .size(360.dp, 320.dp),
+        )
+
+        LaonInstructionsWithAnnotation(
+            title = titleInstruction,
+        )
+    }
 }
 
 @Composable
@@ -118,9 +141,9 @@ private fun LaonInstructionsWithAnnotation(title: String) {
     backgroundColor = 0xFFFFFFFF
 )
 @Composable
-private fun PreviewOnBoardingContent() {
+private fun PreviewOnboardingContent() {
     AppTheme {
-        OnBoardingContent(
+        OnboardingContent(
             currentPage = 0,
             modifier = Modifier
         )
