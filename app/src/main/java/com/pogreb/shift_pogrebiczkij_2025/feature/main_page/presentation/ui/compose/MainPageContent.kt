@@ -1,7 +1,9 @@
 package com.pogreb.shift_pogrebiczkij_2025.feature.main_page.presentation.ui.compose
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -14,21 +16,27 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pogreb.shift_pogrebiczkij_2025.R
+import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.domain.entity.Loan
+import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.LoanStatus
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
 
 @Composable
 internal fun MainPageContent(
     modifier: Modifier,
-    loanAmount: Double,
-    maxAmount: Double,
+    loanAmount: Int,
+    maxAmount: Int,
     percent: Double,
     period: Int,
+    loans: List<Loan>,
     onSliderValueChange: (Float) -> Unit,
     onContinueClick: () -> Unit,
+    onViewAllClick: () -> Unit,
 ) {
 
     Column(
         modifier = modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.surfaceVariant)
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -52,7 +60,10 @@ internal fun MainPageContent(
             text = stringResource(R.string.title_my_loans),
         )
 
-        MyLoansList()
+        MyLoansList(
+            loans = loans,
+            onViewAllClick = onViewAllClick,
+        )
     }
 }
 
@@ -77,13 +88,34 @@ private fun Title(text: String) {
 private fun PreviewMainPageContent() {
     AppTheme {
         MainPageContent(
-            loanAmount = 7000.00,
-            maxAmount = 10000.00,
-            onSliderValueChange = {},
+            modifier = Modifier,
+            loanAmount = 7000,
+            maxAmount = 10000,
             percent = 30.0,
             period = 12,
+            onSliderValueChange = {},
             onContinueClick = {},
-            modifier = Modifier,
-        )
+            onViewAllClick = {},
+            loans = listOf(
+                Loan(
+                    id = 176899134565,
+                    amount = 10000,
+                    date = "2025-11-17T10:15:41.464Z",
+                    status = LoanStatus.APPROVED,
+                ),
+                Loan(
+                    id = 176899134565,
+                    amount = 10000,
+                    date = "2025-12-17T10:15:41.464Z",
+                    status = LoanStatus.REJECTED,
+                ),
+                Loan(
+                    id = 176899134565,
+                    amount = 10000,
+                    date = "2021-11-11T10:15:41.464Z",
+                    status = LoanStatus.REGISTERED,
+                )
+            ),
+        ) 
     }
 }

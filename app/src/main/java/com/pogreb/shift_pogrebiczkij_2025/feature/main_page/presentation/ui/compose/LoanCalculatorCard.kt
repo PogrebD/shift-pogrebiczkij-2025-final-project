@@ -37,8 +37,8 @@ import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.iconSecondary
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoanCalculatorCard(
-    loanAmount: Double,
-    maxAmount: Double,
+    loanAmount: Int,
+    maxAmount: Int,
     percent: Double,
     period: Int,
     onSliderValueChange: (Float) -> Unit,
@@ -46,14 +46,16 @@ fun LoanCalculatorCard(
 ) {
     Card(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 16.dp),
+            .fillMaxWidth(),
         shape = ShapeDefaults.Large,
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface,
         ),
     ) {
-        Column {
+        Column(
+            modifier = Modifier
+                .padding(top = 16.dp)
+        ) {
             LoanAmount(
                 loanAmount = loanAmount,
             )
@@ -108,8 +110,8 @@ private fun LoanConditions(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun LoanAmountSlider(
-    loanAmount: Double,
-    maxAmount: Double,
+    loanAmount: Int,
+    maxAmount: Int,
     onSliderValueChange: (Float) -> Unit
 ) {
     Slider(
@@ -193,7 +195,7 @@ private fun LoanAmountSlider(
 }
 
 @Composable
-private fun LoanAmount(loanAmount: Double) {
+private fun LoanAmount(loanAmount: Int) {
     Row(
         modifier = Modifier.padding(start = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -224,8 +226,8 @@ private fun LoanAmount(loanAmount: Double) {
 private fun PreviewAuthorizationContent() {
     AppTheme {
         LoanCalculatorCard(
-            loanAmount = 7000.00,
-            maxAmount = 10000.00,
+            loanAmount = 7000,
+            maxAmount = 10000,
             onSliderValueChange = {},
             percent = 30.0,
             period = 12,

@@ -22,8 +22,8 @@ import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
 
 @Composable
 fun TabBar(
-    onMainPageClick: () -> Unit,
-    onMenuPageClick: () -> Unit,
+    onMainPageClick: () -> Unit = {},
+    onMenuPageClick: () -> Unit = {},
     activeTab: ActiveTab,
 ) {
     Row(

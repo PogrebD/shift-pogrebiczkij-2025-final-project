@@ -22,7 +22,10 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import com.pogreb.shift_pogrebiczkij_2025.R
-import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.entity.InputErrorType
+import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.InputErrorType.INVALID_FORMAT
+import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.InputErrorType.NONE
+import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.InputErrorType.PASSWORDS_MISMATCH
+import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.InputErrorType.USER_NOT_FOUND
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
 
 @Composable
@@ -142,9 +145,24 @@ private fun ErrorText(errorType: InputErrorType) {
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Start,
         content = {
-            Text(text = errorType.getErrorText())
+            Text(text = getErrorText(errorType))
         }
     )
+}
+
+enum class InputErrorType {
+    PASSWORDS_MISMATCH,
+    INVALID_FORMAT,
+    USER_NOT_FOUND,
+    NONE;
+}
+
+@Composable
+fun getErrorText(type: InputErrorType): String = when (type) {
+    PASSWORDS_MISMATCH -> stringResource(R.string.error_passwords_missmatch)
+    INVALID_FORMAT -> stringResource(R.string.error_invalid_format)
+    USER_NOT_FOUND -> stringResource(R.string.error_user_not_found)
+    NONE -> ""
 }
 
 @Preview(
@@ -169,7 +187,7 @@ private fun PreviewInput() {
                 label = "Текст",
                 text = "Текст",
                 onValueChange = { },
-                loginErrorType = InputErrorType.INVALID_LOGIN_FORMAT,
+                loginErrorType = InputErrorType.INVALID_FORMAT,
             )
         }
     }

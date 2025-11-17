@@ -65,13 +65,14 @@ private fun getContainerColorPrimaryButton(pressed: Boolean) = when {
 fun SecondaryButton(
     onClick: () -> Unit,
     text: String,
+    modifier: Modifier,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val pressed by interactionSource.collectIsPressedAsState()
 
     Button(
         onClick = onClick,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth(),
         shape = ShapeDefaults.Small,
         colors = getColorsSecondaryButton(pressed),
@@ -148,7 +149,7 @@ private fun PreviewButton() {
             PrimaryButton(
                 {}, "Кнопка", Modifier
             )
-            SecondaryButton({}, "Кнопка")
+            SecondaryButton({}, "Кнопка", Modifier)
             TertiaryButton({}, "Кнопка")
         }
     }

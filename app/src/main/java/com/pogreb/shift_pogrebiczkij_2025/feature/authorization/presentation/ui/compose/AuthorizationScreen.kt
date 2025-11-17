@@ -24,9 +24,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.pogreb.shift_pogrebiczkij_2025.R
-import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.entity.InputErrorType
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.state.AuthorizationState
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.viewmodel.AuthorizationViewModel
+import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.InputErrorType
 
 @Composable
 internal fun AuthorizationScreen(

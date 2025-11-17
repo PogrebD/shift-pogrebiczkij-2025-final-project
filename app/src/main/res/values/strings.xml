@@ -34,4 +34,13 @@
     <string name="content_description_menu_page_navigation">Menu Navigation</string>
     <string name="label_login">Войти</string>
     <string name="label_registration">Зарегистрироваться</string>
+    <string name="pattern_loan_number">№ %1$d</string>
+    <string name="error_passwords_missmatch">Пароли не совпадают</string>
+    <string name="error_invalid_format">Только цифры и латинские буквы</string>
+    <string name="error_user_not_found">Пользователь не найден</string>
+    <string name="loan_status_approved">Одобрен</string>
+    <string name="loan_status_registered">На рассмотрении</string>
+    <string name="loan_status_rejected">Отклонён</string>
+    <string name="error_date_format">Неверный формат даты</string>
+    <string name="label_view_all">Посмотреть все</string>
 </resources>

@@ -16,8 +16,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pogreb.shift_pogrebiczkij_2025.R
-import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.entity.InputErrorType
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.AuthorizationTab
+import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.InputErrorType
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.LoginInput
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.PasswordInput
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.PrimaryButton
