@@ -59,4 +59,6 @@
     <string name="body_failure">Сейчас мы не можем одобрить вашу заявку</string>
     <string name="label_back_main">Вернуться на главную</string>
     <string name="content_description_failure">failure</string>
+    <string name="error_Invalid_phone_number">Номера не существует. Проверьте правильность ввода</string>
+    <string name="error_only_russian_letters">Только русские буквы</string>
 </resources>

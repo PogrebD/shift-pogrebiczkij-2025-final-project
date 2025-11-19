@@ -24,8 +24,10 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pogreb.shift_pogrebiczkij_2025.R
-import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.InputErrorType.INVALID_FORMAT
+import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.InputErrorType.INVALID_PHONE_NUMBER
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.InputErrorType.NONE
+import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.InputErrorType.ONLY_LATIN_LETTERS_AND_NUMBERS
+import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.InputErrorType.ONLY_RUSSIAN_LETTERS
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.InputErrorType.PASSWORDS_MISMATCH
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.InputErrorType.USER_NOT_FOUND
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
@@ -203,16 +205,20 @@ private fun ErrorText(errorType: InputErrorType) {
 
 enum class InputErrorType {
     PASSWORDS_MISMATCH,
-    INVALID_FORMAT,
+    ONLY_LATIN_LETTERS_AND_NUMBERS,
     USER_NOT_FOUND,
+    INVALID_PHONE_NUMBER,
+    ONLY_RUSSIAN_LETTERS,
     NONE;
 }
 
 @Composable
 fun getErrorText(type: InputErrorType): String = when (type) {
     PASSWORDS_MISMATCH -> stringResource(R.string.error_passwords_missmatch)
-    INVALID_FORMAT -> stringResource(R.string.error_invalid_format)
+    ONLY_LATIN_LETTERS_AND_NUMBERS -> stringResource(R.string.error_invalid_format)
     USER_NOT_FOUND -> stringResource(R.string.error_user_not_found)
+    INVALID_PHONE_NUMBER -> stringResource(R.string.error_Invalid_phone_number)
+    ONLY_RUSSIAN_LETTERS -> stringResource(R.string.error_only_russian_letters)
     NONE -> ""
 }
 
@@ -244,7 +250,7 @@ private fun PreviewInput() {
                 label = "Текст",
                 text = "Текст",
                 onValueChange = { },
-                errorType = InputErrorType.INVALID_FORMAT,
+                errorType = InputErrorType.ONLY_LATIN_LETTERS_AND_NUMBERS,
             )
         }
     }

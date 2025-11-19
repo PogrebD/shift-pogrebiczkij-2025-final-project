@@ -19,6 +19,7 @@ import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
 
 @Composable
 internal fun LoanProcessingContent(
+    modifier: Modifier,
     name: String,
     lastName: String,
     phone: String,
@@ -28,7 +29,7 @@ internal fun LoanProcessingContent(
     onApplyLoanClick: () -> Unit,
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .padding(16.dp),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
@@ -100,6 +101,7 @@ private fun PreviewLoanProcessingContent() {
             onLastNameChange = {},
             onPhoneChange = {},
             onApplyLoanClick = {},
+            modifier = Modifier,
         )
     }
 }

@@ -83,21 +83,18 @@ fun getStatusColor(status: LoanStatus) = when (status) {
     LoanStatus.REJECTED -> MaterialTheme.colorScheme.error
 }
 
-@Composable
-fun formatDate(isoDate: String): String = try {
+fun formatDate(isoDate: String): String {
     val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
     inputFormat.timeZone = TimeZone.getTimeZone("UTC")
 
     val outputFormat = SimpleDateFormat("d MMMM, EEE", Locale("ru"))
 
     val date = inputFormat.parse(isoDate)
-    if (date != null) {
+    return if (date != null) {
         outputFormat.format(date)
     } else {
         ""
     }
-} catch (e: Exception) {
-    stringResource(R.string.error_date_format)
 }
 
 @Preview(

@@ -10,7 +10,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -27,44 +26,7 @@ import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.PrimaryButton
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
 
 @Composable
-internal fun FailureScreen(
-    onCloseClick: () -> Unit,
-) {
-    Scaffold(
-        topBar = { ResultTopBar(onCloseClick) },
-        content = { paddingValues ->
-            FailureContent(
-                modifier = Modifier
-                    .padding(paddingValues),
-                onBackMainClick = onCloseClick,
-            )
-        }
-    )
-}
-
-@Composable
-internal fun SuccessfulScreen(
-    amount: Long,
-    date: String,
-    onViewAddressClick: () -> Unit,
-    onCloseClick: () -> Unit,
-) {
-    Scaffold(
-        topBar = { ResultTopBar(onCloseClick) },
-        content = { paddingValues ->
-            SuccessfulContent(
-                modifier = Modifier
-                    .padding(paddingValues),
-                amount = amount,
-                date = date,
-                onViewAddressClick = onViewAddressClick,
-            )
-        }
-    )
-}
-
-@Composable
-private fun SuccessfulContent(
+internal fun SuccessfulContent(
     modifier: Modifier,
     amount: Long,
     date: String,
@@ -82,7 +44,7 @@ private fun SuccessfulContent(
 }
 
 @Composable
-private fun FailureContent(
+internal fun FailureContent(
     modifier: Modifier,
     onBackMainClick: () -> Unit,
 ) {
@@ -181,11 +143,11 @@ private fun ResultTopBar(onCloseClick: () -> Unit) {
 private fun PreviewSuccessfulScreen() {
 
     AppTheme {
-        SuccessfulScreen(
-            onCloseClick = {},
+        SuccessfulContent(
             amount = 50000,
             date = "20 мая",
             onViewAddressClick = {},
+            modifier = Modifier,
         )
     }
 }
@@ -199,8 +161,9 @@ private fun PreviewSuccessfulScreen() {
 private fun PreviewFailureScreen() {
 
     AppTheme {
-        FailureScreen(
-            onCloseClick = {}
+        FailureContent(
+            modifier = Modifier,
+            onBackMainClick = {},
         )
     }
 }
