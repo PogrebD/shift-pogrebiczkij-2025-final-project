@@ -2,7 +2,7 @@ package com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.st
 
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.domain.entity.AuthorizationData
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.domain.entity.RegistrationData
-import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.entity.InputErrorType
+import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.InputErrorType
 
 interface AuthorizationState {
     data object Initialize : AuthorizationState
@@ -21,4 +21,6 @@ interface AuthorizationState {
         val passwordErrorType: InputErrorType,
         val repeatPasswordErrorType: InputErrorType,
     ) : AuthorizationState
+
+    data object AlreadyLogged : AuthorizationState
 }

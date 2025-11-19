@@ -37,7 +37,7 @@ internal fun AuthorizationScreen(
     val state by viewModel.state.collectAsState()
 
     LaunchedEffect(Unit) {
-        viewModel.loadLoin()
+        viewModel.initialize()
     }
 
     Scaffold { paddingValues ->
@@ -64,10 +64,10 @@ internal fun AuthorizationScreen(
                         passwordErrorType = currentState.passwordErrorType,
                         repeatPasswordErrorType = InputErrorType.NONE,
                         onLoginClick = {
-                            val authorizationKey: String =
+                            val logged: Boolean =
                                 viewModel.login(currentState.authorizationData)
 
-                            if (authorizationKey.isNotEmpty()) {
+                            if (logged) {
                                 onLoginClick
                             }
                         },
@@ -109,6 +109,10 @@ internal fun AuthorizationScreen(
                         onRepeatPasswordValueCChange = { viewModel.updateRepeatPassword(it) },
                     )
                 }
+            }
+
+            is AuthorizationState.AlreadyLogged -> {
+                onLoginClick()
             }
         }
     }

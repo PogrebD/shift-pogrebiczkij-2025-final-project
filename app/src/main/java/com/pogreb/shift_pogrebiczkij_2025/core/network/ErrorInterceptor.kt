@@ -1,6 +1,5 @@
 package com.pogreb.shift_pogrebiczkij_2025.core.network
 
-
 import okhttp3.Interceptor
 import okhttp3.Response
 import okio.IOException

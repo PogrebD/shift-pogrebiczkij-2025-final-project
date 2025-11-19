@@ -11,7 +11,9 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 
 @Module
 interface NetworkModule {
@@ -31,10 +33,15 @@ interface NetworkModule {
         }
 
         @Provides
-        fun provideOkHttpClient(errorInterceptor: Interceptor): OkHttpClient =
+        @Named("AuthClient")
+        fun provideAuthOkHttpClient(
+            @ErrorInterceptorQualifier errorInterceptor: Interceptor,
+            @AuthInterceptorQualifier authInterceptor: Interceptor
+        ): OkHttpClient =
             OkHttpClient.Builder()
+                .addInterceptor(authInterceptor)
                 .addInterceptor(httpLoggingInterceptor)
-                .addInterceptor(errorInterceptor)
+                //.addInterceptor(errorInterceptor)
                 .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
@@ -48,17 +55,23 @@ interface NetworkModule {
             json.asConverterFactory(jsonMediaType)
 
         @Provides
-        fun provideRetrofit(
+        fun provideAuthRetrofit(
             converterFactory: Converter.Factory,
-            client: OkHttpClient,
+            @Named("AuthClient") client: OkHttpClient,
         ): Retrofit =
             Retrofit.Builder()
                 .baseUrl(BASE_URL)
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(converterFactory)
                 .client(client)
                 .build()
     }
 
     @Binds
+    @ErrorInterceptorQualifier
     fun bindErrorInterceptor(impl: ErrorInterceptor): Interceptor
+
+    @Binds
+    @AuthInterceptorQualifier
+    fun bindAuthInterceptor(impl: AuthInterceptor): Interceptor
 }

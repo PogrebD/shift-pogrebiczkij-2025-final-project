@@ -58,6 +58,7 @@ dependencies {
     implementation(libs.androidx.fragment.ktx)
 
     implementation(libs.retrofit.converter.kotlinxserialization)
+    implementation(libs.retrofit.converter.scalars)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.retrofit.core)
 
@@ -67,6 +68,8 @@ dependencies {
 
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)
+
+    implementation(libs.androidx.security)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

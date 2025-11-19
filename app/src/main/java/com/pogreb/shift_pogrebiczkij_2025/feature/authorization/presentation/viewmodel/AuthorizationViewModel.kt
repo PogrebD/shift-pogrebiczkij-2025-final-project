@@ -4,10 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.domain.entity.AuthorizationData
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.domain.entity.RegistrationData
+import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.domain.usecase.CheckAlreadyLoggedUseCase
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.domain.usecase.LoginUseCase
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.domain.usecase.RegistrationUseCase
-import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.entity.InputErrorType
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.state.AuthorizationState
+import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.InputErrorType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,36 +19,34 @@ import javax.inject.Inject
 class AuthorizationViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val registrationUseCase: RegistrationUseCase,
+    private val checkAlreadyLoggedUseCase: CheckAlreadyLoggedUseCase,
 ) : ViewModel() {
     private val _state = MutableStateFlow<AuthorizationState>(AuthorizationState.Initialize)
     val state: StateFlow<AuthorizationState> = _state.asStateFlow()
 
-
-    fun loadLoin() {
+    suspend fun initialize() {
         _state.update { AuthorizationState.Loading }
-        _state.update {
-            AuthorizationState.LoginContent(
-                authorizationData = AuthorizationData(
-                    name = "",
-                    password = "",
-                ),
-                loginErrorType = InputErrorType.NONE,
-                passwordErrorType = InputErrorType.NONE,
-            )
+
+        val alreadyLogged = checkAlreadyLoggedUseCase()
+        if (alreadyLogged) {
+            _state.update {
+                AuthorizationState.AlreadyLogged
+            }
+        } else {
+            setLoginState()
         }
     }
 
-    fun login(authorizationData: AuthorizationData): String {
-        var authorizationKey = ""
+    fun login(authorizationData: AuthorizationData): Boolean {
+        var logged = false
         viewModelScope.launch {
-            authorizationKey =
-                try {
-                    loginUseCase(authorizationData)
-                } catch (e: Exception) {
-                    ""
-                }
+            try {
+                logged = loginUseCase(authorizationData)
+            } catch (e: Exception) {
+
+            }
         }
-        return authorizationKey
+        return logged
     }
 
     fun registration(authorizationData: AuthorizationData) {
@@ -110,7 +109,7 @@ class AuthorizationViewModel @Inject constructor(
                 is AuthorizationState.LoginContent -> {
                     var errorType = InputErrorType.NONE
                     if (!validateLogin(login)) {
-                        errorType = InputErrorType.INVALID_LOGIN_FORMAT
+                        errorType = InputErrorType.INVALID_FORMAT
                     }
                     currentState.copy(
                         authorizationData = currentState.authorizationData.copy(name = login),
@@ -121,7 +120,7 @@ class AuthorizationViewModel @Inject constructor(
                 is AuthorizationState.RegistrationContent -> {
                     var errorType = InputErrorType.NONE
                     if (!validateLogin(login)) {
-                        errorType = InputErrorType.INVALID_LOGIN_FORMAT
+                        errorType = InputErrorType.INVALID_FORMAT
                     }
                     currentState.copy(
                         registrationData = currentState.registrationData.copy(
@@ -144,7 +143,7 @@ class AuthorizationViewModel @Inject constructor(
                 is AuthorizationState.LoginContent -> {
                     var errorType = InputErrorType.NONE
                     if (!validatePassword(password)) {
-                        errorType = InputErrorType.INVALID_LOGIN_FORMAT
+                        errorType = InputErrorType.INVALID_FORMAT
                     }
                     currentState.copy(
                         authorizationData = currentState.authorizationData.copy(password = password),
@@ -155,7 +154,7 @@ class AuthorizationViewModel @Inject constructor(
                 is AuthorizationState.RegistrationContent -> {
                     var errorType = InputErrorType.NONE
                     if (!validatePassword(password)) {
-                        errorType = InputErrorType.INVALID_LOGIN_FORMAT
+                        errorType = InputErrorType.INVALID_FORMAT
                     }
                     currentState.copy(
                         registrationData = currentState.registrationData.copy(

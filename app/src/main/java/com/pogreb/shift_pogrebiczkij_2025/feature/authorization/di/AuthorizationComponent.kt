@@ -1,5 +1,6 @@
 package com.pogreb.shift_pogrebiczkij_2025.feature.authorization.di
 
+import com.pogreb.shift_pogrebiczkij_2025.core.network.TokenManager
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.AuthorizationRouter
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.ui.fragment.AuthorizationFragment
 import dagger.Component
@@ -27,5 +28,6 @@ interface AuthorizationComponent {
     class Dependencies @Inject constructor(
         val retrofit: Retrofit,
         val router: AuthorizationRouter,
+        val tokenManager: TokenManager,
     )
 }

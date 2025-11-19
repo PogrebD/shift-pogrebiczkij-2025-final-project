@@ -63,10 +63,10 @@ class AuthorizationFragment : Fragment() {
                     AuthorizationScreen(
                         viewModel = viewModel,
                         onLoginClick = {
-                            router.openOnboarding(parentFragmentManager)
+                            router.openMainPage(parentFragmentManager)
                         },
                         onRegistrationClick = {
-                            router.openMainPage(parentFragmentManager)
+                            router.openOnboarding(parentFragmentManager)
                         },
                     )
                 }
