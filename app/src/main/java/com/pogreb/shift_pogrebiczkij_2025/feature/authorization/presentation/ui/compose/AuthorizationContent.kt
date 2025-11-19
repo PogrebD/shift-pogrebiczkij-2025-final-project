@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.pogreb.shift_pogrebiczkij_2025.R
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.AuthorizationTab
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.InputErrorType
-import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.LoginInput
+import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.OutlinedInput
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.PasswordInput
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.PrimaryButton
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
@@ -62,11 +62,11 @@ internal fun AuthorizationContent(
             signUpMode = signUpMode
         )
 
-        LoginInput(
+        OutlinedInput(
             label = "Логин",
             text = loginText,
             onValueChange = onLoginValueChange,
-            loginErrorType = loginErrorType,
+            errorType = loginErrorType,
         )
 
         PasswordInput(

@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material3.Icon
@@ -21,6 +22,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.pogreb.shift_pogrebiczkij_2025.R
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.InputErrorType.INVALID_FORMAT
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.InputErrorType.NONE
@@ -29,13 +31,13 @@ import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.InputErrorType
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
 
 @Composable
-fun LoginInput(
+fun OutlinedInput(
     label: String,
     text: String,
     onValueChange: (String) -> Unit,
-    loginErrorType: InputErrorType,
+    errorType: InputErrorType,
 ) {
-    val isError = loginErrorType != InputErrorType.NONE
+    val isError = errorType != NONE
 
     OutlinedTextField(
         value = text,
@@ -46,7 +48,7 @@ fun LoginInput(
         label = { Text(text = label) },
         supportingText = {
             if (isError) {
-                ErrorText(loginErrorType)
+                ErrorText(errorType)
             }
         },
         isError = isError,
@@ -55,9 +57,12 @@ fun LoginInput(
             imeAction = ImeAction.Done
         ),
         colors = OutlinedTextFieldDefaults.colors(
+            unfocusedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
+            unfocusedBorderColor = MaterialTheme.colorScheme.surface,
             focusedLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
             focusedBorderColor = MaterialTheme.colorScheme.outline,
             errorLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+            errorContainerColor = MaterialTheme.colorScheme.surfaceVariant,
             cursorColor = MaterialTheme.colorScheme.onPrimary,
             selectionColors = TextSelectionColors(
                 handleColor = MaterialTheme.colorScheme.onPrimary,
@@ -76,7 +81,7 @@ fun PasswordInput(
     passwordHidden: Boolean,
     onVisibilityClick: () -> Unit,
 ) {
-    val isError = passwordErrorType != InputErrorType.NONE
+    val isError = passwordErrorType != NONE
 
     OutlinedTextField(
         value = text,
@@ -98,9 +103,55 @@ fun PasswordInput(
             imeAction = ImeAction.Done
         ),
         colors = OutlinedTextFieldDefaults.colors(
+            unfocusedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
+            unfocusedBorderColor = MaterialTheme.colorScheme.surface,
             focusedLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
             focusedBorderColor = MaterialTheme.colorScheme.outline,
             errorLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+            errorContainerColor = MaterialTheme.colorScheme.surfaceVariant,
+            cursorColor = MaterialTheme.colorScheme.onPrimary,
+            selectionColors = TextSelectionColors(
+                handleColor = MaterialTheme.colorScheme.onPrimary,
+                backgroundColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.4f),
+            )
+        )
+    )
+}
+
+@Composable
+fun PhoneInput(
+    label: String,
+    text: String,
+    onValueChange: (String) -> Unit,
+) {
+    OutlinedTextField(
+        value = text,
+        onValueChange = onValueChange,
+        /*{ value ->
+            val digitsOnly = value.filter { it.isDigit() }
+            if (digitsOnly.length <= 10) {
+                onValueChange(digitsOnly)
+            }
+        }*/
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 16.dp),
+        textStyle = MaterialTheme.typography.bodyMedium,
+        label = { Text(text = label) },
+        visualTransformation = PhoneVisualTransformation(
+            mask = "+7 (###) ### ##-##"
+        ),
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Phone,
+            imeAction = ImeAction.Done
+        ),
+        colors = OutlinedTextFieldDefaults.colors(
+            unfocusedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
+            unfocusedBorderColor = MaterialTheme.colorScheme.surface,
+            focusedLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+            focusedBorderColor = MaterialTheme.colorScheme.outline,
+            errorLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+            errorContainerColor = MaterialTheme.colorScheme.surfaceVariant,
             cursorColor = MaterialTheme.colorScheme.onPrimary,
             selectionColors = TextSelectionColors(
                 handleColor = MaterialTheme.colorScheme.onPrimary,
@@ -174,20 +225,26 @@ fun getErrorText(type: InputErrorType): String = when (type) {
 private fun PreviewInput() {
     AppTheme {
         Column {
+            PhoneInput(
+                label = "Телефон",
+                text = "",
+                onValueChange = {},
+            )
+
             PasswordInput(
                 label = "Текст",
-                text = "Текст",
+                text = "",
                 onValueChange = { },
                 passwordHidden = false,
                 onVisibilityClick = {},
                 passwordErrorType = InputErrorType.NONE,
             )
 
-            LoginInput(
+            OutlinedInput(
                 label = "Текст",
                 text = "Текст",
                 onValueChange = { },
-                loginErrorType = InputErrorType.INVALID_FORMAT,
+                errorType = InputErrorType.INVALID_FORMAT,
             )
         }
     }

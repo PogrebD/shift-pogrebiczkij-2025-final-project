@@ -43,4 +43,20 @@
     <string name="loan_status_rejected">Отклонён</string>
     <string name="error_date_format">Неверный формат даты</string>
     <string name="label_view_all">Посмотреть все</string>
+    <string name="title_your_data">Ваши данные</string>
+    <string name="label_name">Имя</string>
+    <string name="label_lastname">Фамилия</string>
+    <string name="label_phone">Телефон</string>
+    <string name="label_apply_loan">Оформить займ</string>
+    <string name="description_loan_processing">После оформления заявки на займ, банк проведет анализ вашей кредитной истории</string>
+    <string name="title_loan_processing">Оформление займа</string>
+    <string name="content_description_back">Назад</string>
+    <string name="content_description_success">Success</string>
+    <string name="pattern_title_success">Получите %1$d ₽ в банке</string>
+    <string name="pattern_body_success">Для получения придите в банк с паспортом до %1$s</string>
+    <string name="label_view_address">Посмотреть адреса банков</string>
+    <string name="title_failure">Заявка не одобрена</string>
+    <string name="body_failure">Сейчас мы не можем одобрить вашу заявку</string>
+    <string name="label_back_main">Вернуться на главную</string>
+    <string name="content_description_failure">failure</string>
 </resources>
