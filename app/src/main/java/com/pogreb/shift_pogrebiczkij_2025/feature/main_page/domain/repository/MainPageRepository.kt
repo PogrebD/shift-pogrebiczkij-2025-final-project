@@ -5,6 +5,6 @@ import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.domain.entity.LoanCo
 
 interface MainPageRepository {
 
+    suspend fun getAllLoans(): List<Loan>
     suspend fun getLoanConditions(): LoanConditions
-    suspend fun getLoans(): List<Loan>
 }
