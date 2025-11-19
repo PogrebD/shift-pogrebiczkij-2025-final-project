@@ -3,11 +3,14 @@ package com.pogreb.shift_pogrebiczkij_2025.app.di
 import android.content.Context
 import com.pogreb.shift_pogrebiczkij_2025.app.MainActivity
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.di.AuthorizationComponent
+import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.di.MainPageComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.onboarding.di.OnboardingComponent
 import dagger.BindsInstance
 import dagger.Component
+import javax.inject.Singleton
 
 
+@Singleton
 @Component(
     modules = [
         AppModule::class
@@ -18,6 +21,7 @@ interface AppComponent {
 
     fun authorizationComponent(): AuthorizationComponent
     fun onboardingComponent(): OnboardingComponent
+    fun mainPageComponent(): MainPageComponent
 
     @Component.Factory
     interface Factory {
