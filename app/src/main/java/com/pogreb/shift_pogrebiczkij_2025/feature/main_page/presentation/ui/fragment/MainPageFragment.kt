@@ -64,7 +64,14 @@ class MainPageFragment : Fragment() {
                         viewModel = viewModel,
                         onQuestionClick = { router.openOnboarding(parentFragmentManager) },
                         onMenuPageClick = { router.openMenu(parentFragmentManager) },
-                        onContinueClick = { router.openLoanProcessing(parentFragmentManager) },
+                        onContinueClick = { percent, period, amount ->
+                            router.openLoanProcessing(
+                                parentFragmentManager,
+                                percent = percent,
+                                period = period,
+                                amount = amount,
+                            )
+                        },
                         onViewAllClick = { router.openLoansHistory(parentFragmentManager) }
                     )
                 }

@@ -23,8 +23,8 @@ import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
 @Composable
 internal fun MainPageContent(
     modifier: Modifier,
-    loanAmount: Int,
-    maxAmount: Int,
+    loanAmount: Long,
+    maxAmount: Long,
     percent: Double,
     period: Int,
     loans: List<Loan>,

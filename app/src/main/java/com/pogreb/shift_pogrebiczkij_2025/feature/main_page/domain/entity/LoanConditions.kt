@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 data class LoanConditions(
     val percent: Double,
     val period: Int,
-    val maxAmount: Int,
+    val maxAmount: Long,
 )

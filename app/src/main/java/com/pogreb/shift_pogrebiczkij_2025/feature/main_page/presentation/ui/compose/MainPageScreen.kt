@@ -25,7 +25,7 @@ internal fun MainPageScreen(
     viewModel: MainPageViewModel,
     onQuestionClick: () -> Unit,
     onMenuPageClick: () -> Unit,
-    onContinueClick: () -> Unit,
+    onContinueClick: (Double, Int, Long) -> Unit,
     onViewAllClick: () -> Unit,
 ) {
     val state by viewModel.state.collectAsState()
@@ -50,7 +50,13 @@ internal fun MainPageScreen(
                     percent = currentState.loanConditions.percent,
                     period = currentState.loanConditions.period,
                     onSliderValueChange = { viewModel.updateLoanAmount(it) },
-                    onContinueClick = onContinueClick,
+                    onContinueClick = {
+                        onContinueClick(
+                            currentState.loanConditions.percent,
+                            currentState.loanConditions.period,
+                            currentState.loanAmount,
+                        )
+                    },
                     onViewAllClick = onViewAllClick,
                     loans = currentState.loans,
                 )

@@ -31,7 +31,7 @@ class MainPageViewModel @Inject constructor(
                     MainPageState.Content(
                         loanConditions = loanConditions,
                         loans = loans,
-                        loanAmount = ((loanConditions.maxAmount * 0.7).toInt()), //!!!!!
+                        loanAmount = ((loanConditions.maxAmount * 0.7).toLong()), //!!!!!
                     )
                 }
             } catch (e: Exception) {
@@ -45,7 +45,7 @@ class MainPageViewModel @Inject constructor(
         _state.update { currentState ->
             if (currentState is MainPageState.Content) {
                 currentState.copy(
-                    loanAmount = loanAmount.toInt()
+                    loanAmount = loanAmount.toLong()
                 )
             } else currentState
         }

@@ -11,7 +11,7 @@ interface MainPageState {
     data class Content(
         val loanConditions: LoanConditions,
         val loans: List<Loan>,
-        val loanAmount: Int,
+        val loanAmount: Long,
     ) : MainPageState
 
     data class Error(

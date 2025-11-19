@@ -37,8 +37,8 @@ import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.iconSecondary
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoanCalculatorCard(
-    loanAmount: Int,
-    maxAmount: Int,
+    loanAmount: Long,
+    maxAmount: Long,
     percent: Double,
     period: Int,
     onSliderValueChange: (Float) -> Unit,
@@ -110,8 +110,8 @@ private fun LoanConditions(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun LoanAmountSlider(
-    loanAmount: Int,
-    maxAmount: Int,
+    loanAmount: Long,
+    maxAmount: Long,
     onSliderValueChange: (Float) -> Unit
 ) {
     Slider(
@@ -195,7 +195,7 @@ private fun LoanAmountSlider(
 }
 
 @Composable
-private fun LoanAmount(loanAmount: Int) {
+private fun LoanAmount(loanAmount: Long) {
     Row(
         modifier = Modifier.padding(start = 16.dp),
         verticalAlignment = Alignment.CenterVertically,

@@ -6,5 +6,10 @@ interface MainPageRouter {
     fun openOnboarding(fragmentManager: FragmentManager)
     fun openLoansHistory(fragmentManager: FragmentManager)
     fun openMenu(fragmentManager: FragmentManager)
-    fun openLoanProcessing(fragmentManager: FragmentManager)
+    fun openLoanProcessing(
+        fragmentManager: FragmentManager,
+        percent: Double,
+        period: Int,
+        amount: Long
+    )
 }
