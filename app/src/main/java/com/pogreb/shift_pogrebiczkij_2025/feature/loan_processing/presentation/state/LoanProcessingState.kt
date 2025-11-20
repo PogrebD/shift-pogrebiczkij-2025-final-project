@@ -12,6 +12,7 @@ interface LoanProcessingState {
         val userData: UserData,
         val nameErrorType: InputErrorType,
         val lastNameErrorType: InputErrorType,
+        val phoneErrorType: InputErrorType,
     ) : LoanProcessingState
 
     data class SuccessfulResult(

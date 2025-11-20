@@ -43,6 +43,7 @@ class LoanProcessingViewModel @Inject constructor(
                 ),
                 nameErrorType = InputErrorType.NONE,
                 lastNameErrorType = InputErrorType.NONE,
+                phoneErrorType = InputErrorType.NONE,
             )
         }
     }
@@ -104,15 +105,20 @@ class LoanProcessingViewModel @Inject constructor(
         val currentState = _state.value as LoanProcessingState.Content
         var errorType = InputErrorType.NONE
 
-        if (!validatePhone(phone)) {
-            errorType = InputErrorType.INVALID_PHONE_NUMBER
+        val phoneDigitsOnly = phone.filter { it.isDigit() }
+        if (phoneDigitsOnly.length <= 11) {
+            if (!validatePhone(phone)) {
+                errorType = InputErrorType.INVALID_PHONE_NUMBER
+            }
+            _state.update {
+                currentState.copy(
+                    userData = currentState.userData.copy(phone = phone),
+                    phoneErrorType = errorType,
+                )
+            }
         }
-        _state.update {
-            currentState.copy(
-                userData = currentState.userData.copy(phone = phone),
-                nameErrorType = errorType
-            )
-        }
+
+
     }
 
     private fun validateName(login: String): Boolean {
@@ -121,7 +127,9 @@ class LoanProcessingViewModel @Inject constructor(
     }
 
     private fun validatePhone(phone: String): Boolean {
-        return phone[0] == '7'
+        return if (phone.isNotEmpty()) {
+            phone[0] == '7' || phone[0] == '8'
+        } else false
     }
 
     private fun formatDateWithAddedDays(isoDate: String, daysToAdd: Int): String {

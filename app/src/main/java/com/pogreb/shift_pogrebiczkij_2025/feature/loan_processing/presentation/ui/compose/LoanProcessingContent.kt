@@ -23,6 +23,9 @@ internal fun LoanProcessingContent(
     name: String,
     lastName: String,
     phone: String,
+    nameErrorType: InputErrorType,
+    lastNameErrorType: InputErrorType,
+    phoneErrorType: InputErrorType,
     onNameChange: (String) -> Unit,
     onLastNameChange: (String) -> Unit,
     onPhoneChange: (String) -> Unit,
@@ -40,19 +43,20 @@ internal fun LoanProcessingContent(
                 label = stringResource(R.string.label_name),
                 text = name,
                 onValueChange = onNameChange,
-                errorType = InputErrorType.NONE
+                errorType = nameErrorType
             )
 
             OutlinedInput(
                 label = stringResource(R.string.label_lastname),
                 text = lastName,
                 onValueChange = onLastNameChange,
-                errorType = InputErrorType.NONE
+                errorType = lastNameErrorType
             )
 
             PhoneInput(
                 label = stringResource(R.string.label_phone),
                 text = phone,
+                errorType = phoneErrorType,
                 onValueChange = onPhoneChange,
             )
 
@@ -102,6 +106,9 @@ private fun PreviewLoanProcessingContent() {
             onPhoneChange = {},
             onApplyLoanClick = {},
             modifier = Modifier,
+            nameErrorType = InputErrorType.NONE,
+            lastNameErrorType = InputErrorType.NONE,
+            phoneErrorType = InputErrorType.NONE,
         )
     }
 }

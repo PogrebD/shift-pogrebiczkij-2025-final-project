@@ -86,7 +86,7 @@ class LoanProcessingFragment : Fragment() {
                         percent = percent,
                         period = period,
                         amount = amount,
-                        onCloseClick = {},
+                        onCloseClick = { router.openMainPage(parentFragmentManager) },
                         onViewAddressClick = {},
                     )
                 }

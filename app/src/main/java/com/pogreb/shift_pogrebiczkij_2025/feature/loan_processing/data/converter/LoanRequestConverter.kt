@@ -1,6 +1,6 @@
 package com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.data.converter
 
-import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.data.entity.LoanRequest
+import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.data.model.LoanRequest
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.domain.entity.LoanData
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.domain.entity.UserData
 import javax.inject.Inject
@@ -18,5 +18,4 @@ class LoanRequestConverter @Inject constructor() {
             period = loanData.period,
             phone = userData.phone,
         )
-
 }

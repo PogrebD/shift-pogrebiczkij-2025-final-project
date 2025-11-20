@@ -12,6 +12,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.pogreb.shift_pogrebiczkij_2025.R
@@ -37,51 +38,76 @@ internal fun LoanProcessingScreen(
         )
     }
 
-    Scaffold { paddingValues ->
-        when (val currentState = state) {
-            is LoanProcessingState.Content ->
-                LoanProcessingContent(
-                    modifier = Modifier
-                        .padding(paddingValues),
-                    name = currentState.userData.name,
-                    lastName = currentState.userData.lastName,
-                    phone = currentState.userData.phone,
-                    onNameChange = viewModel::updateName,
-                    onLastNameChange = viewModel::updateLastName,
-                    onPhoneChange = viewModel::updatePhone,
-                    onApplyLoanClick = viewModel::createLoan,
+    Scaffold(
+        topBar = {
+            when (state) {
+                is LoanProcessingState.Content -> LoanProcessingTopBar(
+                    title = stringResource(R.string.title_loan_processing),
+                    iconPainter = painterResource(R.drawable.arrow_left),
+                    onNavigationClick = onCloseClick,
                 )
 
-            is LoanProcessingState.SuccessfulResult ->
-                SuccessfulContent(
-                    modifier = Modifier
-                        .padding(paddingValues),
-                    amount = currentState.amount,
-                    date = currentState.date,
-                    onViewAddressClick = onViewAddressClick,
+                else -> LoanProcessingTopBar(
+                    title = "",
+                    iconPainter = painterResource(R.drawable.cross),
+                    onNavigationClick = onCloseClick,
                 )
+            }
+        },
+        content = { paddingValues ->
+            when (val currentState = state) {
+                is LoanProcessingState.Content ->
+                    LoanProcessingContent(
+                        modifier = Modifier
+                            .padding(paddingValues),
+                        name = currentState.userData.name,
+                        lastName = currentState.userData.lastName,
+                        phone = currentState.userData.phone,
+                        nameErrorType = currentState.nameErrorType,
+                        lastNameErrorType = currentState.lastNameErrorType,
+                        phoneErrorType = currentState.phoneErrorType,
+                        onNameChange = viewModel::updateName,
+                        onLastNameChange = viewModel::updateLastName,
+                        onPhoneChange = viewModel::updatePhone,
+                        onApplyLoanClick = viewModel::createLoan,
+                    )
 
-            is LoanProcessingState.FailureResult ->
-                FailureContent(
-                    modifier = Modifier
-                        .padding(paddingValues),
-                    onBackMainClick = onCloseClick,
-                )
-        }
-    }
+                is LoanProcessingState.SuccessfulResult ->
+                    SuccessfulContent(
+                        modifier = Modifier
+                            .padding(paddingValues),
+                        amount = currentState.amount,
+                        date = currentState.date,
+                        onViewAddressClick = onViewAddressClick,
+                    )
+
+                is LoanProcessingState.FailureResult ->
+                    FailureContent(
+                        modifier = Modifier
+                            .padding(paddingValues),
+                        onBackMainClick = onCloseClick,
+                    )
+            }
+        },
+
+        )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun LoanProcessingTopBar(onBackClick: () -> Unit) {
+private fun LoanProcessingTopBar(
+    title: String,
+    iconPainter: Painter,
+    onNavigationClick: () -> Unit
+) {
     TopAppBar(
-        title = { Text(stringResource(R.string.title_loan_processing)) },
+        title = { Text(title) },
         navigationIcon = {
             IconButton(
-                onClick = onBackClick,
+                onClick = onNavigationClick,
                 content = {
                     Icon(
-                        painterResource(R.drawable.arrow_left),
+                        painter = iconPainter,
                         contentDescription = stringResource(R.string.content_description_back)
                     )
                 }
