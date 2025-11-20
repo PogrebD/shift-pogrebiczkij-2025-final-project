@@ -65,7 +65,7 @@ internal fun MainPageScreen(
         bottomBar = {
             TabBar(
                 onMenuPageClick = onMenuPageClick,
-                activeTab = ActiveTab.MENU,
+                activeTab = ActiveTab.HOME,
             )
         },
     )

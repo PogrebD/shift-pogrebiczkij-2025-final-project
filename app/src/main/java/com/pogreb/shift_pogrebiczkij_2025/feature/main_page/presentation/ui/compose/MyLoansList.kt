@@ -1,11 +1,10 @@
 package com.pogreb.shift_pogrebiczkij_2025.feature.main_page.presentation.ui.compose
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
@@ -39,17 +38,18 @@ fun MyLoansList(
 @Composable
 fun LoansCard(loans: List<Loan>, onViewAllClick: () -> Unit) {
     Card(
-        modifier = Modifier
-            .padding(16.dp),
-        shape = ShapeDefaults.Large
+        modifier = Modifier,
+        shape = ShapeDefaults.Large,
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface,
+        ),
     ) {
-        LazyColumn(
-            contentPadding = PaddingValues(vertical = 8.dp, horizontal = 16.dp),
+        Column(
+            modifier = Modifier
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            items(
-                items = loans,
-                key = { loan -> loan.id },
-            ) { loan ->
+            loans.forEach { loan ->
                 LoanElement(
                     id = loan.id,
                     amount = loan.amount,
@@ -57,14 +57,14 @@ fun LoansCard(loans: List<Loan>, onViewAllClick: () -> Unit) {
                     date = loan.date,
                 )
             }
-        }
 
-        SecondaryButton(
-            onClick = onViewAllClick,
-            text = stringResource(R.string.label_view_all),
-            modifier = Modifier
-                .padding(top = 16.dp)
-        )
+            SecondaryButton(
+                onClick = onViewAllClick,
+                text = stringResource(R.string.label_view_all),
+                modifier = Modifier
+                    .padding(top = 16.dp)
+            )
+        }
     }
 }
 
@@ -82,7 +82,7 @@ fun EmptyLoans() {
 @Preview(
     name = "Light Theme",
     showBackground = true,
-    backgroundColor = 0xFFFFFFFF
+    backgroundColor = 0xFF654345
 )
 @Composable
 private fun PreviewMyLoansList() {

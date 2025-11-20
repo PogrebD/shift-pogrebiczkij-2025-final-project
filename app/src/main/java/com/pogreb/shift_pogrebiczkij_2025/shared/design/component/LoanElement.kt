@@ -18,7 +18,6 @@ import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.indicatorAttention
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.indicatorPositive
 import java.text.SimpleDateFormat
 import java.util.Locale
-import java.util.TimeZone
 
 @Composable
 fun LoanElement(id: Long, amount: Long, status: LoanStatus, date: String) {
@@ -84,17 +83,11 @@ fun getStatusColor(status: LoanStatus) = when (status) {
 }
 
 fun formatDate(isoDate: String): String {
-    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-    inputFormat.timeZone = TimeZone.getTimeZone("UTC")
-
+    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.getDefault())
     val outputFormat = SimpleDateFormat("d MMMM, EEE", Locale("ru"))
 
     val date = inputFormat.parse(isoDate)
-    return if (date != null) {
-        outputFormat.format(date)
-    } else {
-        ""
-    }
+    return date?.let { outputFormat.format(it) } ?: ""
 }
 
 @Preview(
