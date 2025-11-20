@@ -87,7 +87,7 @@ class LoanProcessingFragment : Fragment() {
                         period = period,
                         amount = amount,
                         onCloseClick = { router.openMainPage(parentFragmentManager) },
-                        onViewAddressClick = {},
+                        onViewAddressClick = { router.openBankAddresses(parentFragmentManager) },
                     )
                 }
             }
