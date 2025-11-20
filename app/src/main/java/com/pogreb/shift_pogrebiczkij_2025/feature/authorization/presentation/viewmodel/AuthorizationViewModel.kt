@@ -109,7 +109,7 @@ class AuthorizationViewModel @Inject constructor(
                 is AuthorizationState.LoginContent -> {
                     var errorType = InputErrorType.NONE
                     if (!validateLogin(login)) {
-                        errorType = InputErrorType.INVALID_FORMAT
+                        errorType = InputErrorType.ONLY_LATIN_LETTERS_AND_NUMBERS
                     }
                     currentState.copy(
                         authorizationData = currentState.authorizationData.copy(name = login),
@@ -120,7 +120,7 @@ class AuthorizationViewModel @Inject constructor(
                 is AuthorizationState.RegistrationContent -> {
                     var errorType = InputErrorType.NONE
                     if (!validateLogin(login)) {
-                        errorType = InputErrorType.INVALID_FORMAT
+                        errorType = InputErrorType.ONLY_LATIN_LETTERS_AND_NUMBERS
                     }
                     currentState.copy(
                         registrationData = currentState.registrationData.copy(
@@ -143,7 +143,7 @@ class AuthorizationViewModel @Inject constructor(
                 is AuthorizationState.LoginContent -> {
                     var errorType = InputErrorType.NONE
                     if (!validatePassword(password)) {
-                        errorType = InputErrorType.INVALID_FORMAT
+                        errorType = InputErrorType.ONLY_LATIN_LETTERS_AND_NUMBERS
                     }
                     currentState.copy(
                         authorizationData = currentState.authorizationData.copy(password = password),
@@ -154,7 +154,7 @@ class AuthorizationViewModel @Inject constructor(
                 is AuthorizationState.RegistrationContent -> {
                     var errorType = InputErrorType.NONE
                     if (!validatePassword(password)) {
-                        errorType = InputErrorType.INVALID_FORMAT
+                        errorType = InputErrorType.ONLY_LATIN_LETTERS_AND_NUMBERS
                     }
                     currentState.copy(
                         registrationData = currentState.registrationData.copy(

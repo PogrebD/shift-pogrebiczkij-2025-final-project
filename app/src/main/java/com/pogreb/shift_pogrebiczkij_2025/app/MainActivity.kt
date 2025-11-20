@@ -6,6 +6,7 @@ import com.pogreb.shift_pogrebiczkij_2025.R
 import com.pogreb.shift_pogrebiczkij_2025.app.di.ComponentProvider
 import com.pogreb.shift_pogrebiczkij_2025.databinding.ActivityMainBinding
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.ui.fragment.AuthorizationFragment
+import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.di.LoanProcessingComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.di.MainPageComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.onboarding.di.OnboardingComponent
 
@@ -35,5 +36,6 @@ class MainActivity : AppCompatActivity(), ComponentProvider {
     override fun provideMainPageComponent(): MainPageComponent =
         appComponent.mainPageComponent()
 
-
+    override fun provideLoanProcessingComponent(): LoanProcessingComponent =
+        appComponent.loanProcessingComponent()
 }

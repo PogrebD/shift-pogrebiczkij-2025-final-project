@@ -8,6 +8,8 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.pogreb.shift_pogrebiczkij_2025.databinding.FragmentLoanProcessingBinding
+import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.di.LoanProcessingComponentProvider
+import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.presentation.LoanProcessingRouter
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.presentation.ui.compose.LoanProcessingScreen
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.presentation.viewmodel.LoanProcessingViewModel
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.presentation.viewmodel.LoanProcessingViewModelFactory
@@ -43,6 +45,9 @@ class LoanProcessingFragment : Fragment() {
     @Inject
     lateinit var factory: LoanProcessingViewModelFactory
 
+    @Inject
+    lateinit var router: LoanProcessingRouter
+
     private lateinit var binding: FragmentLoanProcessingBinding
 
     private val viewModel: LoanProcessingViewModel by viewModels {
@@ -50,7 +55,10 @@ class LoanProcessingFragment : Fragment() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val provider = requireActivity() as LoanProcessingComponentProvider
 
+        val loanProcessingComponent = provider.provideLoanProcessingComponent()
+        loanProcessingComponent.inject(this)
         super.onCreate(savedInstanceState)
     }
 

@@ -1,9 +1,11 @@
 package com.pogreb.shift_pogrebiczkij_2025.app.di
 
 import com.pogreb.shift_pogrebiczkij_2025.app.router.AuthorizationRouterImpl
+import com.pogreb.shift_pogrebiczkij_2025.app.router.LoanProcessingRouterImpl
 import com.pogreb.shift_pogrebiczkij_2025.app.router.MainPageRouterImpl
 import com.pogreb.shift_pogrebiczkij_2025.app.router.OnboardingRouterImpl
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.AuthorizationRouter
+import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.presentation.LoanProcessingRouter
 import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.presentation.MainPageRouter
 import com.pogreb.shift_pogrebiczkij_2025.feature.onboarding.presentation.OnboardingRouter
 import dagger.Binds
@@ -20,4 +22,7 @@ interface NavigationModule {
 
     @Binds
     fun bindMainPageRouter(impl: MainPageRouterImpl): MainPageRouter
+
+    @Binds
+    fun bindLoanProcessingRouter(impl: LoanProcessingRouterImpl): LoanProcessingRouter
 }
