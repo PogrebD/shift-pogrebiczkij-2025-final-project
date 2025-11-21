@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.pogreb.shift_pogrebiczkij_2025.databinding.FragmentLoanHistoryBinding
+import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.di.LoanHistoryComponentProvider
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.presentation.LoanHistoryRouter
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.presentation.ui.compose.LoanHistoryScreen
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.presentation.viewmodel.LoanHistoryViewModel
@@ -35,6 +36,10 @@ class LoanHistoryFragment : Fragment() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val provider = requireActivity() as LoanHistoryComponentProvider
+
+        val loanHistoryComponent = provider.provideLoanHistoryComponent()
+        loanHistoryComponent.inject(this)
 
         super.onCreate(savedInstanceState)
     }

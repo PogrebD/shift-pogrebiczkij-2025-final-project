@@ -1,11 +1,11 @@
 package com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.data.datasource
 
-import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.domain.entity.Loan
+import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.data.model.LoanModel
 import retrofit2.http.GET
 
 interface LoanHistoryApi {
 
     @GET("loans/all")
-    suspend fun getAllLoans(): List<Loan>
+    suspend fun getAllLoans(): List<LoanModel>
 
 }

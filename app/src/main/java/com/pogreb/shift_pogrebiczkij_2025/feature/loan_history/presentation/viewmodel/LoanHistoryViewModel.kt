@@ -1,5 +1,6 @@
 package com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.domain.usecase.GetLoansUseCase
@@ -29,6 +30,7 @@ class LoanHistoryViewModel @Inject constructor(
                     )
                 }
             } catch (e: Exception) {
+                Log.e("loans", e.message ?: "")
             }
         }
     }
