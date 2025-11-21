@@ -64,4 +64,12 @@
     <string name="content_desription_sorry">Что-то пошло не так</string>
     <string name="title_service_unvailable">Сервис временно недоступен</string>
     <string name="content_description_back_main">Вернуться на главную страницу</string>
+    <string name="label_id">Номер займа</string>
+    <string name="label_date">Дата оформления</string>
+    <string name="label_period">Период (дней)</string>
+    <string name="label_percent">Процент</string>
+    <string name="label_amount">Сумма</string>
+    <string name="pattern_percent">%1$s %</string>
+    <string name="label_status">Статус</string>
+    <string name="body_loan_details">Когда займ примет статус «Одобрен», вам нужно будет подойти с паспортом в отделение банка для подписания договора и получить деньги</string>
 </resources>
