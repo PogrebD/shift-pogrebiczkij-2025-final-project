@@ -23,8 +23,6 @@ import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.LoanStatus
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.getStatusColor
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.getStatusText
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
-import java.text.SimpleDateFormat
-import java.util.Locale
 
 @Composable
 internal fun LoanDetailsContent(
@@ -77,8 +75,7 @@ private fun UserDetailsCard(
 ) {
     Card(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
+            .fillMaxWidth(),
         shape = ShapeDefaults.Large,
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface,
@@ -86,7 +83,8 @@ private fun UserDetailsCard(
     ) {
         Column(
             modifier = Modifier
-                .padding(16.dp),
+                .padding(16.dp)
+                .padding(top = 6.dp, bottom = 4.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             DetailsItem(
@@ -117,8 +115,7 @@ private fun LoanDetailsCard(
 ) {
     Card(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
+            .fillMaxWidth(),
         shape = ShapeDefaults.Large,
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface,
@@ -126,7 +123,8 @@ private fun LoanDetailsCard(
     ) {
         Column(
             modifier = Modifier
-                .padding(16.dp),
+                .padding(16.dp)
+                .padding(top = 6.dp, bottom = 4.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             DetailsItem(
@@ -136,7 +134,7 @@ private fun LoanDetailsCard(
 
             DetailsItem(
                 label = stringResource(R.string.label_date),
-                value = formatDate(date),
+                value = date,
             )
 
             DetailsItem(
@@ -146,7 +144,7 @@ private fun LoanDetailsCard(
 
             DetailsItem(
                 label = stringResource(R.string.label_percent),
-                value = stringResource(R.string.pattern_percent, percent),
+                value = stringResource(R.string.pattern_percent, percent.toString()),
             )
 
             DetailsItem(
@@ -163,8 +161,7 @@ private fun Status(
 ) {
     Card(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
+            .fillMaxWidth(),
         shape = ShapeDefaults.Large,
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface,
@@ -221,14 +218,6 @@ private fun DetailsItem(
             style = MaterialTheme.typography.bodyMedium
         )
     }
-}
-
-private fun formatDate(isoDate: String): String {
-    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.getDefault())
-    val outputFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
-
-    val date = inputFormat.parse(isoDate)
-    return date?.let { outputFormat.format(it) } ?: ""
 }
 
 @Preview(
