@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.domain.entity.Loan
+import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.domain.entity.Loan
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.LoanElement
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.LoanStatus
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme

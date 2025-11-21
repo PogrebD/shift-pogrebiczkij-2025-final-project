@@ -1,6 +1,7 @@
 package com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.presentation.state
 
-import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.domain.entity.Loan
+import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.domain.entity.Loan
+
 
 interface LoanHistoryState {
     data object Initialize : LoanHistoryState
