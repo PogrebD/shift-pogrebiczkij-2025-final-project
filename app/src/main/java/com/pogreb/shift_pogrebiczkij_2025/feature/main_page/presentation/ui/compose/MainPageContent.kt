@@ -33,6 +33,7 @@ internal fun MainPageContent(
     onSliderValueChange: (Float) -> Unit,
     onContinueClick: () -> Unit,
     onViewAllClick: () -> Unit,
+    onItemClick: (Long) -> Unit,
 ) {
 
     Column(
@@ -66,6 +67,7 @@ internal fun MainPageContent(
         MyLoansList(
             loans = loans,
             onViewAllClick = onViewAllClick,
+            onItemClick = onItemClick,
         )
     }
 }
@@ -119,6 +121,7 @@ private fun PreviewMainPageContent() {
                     status = LoanStatus.REGISTERED,
                 )
             ),
+            onItemClick = {},
         ) 
     }
 }

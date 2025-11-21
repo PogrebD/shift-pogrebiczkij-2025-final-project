@@ -72,7 +72,8 @@ class MainPageFragment : Fragment() {
                                 amount = amount,
                             )
                         },
-                        onViewAllClick = { router.openLoansHistory(parentFragmentManager) }
+                        onViewAllClick = { router.openLoansHistory(parentFragmentManager) },
+                        onItemClick = TODO()
                     )
                 }
             }

@@ -26,6 +26,13 @@ class MainPageRouterImpl @Inject constructor() : MainPageRouter {
         TODO("Not yet implemented")
     }
 
+    override fun openLoanDetails(
+        fragmentManager: FragmentManager,
+        id: Long
+    ) {
+        TODO("Not yet implemented")
+    }
+
     override fun openLoanProcessing(
         fragmentManager: FragmentManager,
         percent: Double,

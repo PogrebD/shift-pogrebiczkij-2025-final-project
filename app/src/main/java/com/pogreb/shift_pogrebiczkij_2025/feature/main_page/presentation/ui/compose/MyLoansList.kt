@@ -23,20 +23,26 @@ import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
 @Composable
 fun MyLoansList(
     loans: List<Loan>,
-    onViewAllClick: () -> Unit
+    onViewAllClick: () -> Unit,
+    onItemClick: (Long) -> Unit,
 ) {
     if (loans.isEmpty()) {
         EmptyLoans()
     } else {
         LoansCard(
             loans = loans,
-            onViewAllClick = onViewAllClick
+            onViewAllClick = onViewAllClick,
+            onItemClick
         )
     }
 }
 
 @Composable
-fun LoansCard(loans: List<Loan>, onViewAllClick: () -> Unit) {
+fun LoansCard(
+    loans: List<Loan>,
+    onViewAllClick: () -> Unit,
+    onItemClick: (Long) -> Unit,
+) {
     Card(
         modifier = Modifier,
         shape = ShapeDefaults.Large,
@@ -55,6 +61,7 @@ fun LoansCard(loans: List<Loan>, onViewAllClick: () -> Unit) {
                     amount = loan.amount,
                     status = loan.status,
                     date = loan.date,
+                    onItemClick = onItemClick,
                 )
             }
 
@@ -109,6 +116,7 @@ private fun PreviewMyLoansList() {
                 )
             ),
             onViewAllClick = {},
+            onItemClick = {},
         )
     }
 }

@@ -1,4 +1,4 @@
-package com.pogreb.shift_pogrebiczkij_2025.feature.main_page.presentation.ui.compose
+package com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.presentation.ui.compose
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -12,22 +12,21 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.pogreb.shift_pogrebiczkij_2025.R
-import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.presentation.state.MainPageState
-import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.presentation.viewmodel.MainPageViewModel
+import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.presentation.state.LoanHistoryState
+import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.presentation.viewmodel.LoanHistoryViewModel
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.ActiveTab
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.TabBar
 
 @Composable
-internal fun MainPageScreen(
-    viewModel: MainPageViewModel,
-    onQuestionClick: () -> Unit,
-    onMenuPageClick: () -> Unit,
-    onContinueClick: (Double, Int, Long) -> Unit,
-    onViewAllClick: () -> Unit,
+internal fun LoanHistoryScreen(
+    viewModel: LoanHistoryViewModel,
     onItemClick: (Long) -> Unit,
+    onBackClick: () -> Unit,
+    onMenuPageClick: () -> Unit,
 ) {
     val state by viewModel.state.collectAsState()
 
@@ -37,28 +36,17 @@ internal fun MainPageScreen(
 
     Scaffold(
         topBar = {
-            MainPageTopBar(
-                onQuestionClick = onQuestionClick,
+            LoanHistoryTopBar(
+                title = stringResource(R.string.title_my_loans),
+                iconPainter = painterResource(R.drawable.arrow_left),
+                onNavigationClick = onBackClick,
             )
         },
         content = { paddingValues ->
             when (val currentState = state) {
-                is MainPageState.Content -> MainPageContent(
+                is LoanHistoryState.Content -> LoanHistoryContent(
                     modifier = Modifier
                         .padding(paddingValues),
-                    loanAmount = currentState.loanAmount,
-                    maxAmount = currentState.loanConditions.maxAmount,
-                    percent = currentState.loanConditions.percent,
-                    period = currentState.loanConditions.period,
-                    onSliderValueChange = { viewModel.updateLoanAmount(it) },
-                    onContinueClick = {
-                        onContinueClick(
-                            currentState.loanConditions.percent,
-                            currentState.loanConditions.period,
-                            currentState.loanAmount,
-                        )
-                    },
-                    onViewAllClick = onViewAllClick,
                     loans = currentState.loans,
                     onItemClick = onItemClick,
                 )
@@ -75,16 +63,20 @@ internal fun MainPageScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun MainPageTopBar(onQuestionClick: () -> Unit) {
+private fun LoanHistoryTopBar(
+    title: String,
+    iconPainter: Painter,
+    onNavigationClick: () -> Unit
+) {
     TopAppBar(
-        title = { Text(stringResource(R.string.title_main_page)) },
-        actions = {
+        title = { Text(title) },
+        navigationIcon = {
             IconButton(
-                onClick = onQuestionClick,
+                onClick = onNavigationClick,
                 content = {
                     Icon(
-                        painterResource(R.drawable.question),
-                        contentDescription = stringResource(R.string.close_content_description)
+                        painter = iconPainter,
+                        contentDescription = stringResource(R.string.content_description_back)
                     )
                 }
             )
