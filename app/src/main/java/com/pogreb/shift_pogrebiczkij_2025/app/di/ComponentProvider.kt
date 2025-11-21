@@ -4,6 +4,8 @@ import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.di.Authorization
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.di.AuthorizationComponentProvider
 import com.pogreb.shift_pogrebiczkij_2025.feature.bank_addresses.di.BankAddressesComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.bank_addresses.di.BankAddressesComponentProvider
+import com.pogreb.shift_pogrebiczkij_2025.feature.loan_details.di.LoanDetailsComponent
+import com.pogreb.shift_pogrebiczkij_2025.feature.loan_details.di.LoanDetailsComponentProvider
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.di.LoanHistoryComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.di.LoanHistoryComponentProvider
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.di.LoanProcessingComponent
@@ -19,11 +21,13 @@ interface ComponentProvider :
     MainPageComponentProvider,
     LoanProcessingComponentProvider,
     BankAddressesComponentProvider,
-    LoanHistoryComponentProvider {
+    LoanHistoryComponentProvider,
+    LoanDetailsComponentProvider {
     override fun provideAuthorizationComponent(): AuthorizationComponent
     override fun provideOnboardingComponent(): OnboardingComponent
     override fun provideMainPageComponent(): MainPageComponent
     override fun provideLoanProcessingComponent(): LoanProcessingComponent
     override fun provideBankAddressesComponent(): BankAddressesComponent
     override fun provideLoanHistoryComponent(): LoanHistoryComponent
+    override fun provideLoanDetailsComponent(): LoanDetailsComponent
 }

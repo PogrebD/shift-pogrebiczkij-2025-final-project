@@ -2,12 +2,14 @@ package com.pogreb.shift_pogrebiczkij_2025.app.di
 
 import com.pogreb.shift_pogrebiczkij_2025.app.router.AuthorizationRouterImpl
 import com.pogreb.shift_pogrebiczkij_2025.app.router.BankAddressesRouterImpl
+import com.pogreb.shift_pogrebiczkij_2025.app.router.LoanDetailsRouterImpl
 import com.pogreb.shift_pogrebiczkij_2025.app.router.LoanHistoryRouterImpl
 import com.pogreb.shift_pogrebiczkij_2025.app.router.LoanProcessingRouterImpl
 import com.pogreb.shift_pogrebiczkij_2025.app.router.MainPageRouterImpl
 import com.pogreb.shift_pogrebiczkij_2025.app.router.OnboardingRouterImpl
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.AuthorizationRouter
 import com.pogreb.shift_pogrebiczkij_2025.feature.bank_addresses.presentation.BankAddressesRouter
+import com.pogreb.shift_pogrebiczkij_2025.feature.loan_details.presentation.LoanDetailsRouter
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.presentation.LoanHistoryRouter
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.presentation.LoanProcessingRouter
 import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.presentation.MainPageRouter
@@ -35,4 +37,7 @@ interface NavigationModule {
 
     @Binds
     fun bindLoanHistoryRouter(impl: LoanHistoryRouterImpl): LoanHistoryRouter
+
+    @Binds
+    fun bindLoanDetailsRouter(impl: LoanDetailsRouterImpl): LoanDetailsRouter
 }

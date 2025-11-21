@@ -4,6 +4,8 @@ import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.di.Authorization
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.di.DaggerAuthorizationComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.bank_addresses.di.BankAddressesComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.bank_addresses.di.DaggerBankAddressesComponent
+import com.pogreb.shift_pogrebiczkij_2025.feature.loan_details.di.DaggerLoanDetailsComponent
+import com.pogreb.shift_pogrebiczkij_2025.feature.loan_details.di.LoanDetailsComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.di.DaggerLoanHistoryComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.di.LoanHistoryComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.di.DaggerLoanProcessingComponent
@@ -41,4 +43,9 @@ class FeatureModule {
     @Provides
     fun provideLoanHistoryComponent(dependencies: LoanHistoryComponent.Dependencies): LoanHistoryComponent =
         DaggerLoanHistoryComponent.builder().dependencies(dependencies).build()
+
+    @Provides
+    fun provideLoanDetailsComponent(dependencies: LoanDetailsComponent.Dependencies): LoanDetailsComponent =
+        DaggerLoanDetailsComponent.builder().dependencies(dependencies).build()
+
 }

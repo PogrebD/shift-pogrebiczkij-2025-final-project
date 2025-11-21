@@ -8,6 +8,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.pogreb.shift_pogrebiczkij_2025.databinding.FragmentLoanDetailsBinding
+import com.pogreb.shift_pogrebiczkij_2025.feature.loan_details.di.LoanDetailsComponentProvider
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_details.presentation.LoanDetailsRouter
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_details.presentation.ui.compose.LoanDetailsScreen
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_details.presentation.viewmodel.LoanDetailsViewModel
@@ -46,6 +47,10 @@ class LoanDetailsFragment : Fragment() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val provider = requireActivity() as LoanDetailsComponentProvider
+
+        val loanDetailsComponent = provider.provideLoanDetailsComponent()
+        loanDetailsComponent.inject(this)
 
         super.onCreate(savedInstanceState)
     }

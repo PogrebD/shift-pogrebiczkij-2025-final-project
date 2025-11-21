@@ -2,6 +2,7 @@ package com.pogreb.shift_pogrebiczkij_2025.app.router
 
 import androidx.fragment.app.FragmentManager
 import com.pogreb.shift_pogrebiczkij_2025.R
+import com.pogreb.shift_pogrebiczkij_2025.feature.loan_details.presentation.ui.fragment.LoanDetailsFragment
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.presentation.ui.fragment.LoanHistoryFragment
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.presentation.ui.fragment.LoanProcessingFragment
 import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.presentation.MainPageRouter
@@ -37,7 +38,15 @@ class MainPageRouterImpl @Inject constructor() : MainPageRouter {
         fragmentManager: FragmentManager,
         id: Long
     ) {
-        TODO("Not yet implemented")
+        fragmentManager.beginTransaction()
+            .add(
+                R.id.fragment_container_view,
+                LoanDetailsFragment.newInstance(
+                    loanId = id,
+                )
+            )
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun openLoanProcessing(

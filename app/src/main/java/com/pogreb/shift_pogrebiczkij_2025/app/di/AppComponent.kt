@@ -4,6 +4,7 @@ import android.content.Context
 import com.pogreb.shift_pogrebiczkij_2025.app.MainActivity
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.di.AuthorizationComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.bank_addresses.di.BankAddressesComponent
+import com.pogreb.shift_pogrebiczkij_2025.feature.loan_details.di.LoanDetailsComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.di.LoanHistoryComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.di.LoanProcessingComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.di.MainPageComponent
@@ -28,6 +29,7 @@ interface AppComponent {
     fun loanProcessingComponent(): LoanProcessingComponent
     fun bankAddressesComponent(): BankAddressesComponent
     fun loanHistoryComponent(): LoanHistoryComponent
+    fun loanDetailsComponent(): LoanDetailsComponent
 
     @Component.Factory
     interface Factory {

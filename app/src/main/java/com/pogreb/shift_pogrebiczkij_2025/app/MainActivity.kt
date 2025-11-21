@@ -7,6 +7,7 @@ import com.pogreb.shift_pogrebiczkij_2025.app.di.ComponentProvider
 import com.pogreb.shift_pogrebiczkij_2025.databinding.ActivityMainBinding
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.ui.fragment.AuthorizationFragment
 import com.pogreb.shift_pogrebiczkij_2025.feature.bank_addresses.di.BankAddressesComponent
+import com.pogreb.shift_pogrebiczkij_2025.feature.loan_details.di.LoanDetailsComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.di.LoanHistoryComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.di.LoanProcessingComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.di.MainPageComponent
@@ -46,4 +47,7 @@ class MainActivity : AppCompatActivity(), ComponentProvider {
 
     override fun provideLoanHistoryComponent(): LoanHistoryComponent =
         appComponent.loanHistoryComponent()
+
+    override fun provideLoanDetailsComponent(): LoanDetailsComponent =
+        appComponent.loanDetailsComponent()
 }
