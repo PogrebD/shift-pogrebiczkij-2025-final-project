@@ -1,13 +1,7 @@
 package com.pogreb.shift_pogrebiczkij_2025.feature.main_page.presentation.ui.compose
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -18,12 +12,12 @@ import androidx.compose.ui.res.stringResource
 import com.pogreb.shift_pogrebiczkij_2025.R
 import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.presentation.state.MainPageState
 import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.presentation.viewmodel.MainPageViewModel
+import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.ActionTopBar
 
 @Composable
 internal fun MainPageScreen(
     viewModel: MainPageViewModel,
     onQuestionClick: () -> Unit,
-    onMenuPageClick: () -> Unit,
     onContinueClick: (Double, Int, Long) -> Unit,
     onViewAllClick: () -> Unit,
     onItemClick: (Long) -> Unit,
@@ -36,8 +30,11 @@ internal fun MainPageScreen(
 
     Scaffold(
         topBar = {
-            MainPageTopBar(
-                onQuestionClick = onQuestionClick,
+            ActionTopBar(
+                title = stringResource(R.string.title_main_page),
+                iconPainter = painterResource(R.drawable.question),
+                contentDescription = stringResource(R.string.content_description_onboarding),
+                onActionClick = onQuestionClick,
             )
         },
         content = { paddingValues ->
@@ -63,29 +60,5 @@ internal fun MainPageScreen(
                 )
             }
         },
-    )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun MainPageTopBar(onQuestionClick: () -> Unit) {
-    TopAppBar(
-        title = {
-            Text(
-                text = stringResource(R.string.title_main_page),
-                style = MaterialTheme.typography.headlineMedium
-            )
-        },
-        actions = {
-            IconButton(
-                onClick = onQuestionClick,
-                content = {
-                    Icon(
-                        painterResource(R.drawable.question),
-                        contentDescription = stringResource(R.string.content_description_close)
-                    )
-                }
-            )
-        }
     )
 }

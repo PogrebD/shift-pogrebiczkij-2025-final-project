@@ -62,7 +62,6 @@ class LoanHistoryFragment : Fragment() {
                 AppTheme {
                     LoanHistoryScreen(
                         viewModel = viewModel,
-                        onMenuPageClick = { router.openMenu(parentFragmentManager) },
                         onItemClick = { id ->
                             router.openLoanDetails(
                                 fragmentManager = parentFragmentManager,

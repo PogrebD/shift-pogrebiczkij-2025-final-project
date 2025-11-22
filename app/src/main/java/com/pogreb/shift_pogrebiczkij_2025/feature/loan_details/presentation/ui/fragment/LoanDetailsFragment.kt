@@ -76,7 +76,6 @@ class LoanDetailsFragment : Fragment() {
                         viewModel = viewModel,
                         id = loanId,
                         onBackClick = { router.openPreviousPage(parentFragmentManager) },
-                        onMenuPageClick = { router.openMenu(parentFragmentManager) },
                     )
                 }
             }

@@ -1,11 +1,7 @@
 package com.pogreb.shift_pogrebiczkij_2025.feature.onboarding.presentation.ui.compose
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -17,6 +13,7 @@ import com.pogreb.shift_pogrebiczkij_2025.R
 import com.pogreb.shift_pogrebiczkij_2025.feature.onboarding.presentation.state.OnboardingState
 import com.pogreb.shift_pogrebiczkij_2025.feature.onboarding.presentation.viewmodel.OnboardingViewModel
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.BottomNavigation
+import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.NavigationTopBar
 
 @Composable
 internal fun OnboardingScreen(
@@ -33,8 +30,11 @@ internal fun OnboardingScreen(
 
         is OnboardingState.Content -> Scaffold(
             topBar = {
-                OnboardingTopBar(
-                    onCloseClick = onCloseClick,
+                NavigationTopBar(
+                    title = "",
+                    iconPainter = painterResource(R.drawable.cross),
+                    contentDescription = stringResource(R.string.content_description_close),
+                    onNavigationClick = onCloseClick,
                 )
             },
             content = {
@@ -53,24 +53,4 @@ internal fun OnboardingScreen(
             },
         )
     }
-
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun OnboardingTopBar(onCloseClick: () -> Unit) {
-    TopAppBar(
-        title = {},
-        navigationIcon = {
-            IconButton(
-                onClick = onCloseClick,
-                content = {
-                    Icon(
-                        painterResource(R.drawable.cross),
-                        contentDescription = stringResource(R.string.content_description_close)
-                    )
-                }
-            )
-        },
-    )
 }
