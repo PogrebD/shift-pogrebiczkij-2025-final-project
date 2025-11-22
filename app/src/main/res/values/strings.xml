@@ -92,6 +92,8 @@
     <string name="label_back">Назад</string>
     <string name="label_close">Закрыть</string>
     <string name="label_next">Далее</string>
+    <string name="label_password">Пароль</string>
+    <string name="label_repeat_password">Повторите пароль</string>
 
     <string name="content_description_hidden">hidden</string>
     <string name="content_description_home_page_illustration">Home page illustration</string>

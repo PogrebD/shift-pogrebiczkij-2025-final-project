@@ -49,7 +49,8 @@ class AuthorizationViewModel @Inject constructor(
         return logged
     }
 
-    fun registration(authorizationData: AuthorizationData) {
+    fun registration(authorizationData: AuthorizationData): Boolean {
+        var logged = false
         viewModelScope.launch {
             try {
                 val user = registrationUseCase(authorizationData)
@@ -63,10 +64,12 @@ class AuthorizationViewModel @Inject constructor(
                         passwordErrorType = InputErrorType.NONE,
                     )
                 }
+                logged = loginUseCase(authorizationData)
             } catch (e: Exception) {
-            }
 
+            }
         }
+        return logged
     }
 
     fun setLoginState() {

@@ -63,14 +63,14 @@ internal fun AuthorizationContent(
         )
 
         OutlinedInput(
-            label = "Логин",
+            label = stringResource(R.string.label_login),
             text = loginText,
             onValueChange = onLoginValueChange,
             errorType = loginErrorType,
         )
 
         PasswordInput(
-            label = "Пароль",
+            label = stringResource(R.string.label_password),
             text = passwordText,
             onValueChange = onPasswordValueChange,
             passwordErrorType = passwordErrorType,
@@ -80,7 +80,7 @@ internal fun AuthorizationContent(
 
         if (signUpMode) {
             PasswordInput(
-                label = "Повторите пароль",
+                label = stringResource(R.string.label_repeat_password),
                 text = repeatPasswordText,
                 onValueChange = onRepeatPasswordValueCChange,
                 passwordErrorType = repeatPasswordErrorType,
@@ -90,7 +90,7 @@ internal fun AuthorizationContent(
         }
 
         ApplyButton(
-            signUpMode,
+            signUpMode = signUpMode,
             onLoginClick = onLoginClick,
             onRegistrationClick = onRegistrationClick,
         )
