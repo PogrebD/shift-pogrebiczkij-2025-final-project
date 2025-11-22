@@ -41,7 +41,9 @@ internal fun LoanHistoryScreen(
                     modifier = Modifier
                         .padding(paddingValues),
                     loans = currentState.loans,
+                    isRefreshing = currentState.isRefreshing,
                     onItemClick = onItemClick,
+                    onRefresh = viewModel::refresh,
                 )
             }
         },

@@ -9,5 +9,5 @@ class GetRecentLoansUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(): List<Loan> =
         repository.getAllLoans()
-            .takeLast(3)
+            .take(3)
 }

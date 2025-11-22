@@ -1,8 +1,12 @@
 package com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.presentation.ui.compose
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -12,27 +16,39 @@ import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.LoanElement
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.LoanStatus
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun LoanHistoryContent(
     modifier: Modifier,
     loans: List<Loan>,
+    isRefreshing: Boolean,
     onItemClick: (Long) -> Unit,
+    onRefresh: () -> Unit,
 ) {
-    LazyColumn(
-        modifier = modifier,
-        contentPadding = PaddingValues(horizontal = 8.dp)
+    val refreshState = rememberPullToRefreshState()
+
+    PullToRefreshBox(
+        isRefreshing = isRefreshing,
+        onRefresh = onRefresh,
+        state = refreshState,
+        modifier = modifier
+            .fillMaxSize(),
     ) {
-        items(
-            items = loans,
-            key = { loan -> loan.id }
-        ) { loan ->
-            LoanElement(
-                id = loan.id,
-                amount = loan.amount,
-                status = loan.status,
-                date = loan.date,
-                onItemClick = onItemClick,
-            )
+        LazyColumn(
+            contentPadding = PaddingValues(horizontal = 8.dp),
+        ) {
+            items(
+                items = loans,
+                key = { loan -> loan.id }
+            ) { loan ->
+                LoanElement(
+                    id = loan.id,
+                    amount = loan.amount,
+                    status = loan.status,
+                    date = loan.date,
+                    onItemClick = onItemClick,
+                )
+            }
         }
     }
 }
@@ -69,6 +85,8 @@ private fun PreviewLoanHistoryContent() {
             ),
             onItemClick = {},
             modifier = Modifier,
+            isRefreshing = false,
+            onRefresh = {},
         )
     }
 }

@@ -27,6 +27,7 @@ class LoanHistoryViewModel @Inject constructor(
                 _state.update {
                     LoanHistoryState.Content(
                         loans = loans,
+                        isRefreshing = false,
                     )
                 }
             } catch (e: Exception) {
@@ -38,14 +39,26 @@ class LoanHistoryViewModel @Inject constructor(
     fun refresh() {
         viewModelScope.launch {
             try {
+                _state.update {
+                    it.withRefreshing(true)
+                }
                 val loans = getLoansUseCase()
                 _state.update {
                     LoanHistoryState.Content(
                         loans = loans,
+                        isRefreshing = false,
                     )
                 }
             } catch (e: Exception) {
             }
+        }
+    }
+
+    private fun LoanHistoryState.withRefreshing(isRefreshing: Boolean): LoanHistoryState {
+        return when (this) {
+            is LoanHistoryState.Content -> this.copy(isRefreshing = isRefreshing)
+            is LoanHistoryState.Error -> this.copy(isRefreshing = isRefreshing)
+            else -> this
         }
     }
 }
