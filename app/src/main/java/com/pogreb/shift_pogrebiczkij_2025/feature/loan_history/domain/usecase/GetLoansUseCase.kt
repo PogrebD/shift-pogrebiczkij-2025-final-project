@@ -6,8 +6,4 @@ import javax.inject.Inject
 
 class GetLoansUseCase @Inject constructor(
     private val repository: LoanHistoryRepository
-) {
-    suspend operator fun invoke(): List<Loan> =
-        repository.getAllLoans()
-            .reversed()
-}
+) : suspend () -> List<Loan> by repository::getAllLoans

@@ -7,6 +7,7 @@ import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.domain.entity.
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.domain.usecase.CreateNewLoanUseCase
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.presentation.state.LoanProcessingState
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.InputErrorType
+import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.LoanStatus
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,7 +16,6 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
-import java.util.TimeZone
 import javax.inject.Inject
 
 class LoanProcessingViewModel @Inject constructor(
@@ -52,27 +52,31 @@ class LoanProcessingViewModel @Inject constructor(
         val currentState = _state.value as LoanProcessingState.Content
         viewModelScope.launch {
             try {
-                val createdDate = createNewLoanUseCase(
+                val loanResult = createNewLoanUseCase(
                     currentState.loanData,
                     currentState.userData
                 )
-                val endDate = formatDateWithAddedDays(createdDate, currentState.loanData.period)
-                _state.update {
-                    LoanProcessingState.SuccessfulResult(
-                        amount = currentState.loanData.amount,
-                        date = endDate
-                    )
+                if (loanResult.status == LoanStatus.REJECTED) {
+                    _state.update {
+                        LoanProcessingState.FailureResult
+                    }
+                } else {
+                    val endDate =
+                        formatDateWithAddedDays(loanResult.date, currentState.loanData.period)
+                    _state.update {
+                        LoanProcessingState.SuccessfulResult(
+                            amount = currentState.loanData.amount,
+                            date = endDate
+                        )
+                    }
                 }
             } catch (e: Exception) {
-                _state.update {
-                    LoanProcessingState.FailureResult
-                }
             }
         }
     }
 
     fun updateName(name: String) {
-        val currentState = _state.value as LoanProcessingState.Content
+        val currentState = _state.value as? LoanProcessingState.Content ?: return
         var errorType = InputErrorType.NONE
 
         if (!validateName(name)) {
@@ -87,7 +91,7 @@ class LoanProcessingViewModel @Inject constructor(
     }
 
     fun updateLastName(lastName: String) {
-        val currentState = _state.value as LoanProcessingState.Content
+        val currentState = _state.value as? LoanProcessingState.Content ?: return
         var errorType = InputErrorType.NONE
 
         if (!validateName(lastName)) {
@@ -102,7 +106,7 @@ class LoanProcessingViewModel @Inject constructor(
     }
 
     fun updatePhone(phone: String) {
-        val currentState = _state.value as LoanProcessingState.Content
+        val currentState = _state.value as? LoanProcessingState.Content ?: return
         var errorType = InputErrorType.NONE
 
         val phoneDigitsOnly = phone.filter { it.isDigit() }
@@ -133,9 +137,7 @@ class LoanProcessingViewModel @Inject constructor(
     }
 
     private fun formatDateWithAddedDays(isoDate: String, daysToAdd: Int): String {
-        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-        inputFormat.timeZone = TimeZone.getTimeZone("UTC")
-
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.getDefault())
         val outputFormat = SimpleDateFormat("d MMMM", Locale("ru"))
 
         val date = inputFormat.parse(isoDate)
