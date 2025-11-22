@@ -38,13 +38,13 @@ internal fun BankAddressesContent(
         ) {
             Image(
                 painter = painterResource(R.drawable.sorry),
-                contentDescription = stringResource(R.string.content_desription_sorry),
+                contentDescription = stringResource(R.string.content_description_sorry),
                 modifier = Modifier
                     .padding(bottom = 12.dp)
             )
 
             Text(
-                text = stringResource(R.string.title_service_unvailable),
+                text = stringResource(R.string.title_service_unavailable),
                 modifier = Modifier
                     .padding(vertical = 16.dp),
                 style = MaterialTheme.typography.headlineMedium

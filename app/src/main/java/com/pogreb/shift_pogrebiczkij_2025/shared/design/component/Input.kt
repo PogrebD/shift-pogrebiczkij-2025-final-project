@@ -139,7 +139,7 @@ private fun PasswordModeIcon(passwordHidden: Boolean, onVisibilityClick: () -> U
         content = {
             Icon(
                 painter = getPasswordPainter(passwordHidden),
-                contentDescription = stringResource(R.string.hidden_content_description),
+                contentDescription = stringResource(R.string.content_description_hidden),
             )
         }
     )

@@ -24,7 +24,7 @@ import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
 class MainActivity : AppCompatActivity(), ComponentProvider {
     private lateinit var binding: ActivityMainBinding
     private var currentScreen = mutableStateOf(ActiveTab.HOME)
-    private var activeTabBar = mutableStateOf(false)
+    private var availableTabBar = mutableStateOf(false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         appComponent.inject(this)
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity(), ComponentProvider {
                     onMainPageClick = { openMainPage() },
                     onMenuPageClick = { openMenu() },
                     activeTab = currentScreen.value,
-                    activeTabBar = activeTabBar.value,
+                    activeTabBar = availableTabBar.value,
                 )
             }
         }
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity(), ComponentProvider {
         val currentFragment = supportFragmentManager
             .findFragmentById(binding.fragmentContainerView.id)
 
-        activeTabBar.value = when (currentFragment) {
+        availableTabBar.value = when (currentFragment) {
             is AuthorizationFragment -> false
             is OnboardingFragment -> false
             else -> true

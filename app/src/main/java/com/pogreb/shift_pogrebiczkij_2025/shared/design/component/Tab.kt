@@ -68,7 +68,7 @@ private fun LoginTextButton(modifier: Modifier, onLoginClick: () -> Unit, signUp
         ),
         content = {
             Text(
-                text = stringResource(R.string.login_title),
+                text = stringResource(R.string.title_login),
                 color = getLoginTextColor(signUpMode),
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.bodyMedium,
@@ -94,7 +94,7 @@ private fun RegistrationTextButton(
         ),
         content = {
             Text(
-                text = stringResource(R.string.registration_title),
+                text = stringResource(R.string.title_registration),
                 color = getRegistrationTextColor(signUpMode),
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.bodyMedium,

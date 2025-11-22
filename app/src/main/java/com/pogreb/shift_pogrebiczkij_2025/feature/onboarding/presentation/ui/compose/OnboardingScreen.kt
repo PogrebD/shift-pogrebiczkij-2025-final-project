@@ -67,7 +67,7 @@ private fun OnboardingTopBar(onCloseClick: () -> Unit) {
                 content = {
                     Icon(
                         painterResource(R.drawable.cross),
-                        contentDescription = stringResource(R.string.close_content_description)
+                        contentDescription = stringResource(R.string.content_description_close)
                     )
                 }
             )

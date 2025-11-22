@@ -82,7 +82,7 @@ private fun MainPageTopBar(onQuestionClick: () -> Unit) {
                 content = {
                     Icon(
                         painterResource(R.drawable.question),
-                        contentDescription = stringResource(R.string.close_content_description)
+                        contentDescription = stringResource(R.string.content_description_close)
                     )
                 }
             )

@@ -164,7 +164,7 @@ private fun AuthorizationLogoWithLoading() {
 private fun Logo() {
     Image(
         painter = getLogoPainter(),
-        contentDescription = stringResource(R.string.app_logo_content_description),
+        contentDescription = stringResource(R.string.content_description_app_logo),
     )
 }
 

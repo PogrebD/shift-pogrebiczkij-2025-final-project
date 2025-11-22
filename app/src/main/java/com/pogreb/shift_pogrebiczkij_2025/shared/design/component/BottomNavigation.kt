@@ -151,13 +151,13 @@ private fun getNavIconColor(currentPage: Int, index: Int) = when (index) {
 @Composable
 private fun getBackButtonText(currentPage: Int) = when (currentPage) {
     0 -> ""
-    else -> stringResource(R.string.back_label)
+    else -> stringResource(R.string.label_back)
 }
 
 @Composable
 private fun getNextButtonText(currentPage: Int) = when (currentPage) {
-    2 -> stringResource(R.string.close_label)
-    else -> stringResource(R.string.next_label)
+    2 -> stringResource(R.string.label_close)
+    else -> stringResource(R.string.label_next)
 }
 
 private fun getOnClickNextAction(

@@ -83,7 +83,7 @@ private fun YourDataTitle() {
 @Composable
 private fun Description() {
     Text(
-        text = stringResource(R.string.description_loan_processing),
+        text = stringResource(R.string.body_loan_processing),
         color = MaterialTheme.colorScheme.onSurfaceVariant,
         style = MaterialTheme.typography.bodySmall,
     )
