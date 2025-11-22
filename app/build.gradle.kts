@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.appcompat)
+    implementation(libs.android.material)
 
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.fragment.ktx)
@@ -67,6 +68,7 @@ dependencies {
     implementation(libs.logging.interceptor)
 
     implementation(libs.dagger)
+    implementation(libs.androidx.recyclerview)
     ksp(libs.dagger.compiler)
 
     implementation(libs.androidx.security)

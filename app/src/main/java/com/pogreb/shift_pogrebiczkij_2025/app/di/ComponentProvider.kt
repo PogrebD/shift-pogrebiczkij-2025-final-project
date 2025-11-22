@@ -12,6 +12,8 @@ import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.di.LoanProcess
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.di.LoanProcessingComponentProvider
 import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.di.MainPageComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.di.MainPageComponentProvider
+import com.pogreb.shift_pogrebiczkij_2025.feature.menu.di.MenuComponent
+import com.pogreb.shift_pogrebiczkij_2025.feature.menu.di.MenuComponentProvider
 import com.pogreb.shift_pogrebiczkij_2025.feature.onboarding.di.OnboardingComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.onboarding.di.OnboardingComponentProvider
 
@@ -22,7 +24,8 @@ interface ComponentProvider :
     LoanProcessingComponentProvider,
     BankAddressesComponentProvider,
     LoanHistoryComponentProvider,
-    LoanDetailsComponentProvider {
+    LoanDetailsComponentProvider,
+    MenuComponentProvider {
     override fun provideAuthorizationComponent(): AuthorizationComponent
     override fun provideOnboardingComponent(): OnboardingComponent
     override fun provideMainPageComponent(): MainPageComponent
@@ -30,4 +33,5 @@ interface ComponentProvider :
     override fun provideBankAddressesComponent(): BankAddressesComponent
     override fun provideLoanHistoryComponent(): LoanHistoryComponent
     override fun provideLoanDetailsComponent(): LoanDetailsComponent
+    override fun provideMenuComponent(): MenuComponent
 }

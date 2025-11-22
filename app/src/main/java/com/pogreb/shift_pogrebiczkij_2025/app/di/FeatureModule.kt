@@ -12,6 +12,8 @@ import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.di.DaggerLoanP
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.di.LoanProcessingComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.di.DaggerMainPageComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.di.MainPageComponent
+import com.pogreb.shift_pogrebiczkij_2025.feature.menu.di.DaggerMenuComponent
+import com.pogreb.shift_pogrebiczkij_2025.feature.menu.di.MenuComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.onboarding.di.DaggerOnboardingComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.onboarding.di.OnboardingComponent
 import dagger.Module
@@ -48,4 +50,7 @@ class FeatureModule {
     fun provideLoanDetailsComponent(dependencies: LoanDetailsComponent.Dependencies): LoanDetailsComponent =
         DaggerLoanDetailsComponent.builder().dependencies(dependencies).build()
 
+    @Provides
+    fun provideMenuComponent(dependencies: MenuComponent.Dependencies): MenuComponent =
+        DaggerMenuComponent.builder().dependencies(dependencies).build()
 }

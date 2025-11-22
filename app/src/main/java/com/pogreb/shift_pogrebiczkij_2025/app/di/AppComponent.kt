@@ -8,6 +8,7 @@ import com.pogreb.shift_pogrebiczkij_2025.feature.loan_details.di.LoanDetailsCom
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.di.LoanHistoryComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.di.LoanProcessingComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.di.MainPageComponent
+import com.pogreb.shift_pogrebiczkij_2025.feature.menu.di.MenuComponent
 import com.pogreb.shift_pogrebiczkij_2025.feature.onboarding.di.OnboardingComponent
 import dagger.BindsInstance
 import dagger.Component
@@ -30,6 +31,7 @@ interface AppComponent {
     fun bankAddressesComponent(): BankAddressesComponent
     fun loanHistoryComponent(): LoanHistoryComponent
     fun loanDetailsComponent(): LoanDetailsComponent
+    fun menuComponent(): MenuComponent
 
     @Component.Factory
     interface Factory {
