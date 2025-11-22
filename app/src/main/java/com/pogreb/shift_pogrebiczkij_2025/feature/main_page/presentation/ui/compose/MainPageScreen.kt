@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -17,8 +18,6 @@ import androidx.compose.ui.res.stringResource
 import com.pogreb.shift_pogrebiczkij_2025.R
 import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.presentation.state.MainPageState
 import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.presentation.viewmodel.MainPageViewModel
-import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.ActiveTab
-import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.TabBar
 
 @Composable
 internal fun MainPageScreen(
@@ -64,12 +63,6 @@ internal fun MainPageScreen(
                 )
             }
         },
-        bottomBar = {
-            TabBar(
-                onMenuPageClick = onMenuPageClick,
-                activeTab = ActiveTab.HOME,
-            )
-        },
     )
 }
 
@@ -77,7 +70,12 @@ internal fun MainPageScreen(
 @Composable
 private fun MainPageTopBar(onQuestionClick: () -> Unit) {
     TopAppBar(
-        title = { Text(stringResource(R.string.title_main_page)) },
+        title = {
+            Text(
+                text = stringResource(R.string.title_main_page),
+                style = MaterialTheme.typography.headlineMedium
+            )
+        },
         actions = {
             IconButton(
                 onClick = onQuestionClick,

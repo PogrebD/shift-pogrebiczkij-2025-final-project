@@ -24,35 +24,38 @@ import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.bgDisable
 
 @Composable
 fun TabBar(
-    onMainPageClick: () -> Unit = {},
-    onMenuPageClick: () -> Unit = {},
+    onMainPageClick: () -> Unit,
+    onMenuPageClick: () -> Unit,
     activeTab: ActiveTab,
+    activeTabBar: Boolean,
 ) {
-    HorizontalDivider(
-        thickness = 1.dp,
-        color = MaterialTheme.colorScheme.bgDisable
-    )
-
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 10.dp),
-        horizontalArrangement = Arrangement.SpaceAround,
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        MainPageNavigationElement(
-            onMainPageClick = onMainPageClick,
-            color = getMainPageTextColor(
-                activeTab = activeTab
-            )
+    if (activeTabBar) {
+        HorizontalDivider(
+            thickness = 1.dp,
+            color = MaterialTheme.colorScheme.bgDisable
         )
 
-        MenuPageNavigationElement(
-            onMenuPageClick = onMenuPageClick,
-            color = getMenuPageTextColor(
-                activeTab = activeTab
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 10.dp),
+            horizontalArrangement = Arrangement.SpaceAround,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            MainPageNavigationElement(
+                onMainPageClick = onMainPageClick,
+                color = getMainPageTextColor(
+                    activeTab = activeTab
+                )
             )
-        )
+
+            MenuPageNavigationElement(
+                onMenuPageClick = onMenuPageClick,
+                color = getMenuPageTextColor(
+                    activeTab = activeTab
+                )
+            )
+        }
     }
 }
 
@@ -140,6 +143,7 @@ private fun PreviewTabBar() {
             onMainPageClick = {},
             onMenuPageClick = {},
             activeTab = ActiveTab.HOME,
+            activeTabBar = true,
         )
     }
 }
