@@ -43,7 +43,7 @@ internal fun OnboardingContent(
 
             2 -> Content(
                 modifier = modifier,
-                illustration = painterResource(R.drawable.closing_illuctration),
+                illustration = painterResource(R.drawable.closing_illustration),
                 titleInstruction = stringResource(R.string.title_Issued_loans),
                 bodyInstruction = stringResource(R.string.body_Issued_loans),
             )
