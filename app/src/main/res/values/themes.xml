@@ -1,5 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Shiftpogrebiczkij2025" parent="Theme.AppCompat.DayNight.NoActionBar" />
+    <style name="Theme.Shiftpogrebiczkij2025" parent="Theme.AppCompat.DayNight.NoActionBar">
+
+        <item name="colorSurface">@color/bg_primary</item>
+        <item name="colorOnSurface">@color/font_primary</item>
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="bgPrimary">@color/bg_primary</item>
+        <item name="bgSecondary">@color/bg_secondary</item>
+        <item name="bgTertiary">@color/bg_tertiary</item>
+        <item name="bgDisable">@color/bg_disable</item>
+        <item name="bgInvert">@color/bg_invert</item>
+
+        <item name="fontPrimary">@color/font_primary</item>
+        <item name="fontSecondary">@color/font_secondary</item>
+        <item name="fontDisable">@color/font_disable</item>
+        <item name="fontPrimaryInvert">@color/font_primary_invert</item>
+
+        <item name="indicatorError">@color/indicator_error</item>
+        <item name="indicatorPositive">@color/indicator_positive</item>
+        <item name="indicatorAttention">@color/indicator_attention</item>
+
+        <item name="borderPrimary">@color/border_primary</item>
+        <item name="borderSecondary">@color/border_secondary</item>
+
+        <item name="iconPrimary">@color/icon_primary</item>
+        <item name="iconSecondary">@color/icon_secondary</item>
+        <item name="iconDisable">@color/icon_disable</item>
+        <item name="iconPrimaryInvert">@color/icon_primary_invert</item>
+
+        <item name="headlineLarge">@style/HeadlineLarge</item>
+        <item name="headlineMedium">@style/HeadlineMedium</item>
+        <item name="bodyLarge">@style/BodyLarge</item>
+        <item name="bodyMedium">@style/BodyMedium</item>
+        <item name="bodySmall">@style/BodySmall</item>
+
+        <item name="android:windowBackground">@color/bg_primary</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+    </style>
 </resources>

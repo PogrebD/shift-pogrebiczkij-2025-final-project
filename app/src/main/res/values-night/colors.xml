@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="permanent_primary">#FFFED200</color>
+    <color name="permanent_primary_light">#FFFFE982</color>
+    <color name="permanent_primary_dark">#FFDEB800</color>
+
+    <color name="bg_primary">#FF151E2A</color>
+    <color name="bg_secondary">#FF313944</color>
+    <color name="bg_tertiary">#FF363A42</color>
+    <color name="bg_disable">#FF2D3137</color>
+    <color name="bg_invert">#FFF5F5F5</color>
+
+    <color name="font_primary">#FFFFFFFF</color>
+    <color name="font_secondary">#FFA1A5AA</color>
+    <color name="font_disable">#FF73787F</color>
+    <color name="font_primary_invert">#FF151E2A</color>
+
+    <color name="indicator_error">#FFD34545</color>
+    <color name="indicator_positive">#FF26A169</color>
+    <color name="indicator_attention">#FFF19916</color>
+
+    <color name="border_primary">#FFB4B4B4</color>
+    <color name="border_secondary">#FF363E48</color>
+
+    <color name="icon_primary">#FFFFFFFF</color>
+    <color name="icon_secondary">#FFA1A5AA</color>
+    <color name="icon_disable">#FF73787F</color>
+    <color name="icon_primary_invert">#FF151E2A</color>
+
+    <color name="colorPrimary">@color/permanent_primary</color>
+    <color name="colorPrimaryDark">@color/permanent_primary_dark</color>
+    <color name="colorAccent">@color/permanent_primary</color>
+</resources>

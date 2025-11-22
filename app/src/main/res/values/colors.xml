@@ -1,10 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="permanent_primary">#FFFED200</color>
+    <color name="permanent_primary_light">#FFFFE982</color>
+    <color name="permanent_primary_dark">#FFDEB800</color>
+
+    <color name="bg_primary">#FFFFFFFF</color>
+    <color name="bg_secondary">#FFF1F1F2</color>
+    <color name="bg_tertiary">#FF9D9E9F</color>
+    <color name="bg_disable">#FFE5E5E5</color>
+    <color name="bg_invert">#FF272F3A</color>
+
+    <color name="font_primary">#FF151E2A</color>
+    <color name="font_secondary">#FF73787F</color>
+    <color name="font_disable">#FFA1A5AA</color>
+    <color name="font_primary_invert">#FFFFFFFF</color>
+
+    <color name="indicator_error">#FFE53E3E</color>
+    <color name="indicator_positive">#FF19B36D</color>
+    <color name="indicator_attention">#FFFE9800</color>
+
+    <color name="border_primary">#FF959698</color>
+    <color name="border_secondary">#FFE3E4E5</color>
+
+    <color name="icon_primary">#FF151E2A</color>
+    <color name="icon_secondary">#FF73787F</color>
+    <color name="icon_disable">#FFA1A5AA</color>
+    <color name="icon_primary_invert">#FFFFFFFF</color>
+
+    <color name="colorPrimary">@color/permanent_primary</color>
+    <color name="colorPrimaryDark">@color/permanent_primary_dark</color>
+    <color name="colorAccent">@color/permanent_primary</color>
 </resources>

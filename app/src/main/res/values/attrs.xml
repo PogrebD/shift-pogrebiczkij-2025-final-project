@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="bgPrimary" format="color|reference" />
+    <attr name="bgSecondary" format="color|reference" />
+    <attr name="bgTertiary" format="color|reference" />
+    <attr name="bgDisable" format="color|reference" />
+    <attr name="bgInvert" format="color|reference" />
+
+    <attr name="fontPrimary" format="color|reference" />
+    <attr name="fontSecondary" format="color|reference" />
+    <attr name="fontDisable" format="color|reference" />
+    <attr name="fontPrimaryInvert" format="color|reference" />
+
+    <attr name="indicatorError" format="color|reference" />
+    <attr name="indicatorPositive" format="color|reference" />
+    <attr name="indicatorAttention" format="color|reference" />
+
+    <attr name="borderPrimary" format="color|reference" />
+    <attr name="borderSecondary" format="color|reference" />
+
+    <attr name="iconPrimary" format="color|reference" />
+    <attr name="iconSecondary" format="color|reference" />
+    <attr name="iconDisable" format="color|reference" />
+    <attr name="iconPrimaryInvert" format="color|reference" />
+
+    <attr name="headlineLarge" format="reference" />
+    <attr name="headlineMedium" format="reference" />
+    <attr name="bodyLarge" format="reference" />
+    <attr name="bodyMedium" format="reference" />
+    <attr name="bodySmall" format="reference" />
+</resources>
