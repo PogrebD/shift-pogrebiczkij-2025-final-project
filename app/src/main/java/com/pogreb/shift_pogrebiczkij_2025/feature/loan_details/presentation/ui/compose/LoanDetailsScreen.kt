@@ -12,6 +12,8 @@ import androidx.compose.ui.res.stringResource
 import com.pogreb.shift_pogrebiczkij_2025.R
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_details.presentation.state.LoanDetailsState
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_details.presentation.viewmodel.LoanDetailsViewModel
+import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.ErrorDialog
+import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.FullScreenProgressIndicator
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.NavigationTopBar
 
 @Composable
@@ -49,6 +51,17 @@ internal fun LoanDetailsScreen(
                     period = currentState.loanDetails.period,
                     phone = currentState.loanDetails.phone,
                     status = currentState.loanDetails.status,
+                )
+
+                is LoanDetailsState.Loading -> FullScreenProgressIndicator()
+
+                is LoanDetailsState.Error -> ErrorDialog(
+                    message = currentState.massage,
+                    onRetry = { viewModel.refresh(id) },
+                    onCancel = {
+                        viewModel.clearDialog()
+                        onBackClick()
+                    }
                 )
             }
         },
