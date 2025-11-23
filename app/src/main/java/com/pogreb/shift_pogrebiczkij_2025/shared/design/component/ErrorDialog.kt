@@ -7,7 +7,6 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -26,14 +25,20 @@ fun ErrorDialog(
             title = { Title() },
             text = { Text(text = message) },
             confirmButton = {
-                TextButton(onClick = onRetry) {
-                    Text(text = stringResource(R.string.label_try_again))
-                }
+                TertiaryButton(
+                    onClick = onRetry,
+                    text = stringResource(R.string.label_try_again),
+                    modifier = Modifier,
+                    enabled = true,
+                )
             },
             dismissButton = {
-                TextButton(onClick = onCancel) {
-                    Text(text = stringResource(R.string.label_cancel))
-                }
+                TertiaryButton(
+                    onClick = onRetry,
+                    text = stringResource(R.string.label_cancel),
+                    modifier = Modifier,
+                    enabled = true,
+                )
             },
             containerColor = MaterialTheme.colorScheme.background
         )
@@ -51,9 +56,12 @@ fun ErrorDialogWithoutDismiss(
             title = { Title() },
             text = { Text(text = message) },
             confirmButton = {
-                TextButton(onClick = onRetry) {
-                    Text(text = stringResource(R.string.label_try_again))
-                }
+                TertiaryButton(
+                    onClick = onRetry,
+                    text = stringResource(R.string.label_try_again),
+                    modifier = Modifier,
+                    enabled = true,
+                )
             },
             containerColor = MaterialTheme.colorScheme.background
         )

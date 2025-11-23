@@ -36,6 +36,7 @@ internal fun AuthorizationContent(
     passwordErrorType: InputErrorType,
     repeatPasswordErrorType: InputErrorType,
     errorMessage: String,
+    buttonEnabled: Boolean,
     onLoginTabClick: () -> Unit = {},
     onRegistrationTabClick: () -> Unit = {},
     onLoginClick: () -> Unit = {},
@@ -104,6 +105,7 @@ internal fun AuthorizationContent(
             signUpMode = signUpMode,
             onLoginClick = onLoginClick,
             onRegistrationClick = onRegistrationClick,
+            buttonEnabled = buttonEnabled,
         )
 
         ErrorDialogWithoutDismiss(
@@ -113,9 +115,9 @@ internal fun AuthorizationContent(
     }
 }
 
-
 @Composable
 fun ApplyButton(
+    buttonEnabled: Boolean,
     signUpMode: Boolean,
     onLoginClick: () -> Unit,
     onRegistrationClick: () -> Unit,
@@ -125,14 +127,16 @@ fun ApplyButton(
             onClick = { onRegistrationClick() },
             text = stringResource(R.string.label_registration),
             modifier = Modifier
-                .padding(vertical = 16.dp)
+                .padding(vertical = 16.dp),
+            enabled = buttonEnabled
         )
     } else {
         PrimaryButton(
             onClick = { onLoginClick() },
             text = stringResource(R.string.label_enter),
             modifier = Modifier
-                .padding(vertical = 16.dp)
+                .padding(vertical = 16.dp),
+            enabled = buttonEnabled
         )
     }
 }
@@ -162,6 +166,7 @@ private fun PreviewAuthorizationContent() {
             onRegistrationTabClick = {},
             errorMessage = "",
             onRetryClick = {},
+            buttonEnabled = true,
         )
     }
 }

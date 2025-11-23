@@ -27,6 +27,7 @@ fun PrimaryButton(
     onClick: () -> Unit,
     text: String,
     modifier: Modifier,
+    enabled: Boolean = true,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val pressed by interactionSource.collectIsPressedAsState()
@@ -35,6 +36,7 @@ fun PrimaryButton(
         onClick = onClick,
         modifier = modifier
             .fillMaxWidth(),
+        enabled = enabled,
         shape = ShapeDefaults.Small,
         colors = getColorsPrimaryButton(pressed),
         contentPadding = PaddingValues(horizontal = 10.dp, vertical = 16.dp),
@@ -66,6 +68,7 @@ fun SecondaryButton(
     onClick: () -> Unit,
     text: String,
     modifier: Modifier,
+    enabled: Boolean = true,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val pressed by interactionSource.collectIsPressedAsState()
@@ -74,6 +77,7 @@ fun SecondaryButton(
         onClick = onClick,
         modifier = modifier
             .fillMaxWidth(),
+        enabled = enabled,
         shape = ShapeDefaults.Small,
         colors = getColorsSecondaryButton(pressed),
         contentPadding = PaddingValues(horizontal = 10.dp, vertical = 16.dp),
@@ -104,14 +108,16 @@ private fun getContainerColorSecondaryButton(pressed: Boolean) = when {
 fun TertiaryButton(
     onClick: () -> Unit,
     text: String,
+    modifier: Modifier,
+    enabled: Boolean = true,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val pressed by interactionSource.collectIsPressedAsState()
 
     TextButton(
         onClick = onClick,
-        modifier = Modifier
-            .fillMaxWidth(),
+        modifier = modifier,
+        enabled = enabled,
         shape = ShapeDefaults.Small,
         colors = getColorsTertiaryButton(pressed),
         contentPadding = PaddingValues(horizontal = 10.dp, vertical = 16.dp),
@@ -147,10 +153,23 @@ private fun PreviewButton() {
     AppTheme {
         Column {
             PrimaryButton(
-                {}, "Кнопка", Modifier
+                onClick = {},
+                text = "Кнопка",
+                modifier = Modifier,
+                enabled = true
             )
-            SecondaryButton({}, "Кнопка", Modifier)
-            TertiaryButton({}, "Кнопка")
+            SecondaryButton(
+                onClick = {},
+                text = "Кнопка",
+                modifier = Modifier,
+                enabled = true
+            )
+            TertiaryButton(
+                onClick = {},
+                text = "Кнопка",
+                modifier = Modifier,
+                enabled = true,
+            )
         }
     }
 }

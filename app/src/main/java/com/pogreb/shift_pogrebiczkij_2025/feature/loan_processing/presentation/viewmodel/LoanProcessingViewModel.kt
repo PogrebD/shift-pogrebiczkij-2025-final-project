@@ -118,6 +118,20 @@ class LoanProcessingViewModel @Inject constructor(
         }
     }
 
+    fun getAvailabilityApplyButton(): Boolean =
+        when (val currentState = _state.value) {
+            is LoanProcessingState.Content ->
+                currentState.nameErrorType == InputErrorType.NONE
+                        && currentState.lastNameErrorType == InputErrorType.NONE
+                        && currentState.phoneErrorType == InputErrorType.NONE
+                        && currentState.userData.name.isNotEmpty()
+                        && currentState.userData.lastName.isNotEmpty()
+                        && currentState.userData.phone.isNotEmpty()
+                        && currentState.userData.phone.length == 11
+
+            else -> false
+        }
+
     fun updateName(name: String) {
         val currentState = _state.value as? LoanProcessingState.Content ?: return
         var errorType = InputErrorType.NONE
@@ -143,7 +157,7 @@ class LoanProcessingViewModel @Inject constructor(
         _state.update {
             currentState.copy(
                 userData = currentState.userData.copy(lastName = lastName),
-                nameErrorType = errorType
+                lastNameErrorType = errorType
             )
         }
     }

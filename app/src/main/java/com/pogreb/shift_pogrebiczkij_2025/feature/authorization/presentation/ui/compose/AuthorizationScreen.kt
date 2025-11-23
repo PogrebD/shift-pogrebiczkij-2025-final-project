@@ -62,6 +62,7 @@ internal fun AuthorizationScreen(
                         passwordErrorType = currentState.passwordErrorType,
                         repeatPasswordErrorType = InputErrorType.NONE,
                         errorMessage = currentState.errorMessage,
+                        buttonEnabled = viewModel.getAvailabilityApplyButton(),
                         onRetryClick = viewModel::clearDialog,
                         onLoginClick = {
                             viewModel.login(
@@ -99,6 +100,7 @@ internal fun AuthorizationScreen(
                         passwordErrorType = currentState.passwordErrorType,
                         repeatPasswordErrorType = currentState.repeatPasswordErrorType,
                         errorMessage = currentState.errorMessage,
+                        buttonEnabled = viewModel.getAvailabilityApplyButton(),
                         onRetryClick = viewModel::clearDialog,
                         onRegistrationClick = {
                             viewModel.registration(

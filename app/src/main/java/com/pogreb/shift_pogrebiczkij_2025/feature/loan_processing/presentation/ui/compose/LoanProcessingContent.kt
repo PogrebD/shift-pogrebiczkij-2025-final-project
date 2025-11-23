@@ -28,6 +28,7 @@ internal fun LoanProcessingContent(
     lastNameErrorType: InputErrorType,
     phoneErrorType: InputErrorType,
     errorMessage: String,
+    buttonEnabled: Boolean,
     onRefresh: () -> Unit,
     onCancel: () -> Unit,
     onNameChange: (String) -> Unit,
@@ -71,7 +72,8 @@ internal fun LoanProcessingContent(
             onClick = onApplyLoanClick,
             text = stringResource(R.string.label_apply_loan),
             modifier = Modifier
-                .padding(top = 16.dp)
+                .padding(top = 16.dp),
+            enabled = buttonEnabled,
         )
 
         ErrorDialog(
@@ -122,6 +124,7 @@ private fun PreviewLoanProcessingContent() {
             errorMessage = "",
             onRefresh = {},
             onCancel = {},
+            buttonEnabled = true,
         )
     }
 }

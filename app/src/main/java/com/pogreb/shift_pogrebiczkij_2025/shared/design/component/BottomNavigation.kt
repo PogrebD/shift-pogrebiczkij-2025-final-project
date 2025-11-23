@@ -8,17 +8,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pogreb.shift_pogrebiczkij_2025.R
@@ -76,20 +72,12 @@ fun BottomNavigation(
 
 @Composable
 private fun NextTextButton(text: String, modifier: Modifier, onClick: () -> Unit) {
-    Button(
+    TertiaryButton(
         onClick = onClick,
-        modifier = modifier,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.background
-        ),
-        content = {
-            Text(
-                text = text,
-                modifier = modifier,
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.bodyMedium,
-            )
-        }
+        text = text,
+        modifier = modifier
+            .padding(horizontal = 8.dp),
+        enabled = true
     )
 }
 
@@ -123,22 +111,12 @@ private fun BackTextButton(
     enabled: Boolean,
     onBackClick: () -> Unit
 ) {
-    Button(
+    TertiaryButton(
         onClick = onBackClick,
-        modifier = modifier,
-        enabled = enabled,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.background,
-            disabledContainerColor = MaterialTheme.colorScheme.background,
-        ),
-        content = {
-            Text(
-                text = text,
-                modifier = modifier,
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.bodyMedium,
-            )
-        }
+        text = text,
+        modifier = modifier
+            .padding(horizontal = 8.dp),
+        enabled = enabled
     )
 }
 

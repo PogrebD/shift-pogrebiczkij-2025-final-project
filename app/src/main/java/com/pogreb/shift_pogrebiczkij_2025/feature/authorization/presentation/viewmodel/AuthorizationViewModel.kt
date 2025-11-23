@@ -137,6 +137,25 @@ class AuthorizationViewModel @Inject constructor(
         }
     }
 
+    fun getAvailabilityApplyButton(): Boolean = // выглядит страшно
+        when (val currentState = _state.value) {
+            is AuthorizationState.LoginContent ->
+                currentState.loginErrorType == InputErrorType.NONE
+                        && currentState.passwordErrorType == InputErrorType.NONE
+                        && currentState.authorizationData.password.isNotEmpty()
+                        && currentState.authorizationData.name.isNotEmpty()
+
+            is AuthorizationState.RegistrationContent ->
+                currentState.loginErrorType == InputErrorType.NONE
+                        && currentState.passwordErrorType == InputErrorType.NONE
+                        && currentState.repeatPasswordErrorType == InputErrorType.NONE
+                        && currentState.registrationData.authorizationData.password.isNotEmpty()
+                        && currentState.registrationData.authorizationData.name.isNotEmpty()
+                        && currentState.registrationData.repeatPassword.isNotEmpty()
+
+            else -> false
+        }
+
     fun updateLogin(login: String) {
         _state.update { currentState ->
             when (currentState) {

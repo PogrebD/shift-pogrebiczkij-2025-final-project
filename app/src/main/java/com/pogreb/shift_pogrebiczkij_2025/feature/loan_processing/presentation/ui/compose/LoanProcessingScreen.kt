@@ -70,6 +70,7 @@ internal fun LoanProcessingScreen(
                         onApplyLoanClick = viewModel::createLoan,
                         onRefresh = viewModel::refreshCreateLoan,
                         onCancel = viewModel::clearDialog,
+                        buttonEnabled = viewModel.getAvailabilityApplyButton(),
                     )
 
                 is LoanProcessingState.SuccessfulResult ->
