@@ -29,6 +29,8 @@ class LoanProcessingViewModel @Inject constructor(
         period: Int,
         amount: Long,
     ) {
+        if (_state.value is LoanProcessingState.Content) return
+
         _state.update {
             LoanProcessingState.Content(
                 loanData = LoanData(

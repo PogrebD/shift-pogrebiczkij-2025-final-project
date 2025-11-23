@@ -21,6 +21,8 @@ class MainPageViewModel @Inject constructor(
     val state: StateFlow<MainPageState> = _state.asStateFlow()
 
     fun initialize() {
+        if (_state.value is MainPageState.Content) return
+        
         _state.update { MainPageState.Loading }
 
         var currentState = MainPageState.Content(

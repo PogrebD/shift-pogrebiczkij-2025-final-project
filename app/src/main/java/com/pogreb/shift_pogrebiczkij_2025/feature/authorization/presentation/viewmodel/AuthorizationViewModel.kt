@@ -26,6 +26,10 @@ class AuthorizationViewModel @Inject constructor(
     val state: StateFlow<AuthorizationState> = _state.asStateFlow()
 
     suspend fun initialize() {
+        if (_state.value is AuthorizationState.LoginContent
+            || _state.value is AuthorizationState.RegistrationContent
+        ) return
+
         _state.update { AuthorizationState.Loading }
 
         delay(2000)

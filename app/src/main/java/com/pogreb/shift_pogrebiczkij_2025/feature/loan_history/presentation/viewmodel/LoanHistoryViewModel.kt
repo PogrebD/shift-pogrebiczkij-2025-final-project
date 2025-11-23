@@ -18,6 +18,8 @@ class LoanHistoryViewModel @Inject constructor(
     val state: StateFlow<LoanHistoryState> = _state.asStateFlow()
 
     fun initialize() {
+        if (_state.value is LoanHistoryState.Content) return
+
         _state.update {
             LoanHistoryState.Loading
         }
