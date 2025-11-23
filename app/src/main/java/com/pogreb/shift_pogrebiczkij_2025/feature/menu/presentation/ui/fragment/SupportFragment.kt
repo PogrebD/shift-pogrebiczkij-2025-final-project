@@ -11,8 +11,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.pogreb.shift_pogrebiczkij_2025.R
 import com.pogreb.shift_pogrebiczkij_2025.databinding.FragmentSupportBinding
-import com.pogreb.shift_pogrebiczkij_2025.feature.menu.presentation.MenuRouter
-import javax.inject.Inject
 
 class SupportFragment : Fragment() {
 
@@ -21,9 +19,6 @@ class SupportFragment : Fragment() {
             return SupportFragment()
         }
     }
-
-    @Inject
-    lateinit var router: MenuRouter
 
     private lateinit var binding: FragmentSupportBinding
 
@@ -67,7 +62,7 @@ class SupportFragment : Fragment() {
 
     private fun setupClickListeners() {
         binding.closeButton.setOnClickListener {
-            router.openPreviousPage(parentFragmentManager)
+            parentFragmentManager.popBackStack()
         }
     }
 }

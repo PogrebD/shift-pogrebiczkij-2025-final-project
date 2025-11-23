@@ -4,5 +4,4 @@ import androidx.fragment.app.FragmentManager
 
 interface LoanDetailsRouter {
     fun openPreviousPage(fragmentManager: FragmentManager)
-    fun openMenu(fragmentManager: FragmentManager)
 }

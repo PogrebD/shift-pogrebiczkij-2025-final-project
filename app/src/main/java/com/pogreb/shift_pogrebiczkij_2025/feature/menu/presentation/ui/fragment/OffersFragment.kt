@@ -54,7 +54,7 @@ class OffersFragment : Fragment() {
         }
 
         binding.closeButton.setOnClickListener {
-            router.openPreviousPage(parentFragmentManager)
+            parentFragmentManager.popBackStack()
         }
     }
 }

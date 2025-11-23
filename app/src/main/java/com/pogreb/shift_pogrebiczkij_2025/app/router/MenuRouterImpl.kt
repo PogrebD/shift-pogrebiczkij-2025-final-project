@@ -6,7 +6,6 @@ import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.ui.
 import com.pogreb.shift_pogrebiczkij_2025.feature.bank_addresses.presentation.ui.fragment.BankAddressesFragment
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.presentation.ui.fragment.LoanHistoryFragment
 import com.pogreb.shift_pogrebiczkij_2025.feature.menu.presentation.MenuRouter
-import com.pogreb.shift_pogrebiczkij_2025.feature.menu.presentation.ui.fragment.MenuFragment
 import com.pogreb.shift_pogrebiczkij_2025.feature.onboarding.presentation.ui.fragment.OnboardingFragment
 import javax.inject.Inject
 
@@ -49,15 +48,14 @@ class MenuRouterImpl @Inject constructor() : MenuRouter {
             )
             .addToBackStack(null)
             .commit()
-    }
 
-    override fun openPreviousPage(fragmentManager: FragmentManager) {
         fragmentManager.beginTransaction()
-            .add(
+            .replace(
                 R.id.fragment_container_view,
-                MenuFragment.newInstance()
+                AuthorizationFragment.newInstance()
             )
-            .addToBackStack(null)
             .commit()
-    } // временно
+
+        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+    }
 }

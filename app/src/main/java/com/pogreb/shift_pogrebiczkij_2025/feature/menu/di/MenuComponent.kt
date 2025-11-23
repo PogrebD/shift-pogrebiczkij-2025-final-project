@@ -2,7 +2,6 @@ package com.pogreb.shift_pogrebiczkij_2025.feature.menu.di
 
 import com.pogreb.shift_pogrebiczkij_2025.core.network.TokenManager
 import com.pogreb.shift_pogrebiczkij_2025.feature.menu.presentation.MenuRouter
-import com.pogreb.shift_pogrebiczkij_2025.feature.menu.presentation.ui.fragment.LanguageFragment
 import com.pogreb.shift_pogrebiczkij_2025.feature.menu.presentation.ui.fragment.MenuFragment
 import com.pogreb.shift_pogrebiczkij_2025.feature.menu.presentation.ui.fragment.OffersFragment
 import dagger.Component
@@ -15,7 +14,6 @@ import javax.inject.Inject
 )
 interface MenuComponent {
     fun inject(target: MenuFragment)
-    fun inject(target: LanguageFragment)
     fun inject(target: OffersFragment)
 
     @Component.Builder

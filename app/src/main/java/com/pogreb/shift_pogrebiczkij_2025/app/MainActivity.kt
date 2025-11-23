@@ -3,6 +3,7 @@ package com.pogreb.shift_pogrebiczkij_2025.app
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.mutableStateOf
+import androidx.fragment.app.FragmentManager
 import com.pogreb.shift_pogrebiczkij_2025.R
 import com.pogreb.shift_pogrebiczkij_2025.app.di.ComponentProvider
 import com.pogreb.shift_pogrebiczkij_2025.databinding.ActivityMainBinding
@@ -24,7 +25,11 @@ import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
 class MainActivity : AppCompatActivity(), ComponentProvider {
     private lateinit var binding: ActivityMainBinding
     private var currentScreen = mutableStateOf(ActiveTab.HOME)
-    private var availableTabBar = mutableStateOf(false)
+    var availableTabBar = mutableStateOf(false)
+
+    private val backStackListener = FragmentManager.OnBackStackChangedListener {
+        updateBottomBar()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         appComponent.inject(this)
@@ -44,6 +49,11 @@ class MainActivity : AppCompatActivity(), ComponentProvider {
         setupFragmentListener()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        supportFragmentManager.removeOnBackStackChangedListener(backStackListener)
+    }
+
     private fun setupBottomBar() {
         binding.bottomBarComposeView.setContent {
             AppTheme {
@@ -58,9 +68,7 @@ class MainActivity : AppCompatActivity(), ComponentProvider {
     }
 
     private fun setupFragmentListener() {
-        supportFragmentManager.addOnBackStackChangedListener {
-            updateBottomBar()
-        }
+        supportFragmentManager.addOnBackStackChangedListener(backStackListener)
     }
 
     private fun updateBottomBar() {
@@ -77,16 +85,22 @@ class MainActivity : AppCompatActivity(), ComponentProvider {
     private fun openMenu() {
         supportFragmentManager
             .beginTransaction()
-            .add(R.id.fragment_container_view, MenuFragment.newInstance())
+            .replace(R.id.fragment_container_view, MenuFragment.newInstance())
             .commit()
+
+        supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+
         currentScreen.value = ActiveTab.MENU
     }
 
     private fun openMainPage() {
         supportFragmentManager
             .beginTransaction()
-            .add(R.id.fragment_container_view, MainPageFragment.newInstance())
+            .replace(R.id.fragment_container_view, MainPageFragment.newInstance())
             .commit()
+
+        supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+
         currentScreen.value = ActiveTab.HOME
     }
 

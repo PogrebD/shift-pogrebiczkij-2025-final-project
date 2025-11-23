@@ -10,17 +10,16 @@ import javax.inject.Inject
 class LoanProcessingRouterImpl @Inject constructor() : LoanProcessingRouter {
     override fun openMainPage(fragmentManager: FragmentManager) {
         fragmentManager.beginTransaction()
-            .add(
+            .replace(
                 R.id.fragment_container_view,
                 MainPageFragment.newInstance()
             )
-            .addToBackStack(null)
             .commit()
     }
 
     override fun openBankAddresses(fragmentManager: FragmentManager) {
         fragmentManager.beginTransaction()
-            .add(
+            .replace(
                 R.id.fragment_container_view,
                 BankAddressesFragment.newInstance()
             )

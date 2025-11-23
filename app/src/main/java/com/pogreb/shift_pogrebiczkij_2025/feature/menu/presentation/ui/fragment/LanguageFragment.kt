@@ -9,9 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pogreb.shift_pogrebiczkij_2025.R
 import com.pogreb.shift_pogrebiczkij_2025.databinding.FragmentLanguageBinding
-import com.pogreb.shift_pogrebiczkij_2025.feature.menu.di.MenuComponentProvider
-import com.pogreb.shift_pogrebiczkij_2025.feature.menu.presentation.MenuRouter
-import javax.inject.Inject
 
 class LanguageFragment : Fragment() {
 
@@ -20,9 +17,6 @@ class LanguageFragment : Fragment() {
             return LanguageFragment()
         }
     }
-
-    @Inject
-    lateinit var router: MenuRouter
 
     private lateinit var binding: FragmentLanguageBinding
     private lateinit var languageAdapter: LanguageAdapter
@@ -33,15 +27,6 @@ class LanguageFragment : Fragment() {
         R.string.label_de,
         R.string.label_ky
     )
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val provider = requireActivity() as MenuComponentProvider
-        val menuComponent = provider.provideMenuComponent()
-
-        menuComponent.inject(this)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -85,11 +70,11 @@ class LanguageFragment : Fragment() {
 
     private fun setupClickListeners() {
         binding.closeButton.setOnClickListener {
-            router.openPreviousPage(parentFragmentManager)
+            parentFragmentManager.popBackStack()
         }
 
         binding.primaryButton.setOnClickListener {
-            router.openPreviousPage(parentFragmentManager)
+            parentFragmentManager.popBackStack()
         }
     }
 }

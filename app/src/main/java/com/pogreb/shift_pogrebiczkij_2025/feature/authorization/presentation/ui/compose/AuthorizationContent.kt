@@ -51,13 +51,15 @@ internal fun AuthorizationContent(
 
     Column(
         modifier = Modifier
-            .clip(
-                RoundedCornerShape(
+            .border(
+                width = 2.dp,
+                color = MaterialTheme.colorScheme.surface,
+                shape = RoundedCornerShape(
                     topStart = 16.dp,
                     topEnd = 16.dp
                 )
             )
-            .background(MaterialTheme.colorScheme.surface)
+            .padding(top = 2.dp)
             .border(
                 width = 2.dp,
                 color = MaterialTheme.colorScheme.outline,
@@ -66,6 +68,13 @@ internal fun AuthorizationContent(
                     topEnd = 16.dp
                 )
             )
+            .clip(
+                RoundedCornerShape(
+                    topStart = 16.dp,
+                    topEnd = 16.dp
+                )
+            )
+            .background(MaterialTheme.colorScheme.surface)
             .padding(horizontal = 16.dp)
     ) {
         AuthorizationTab(

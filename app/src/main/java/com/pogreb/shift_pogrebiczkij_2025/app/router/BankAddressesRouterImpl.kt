@@ -9,11 +9,13 @@ import javax.inject.Inject
 class BankAddressesRouterImpl @Inject constructor() : BankAddressesRouter {
     override fun openMainPage(fragmentManager: FragmentManager) {
         fragmentManager.beginTransaction()
-            .add(
+            .replace(
                 R.id.fragment_container_view,
                 MainPageFragment.newInstance()
             )
             .addToBackStack(null)
             .commit()
+
+        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
 }

@@ -6,7 +6,6 @@ import com.pogreb.shift_pogrebiczkij_2025.feature.loan_details.presentation.ui.f
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.presentation.ui.fragment.LoanHistoryFragment
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.presentation.ui.fragment.LoanProcessingFragment
 import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.presentation.MainPageRouter
-import com.pogreb.shift_pogrebiczkij_2025.feature.menu.presentation.ui.fragment.MenuFragment
 import com.pogreb.shift_pogrebiczkij_2025.feature.onboarding.presentation.ui.fragment.OnboardingFragment
 import javax.inject.Inject
 
@@ -26,16 +25,6 @@ class MainPageRouterImpl @Inject constructor() : MainPageRouter {
             .add(
                 R.id.fragment_container_view,
                 LoanHistoryFragment.newInstance()
-            )
-            .addToBackStack(null)
-            .commit()
-    }
-
-    override fun openMenu(fragmentManager: FragmentManager) {
-        fragmentManager.beginTransaction()
-            .add(
-                R.id.fragment_container_view,
-                MenuFragment.newInstance()
             )
             .addToBackStack(null)
             .commit()

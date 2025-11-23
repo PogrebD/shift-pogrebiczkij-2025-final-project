@@ -63,7 +63,7 @@ class OnboardingFragment : Fragment() {
                     OnboardingScreen(
                         viewModel = viewModel,
                         onCloseClick = {
-                            router.openMainPage(parentFragmentManager)
+                            router.openPreviousPage(parentFragmentManager)
                         },
                     )
                 }

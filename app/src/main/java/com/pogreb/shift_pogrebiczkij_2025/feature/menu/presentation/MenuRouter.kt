@@ -7,5 +7,4 @@ interface MenuRouter {
     fun openLoansHistory(fragmentManager: FragmentManager)
     fun openBankAddresses(fragmentManager: FragmentManager)
     fun openAuthorization(fragmentManager: FragmentManager)
-    fun openPreviousPage(fragmentManager: FragmentManager)
 }
