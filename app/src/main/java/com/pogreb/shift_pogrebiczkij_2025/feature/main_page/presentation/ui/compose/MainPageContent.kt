@@ -30,6 +30,10 @@ internal fun MainPageContent(
     percent: Double,
     period: Int,
     loans: List<Loan>,
+    errorTextLoanCondition: String,
+    errorTextLoans: String,
+    onRetryLoadLoansClick: () -> Unit,
+    onRetryLoadConditionClick: () -> Unit,
     onSliderValueChange: (Float) -> Unit,
     onContinueClick: () -> Unit,
     onViewAllClick: () -> Unit,
@@ -58,6 +62,8 @@ internal fun MainPageContent(
             period = period,
             onSliderValueChange = onSliderValueChange,
             onContinueClick = onContinueClick,
+            errorTextConditions = errorTextLoanCondition,
+            onRetryLoadCondition = onRetryLoadConditionClick,
         )
 
         Title(
@@ -68,6 +74,8 @@ internal fun MainPageContent(
             loans = loans,
             onViewAllClick = onViewAllClick,
             onItemClick = onItemClick,
+            errorTextLoans = errorTextLoans,
+            onRetryClick = onRetryLoadLoansClick,
         )
     }
 }
@@ -122,6 +130,10 @@ private fun PreviewMainPageContent() {
                 )
             ),
             onItemClick = {},
+            errorTextLoanCondition = "Увы",
+            onRetryLoadConditionClick = { },
+            errorTextLoans = "Увы",
+            onRetryLoadLoansClick = { },
         ) 
     }
 }

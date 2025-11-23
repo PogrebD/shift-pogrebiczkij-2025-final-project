@@ -3,8 +3,10 @@ package com.pogreb.shift_pogrebiczkij_2025.core.network
 import okhttp3.Interceptor
 import okhttp3.Response
 import okio.IOException
+import java.net.HttpURLConnection.HTTP_FORBIDDEN
 import java.net.HttpURLConnection.HTTP_INTERNAL_ERROR
 import java.net.HttpURLConnection.HTTP_NOT_FOUND
+import java.net.HttpURLConnection.HTTP_UNAUTHORIZED
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import javax.inject.Inject
@@ -22,25 +24,17 @@ class ErrorInterceptor @Inject constructor() : Interceptor {
                     is SocketTimeoutException -> NetworkException("Request timeout")
                     is UnknownHostException -> NetworkException("No internet connection")
                     is IOException -> NetworkException("Network error occurred")
-                    else -> UnknownException("Unknown error: ${throwable.message}")
+                    else -> UnknownException("Unknown error")
                 }
             }
 
     private fun createException(response: Response): IOException =
         when (response.code) {
-            HTTP_NOT_FOUND -> NotFoundException(response.message)
-            HTTP_INTERNAL_ERROR -> InternalServerException(response.message)
-            else -> InnerException(response.message)
+            HTTP_UNAUTHORIZED -> DomainException("Unauthorized")
+            HTTP_FORBIDDEN -> DomainException("Forbidden")
+            HTTP_NOT_FOUND -> DomainException("Not Found")
+            HTTP_INTERNAL_ERROR -> InternalServerException("Internal error")
+            else -> InnerException("Inner error")
         }
 }
 
-data class NotFoundException(override val message: String) :
-    IOException(message) // вынести в отдельный класс
-
-data class InternalServerException(override val message: String) : IOException(message)
-
-data class InnerException(override val message: String) : IOException(message)
-
-data class NetworkException(override val message: String) : IOException(message)
-
-data class UnknownException(override val message: String) : IOException(message)

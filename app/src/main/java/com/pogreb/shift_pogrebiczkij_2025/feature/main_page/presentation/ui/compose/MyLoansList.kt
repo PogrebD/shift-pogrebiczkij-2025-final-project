@@ -23,23 +23,31 @@ import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
 @Composable
 fun MyLoansList(
     loans: List<Loan>,
+    errorTextLoans: String,
+    onRetryClick: () -> Unit,
     onViewAllClick: () -> Unit,
     onItemClick: (Long) -> Unit,
 ) {
-    if (loans.isEmpty()) {
+
+    if (loans.isEmpty() && errorTextLoans.isEmpty()) {
         EmptyLoans()
     } else {
         LoansCard(
             loans = loans,
             onViewAllClick = onViewAllClick,
-            onItemClick
+            errorTextLoans = errorTextLoans,
+            onRetryClick = onRetryClick,
+            onItemClick = onItemClick,
         )
     }
+
 }
 
 @Composable
 fun LoansCard(
     loans: List<Loan>,
+    errorTextLoans: String,
+    onRetryClick: () -> Unit,
     onViewAllClick: () -> Unit,
     onItemClick: (Long) -> Unit,
 ) {
@@ -50,28 +58,48 @@ fun LoansCard(
             containerColor = MaterialTheme.colorScheme.surface,
         ),
     ) {
-        Column(
-            modifier = Modifier
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            loans.forEach { loan ->
-                LoanElement(
-                    id = loan.id,
-                    amount = loan.amount,
-                    status = loan.status,
-                    date = loan.date,
-                    onItemClick = onItemClick,
-                )
-            }
-
-            SecondaryButton(
-                onClick = onViewAllClick,
-                text = stringResource(R.string.label_view_all),
-                modifier = Modifier
-                    .padding(top = 16.dp)
+        if (errorTextLoans.isEmpty()) {
+            MyLoansListContent(
+                loans = loans,
+                onViewAllClick = onViewAllClick,
+                onItemClick = onItemClick,
+            )
+        } else {
+            ErrorCardContent(
+                error = errorTextLoans,
+                onRetryClick = onRetryClick,
             )
         }
+    }
+}
+
+@Composable
+fun MyLoansListContent(
+    loans: List<Loan>,
+    onViewAllClick: () -> Unit,
+    onItemClick: (Long) -> Unit,
+) {
+    Column(
+        modifier = Modifier
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        loans.forEach { loan ->
+            LoanElement(
+                id = loan.id,
+                amount = loan.amount,
+                status = loan.status,
+                date = loan.date,
+                onItemClick = onItemClick,
+            )
+        }
+
+        SecondaryButton(
+            onClick = onViewAllClick,
+            text = stringResource(R.string.label_view_all),
+            modifier = Modifier
+                .padding(top = 16.dp)
+        )
     }
 }
 
@@ -117,6 +145,8 @@ private fun PreviewMyLoansList() {
             ),
             onViewAllClick = {},
             onItemClick = {},
+            errorTextLoans = "Увы",
+            onRetryClick = {},
         )
     }
 }

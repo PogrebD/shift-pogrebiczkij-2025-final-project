@@ -39,6 +39,7 @@
     <string name="title_offers">Специальное предложение</string>
     <string name="title_language">Язык</string>
     <string name="title_exit_dialog">Выход</string>
+    <string name="title_error">Ошибка</string>
 
     <string name="body_get_loan">Отслеживайте изменение статуса заявки.\nКогда займ будет одобрен, подойдите с паспортом в отделение банка для подписания договора</string>
     <string name="body_create_loan">Выберите сумму и нажмите «продолжить». Затем укажите свои данные.\nПосле нажатия «Оформить займ» заявка поступит в банк</string>
@@ -94,6 +95,7 @@
     <string name="label_next">Далее</string>
     <string name="label_password">Пароль</string>
     <string name="label_repeat_password">Повторите пароль</string>
+    <string name="label_try_again">Попробовать снова</string>
 
     <string name="content_description_hidden">hidden</string>
     <string name="content_description_home_page_illustration">Home page illustration</string>
@@ -108,6 +110,5 @@
     <string name="content_description_app_logo">app logo</string>
     <string name="content_description_sorry">Что-то пошло не так</string>
     <string name="content_description_onboarding">onboarding</string>
-    <string name="title_error">Ошибка</string>
-    <string name="label_try_again">Попробовать снова</string>
+    <string name="content_description_sentiment_dissatisfied">sentiment dissatisfied</string>
 </resources>

@@ -13,6 +13,7 @@ import com.pogreb.shift_pogrebiczkij_2025.R
 import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.presentation.state.MainPageState
 import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.presentation.viewmodel.MainPageViewModel
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.ActionTopBar
+import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.FullScreenProgressIndicator
 
 @Composable
 internal fun MainPageScreen(
@@ -46,6 +47,10 @@ internal fun MainPageScreen(
                     maxAmount = currentState.loanConditions.maxAmount,
                     percent = currentState.loanConditions.percent,
                     period = currentState.loanConditions.period,
+                    errorTextLoanCondition = currentState.errorTextConditions,
+                    errorTextLoans = currentState.errorTextLoans,
+                    onRetryLoadLoansClick = viewModel::refreshLoans,
+                    onRetryLoadConditionClick = viewModel::refreshLoanCondition,
                     onSliderValueChange = { viewModel.updateLoanAmount(it) },
                     onContinueClick = {
                         onContinueClick(
@@ -58,6 +63,8 @@ internal fun MainPageScreen(
                     loans = currentState.loans,
                     onItemClick = onItemClick,
                 )
+
+                is MainPageState.Loading -> FullScreenProgressIndicator()
             }
         },
     )

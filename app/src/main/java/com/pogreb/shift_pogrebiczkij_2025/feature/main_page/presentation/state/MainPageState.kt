@@ -10,11 +10,9 @@ interface MainPageState {
 
     data class Content(
         val loanConditions: LoanConditions,
+        val errorTextConditions: String,
         val loans: List<Loan>,
+        val errorTextLoans: String,
         val loanAmount: Long,
-    ) : MainPageState
-
-    data class Error(
-        val massage: String
     ) : MainPageState
 }

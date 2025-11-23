@@ -41,8 +41,10 @@ fun LoanCalculatorCard(
     maxAmount: Long,
     percent: Double,
     period: Int,
+    errorTextConditions: String,
     onSliderValueChange: (Float) -> Unit,
     onContinueClick: () -> Unit,
+    onRetryLoadCondition: () -> Unit,
 ) {
     Card(
         modifier = Modifier
@@ -52,32 +54,58 @@ fun LoanCalculatorCard(
             containerColor = MaterialTheme.colorScheme.surface,
         ),
     ) {
-        Column(
-            modifier = Modifier
-                .padding(top = 16.dp)
-        ) {
-            LoanAmount(
+        if (errorTextConditions.isEmpty()) {
+            CardContent(
                 loanAmount = loanAmount,
-            )
-
-            LoanAmountSlider(
-                loanAmount = loanAmount,
-                onSliderValueChange = onSliderValueChange,
                 maxAmount = maxAmount,
-            )
-
-            LoanConditions(
                 percent = percent,
                 period = period,
+                onSliderValueChange = onSliderValueChange,
+                onContinueClick = onContinueClick,
             )
-
-            PrimaryButton(
-                onClick = onContinueClick,
-                text = stringResource(R.string.label_continue),
-                modifier = Modifier
-                    .padding(16.dp)
+        } else {
+            ErrorCardContent(
+                error = errorTextConditions,
+                onRetryClick = onRetryLoadCondition,
             )
         }
+    }
+}
+
+@Composable
+private fun CardContent(
+    loanAmount: Long,
+    maxAmount: Long,
+    percent: Double,
+    period: Int,
+    onSliderValueChange: (Float) -> Unit,
+    onContinueClick: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .padding(top = 16.dp)
+    ) {
+        LoanAmount(
+            loanAmount = loanAmount,
+        )
+
+        LoanAmountSlider(
+            loanAmount = loanAmount,
+            onSliderValueChange = onSliderValueChange,
+            maxAmount = maxAmount,
+        )
+
+        LoanConditions(
+            percent = percent,
+            period = period,
+        )
+
+        PrimaryButton(
+            onClick = onContinueClick,
+            text = stringResource(R.string.label_continue),
+            modifier = Modifier
+                .padding(16.dp)
+        )
     }
 }
 
@@ -232,6 +260,8 @@ private fun PreviewAuthorizationContent() {
             percent = 30.0,
             period = 12,
             onContinueClick = {},
+            errorTextConditions = "Увы",
+            onRetryLoadCondition = {},
         )
     }
 }

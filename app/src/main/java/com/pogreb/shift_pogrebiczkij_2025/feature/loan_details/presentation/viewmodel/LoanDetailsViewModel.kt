@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_details.domain.usecase.GetLoanDetailsUseCase
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_details.presentation.state.LoanDetailsState
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -33,7 +32,6 @@ class LoanDetailsViewModel @Inject constructor(
 
         viewModelScope.launch {
             try {
-                delay(3000)
                 val loanDetails = getLoanDetailsUseCase(id)
                 val formattedDate = formatDate(loanDetails.date)
                 _state.update {

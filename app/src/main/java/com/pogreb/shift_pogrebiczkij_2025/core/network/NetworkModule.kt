@@ -41,7 +41,7 @@ interface NetworkModule {
             OkHttpClient.Builder()
                 .addInterceptor(authInterceptor)
                 .addInterceptor(httpLoggingInterceptor)
-                //.addInterceptor(errorInterceptor)
+                .addInterceptor(errorInterceptor)
                 .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
