@@ -63,7 +63,9 @@ internal fun LoanDetailsContent(
             status = status,
         )
 
-        Description()
+        Description(
+            status = status,
+        )
     }
 }
 
@@ -192,12 +194,19 @@ private fun Status(
 }
 
 @Composable
-private fun Description() {
+private fun Description(status: LoanStatus) {
     Text(
-        text = stringResource(R.string.body_loan_details),
+        text = getDescriptionText(status),
         color = MaterialTheme.colorScheme.onSurfaceVariant,
         style = MaterialTheme.typography.bodySmall
     )
+}
+
+@Composable
+private fun getDescriptionText(status: LoanStatus) = when (status) {
+    LoanStatus.REGISTERED -> stringResource(R.string.body_loan_details_registered)
+    LoanStatus.APPROVED -> stringResource(R.string.body_loan_details_approved)
+    LoanStatus.REJECTED -> stringResource(R.string.body_loan_details_rejected)
 }
 
 @Composable

@@ -55,7 +55,9 @@
     <string name="body_loan_processing">После оформления заявки на займ, банк проведет анализ вашей кредитной истории</string>
     <string name="body_failure">Сейчас мы не можем одобрить вашу заявку</string>
     <string name="body_support_phone">8-800-300-10-10</string>
-    <string name="body_loan_details">Когда займ примет статус «Одобрен», вам нужно будет подойти с паспортом в отделение банка для подписания договора и получить деньги</string>
+    <string name="body_loan_details_registered">Когда займ примет статус «Одобрен», вам нужно будет подойти с паспортом в отделение банка для подписания договора и получить деньги</string>
+    <string name="body_loan_details_approved">Вам нужно подойти с паспортом в отделение банка для подписания договора и получить деньги</string>
+    <string name="body_loan_details_rejected">К сожалению вам отказано в займе. Вы можете попробовать оформить займ на других условиях</string>
 
     <string name="label_ru">Русский</string>
     <string name="label_en">English</string>
