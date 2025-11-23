@@ -63,10 +63,13 @@ internal fun LoanProcessingScreen(
                         nameErrorType = currentState.nameErrorType,
                         lastNameErrorType = currentState.lastNameErrorType,
                         phoneErrorType = currentState.phoneErrorType,
+                        errorMessage = currentState.errorMassage,
                         onNameChange = viewModel::updateName,
                         onLastNameChange = viewModel::updateLastName,
                         onPhoneChange = viewModel::updatePhone,
                         onApplyLoanClick = viewModel::createLoan,
+                        onRefresh = viewModel::refreshCreateLoan,
+                        onCancel = viewModel::clearDialog,
                     )
 
                 is LoanProcessingState.SuccessfulResult ->

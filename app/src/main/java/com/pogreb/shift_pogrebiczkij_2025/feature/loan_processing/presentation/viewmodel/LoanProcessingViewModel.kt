@@ -71,7 +71,50 @@ class LoanProcessingViewModel @Inject constructor(
                     }
                 }
             } catch (e: Exception) {
+                _state.update {
+                    currentState.copy(errorMassage = e.message ?: "")
+                }
             }
+        }
+    }
+
+    fun refreshCreateLoan() {
+        val currentState = _state.value as LoanProcessingState.Content
+        _state.update {
+            currentState.copy(errorMassage = "")
+        }
+        viewModelScope.launch {
+            try {
+                val loanResult = createNewLoanUseCase(
+                    currentState.loanData,
+                    currentState.userData
+                )
+                if (loanResult.status == LoanStatus.REJECTED) {
+                    _state.update {
+                        LoanProcessingState.FailureResult
+                    }
+                } else {
+                    val endDate =
+                        formatDateWithAddedDays(loanResult.date, currentState.loanData.period)
+                    _state.update {
+                        LoanProcessingState.SuccessfulResult(
+                            amount = currentState.loanData.amount,
+                            date = endDate
+                        )
+                    }
+                }
+            } catch (e: Exception) {
+                _state.update {
+                    currentState.copy(errorMassage = e.message ?: "")
+                }
+            }
+        }
+    }
+
+    fun clearDialog() {
+        val currentState = _state.value as LoanProcessingState.Content
+        _state.update {
+            currentState.copy(errorMassage = "")
         }
     }
 

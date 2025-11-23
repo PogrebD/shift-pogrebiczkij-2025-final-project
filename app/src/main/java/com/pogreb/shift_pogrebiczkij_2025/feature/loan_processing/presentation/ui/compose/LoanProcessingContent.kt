@@ -11,6 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pogreb.shift_pogrebiczkij_2025.R
+import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.ErrorDialog
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.InputErrorType
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.OutlinedInput
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.PhoneInput
@@ -26,6 +27,9 @@ internal fun LoanProcessingContent(
     nameErrorType: InputErrorType,
     lastNameErrorType: InputErrorType,
     phoneErrorType: InputErrorType,
+    errorMessage: String,
+    onRefresh: () -> Unit,
+    onCancel: () -> Unit,
     onNameChange: (String) -> Unit,
     onLastNameChange: (String) -> Unit,
     onPhoneChange: (String) -> Unit,
@@ -69,6 +73,12 @@ internal fun LoanProcessingContent(
             modifier = Modifier
                 .padding(top = 16.dp)
         )
+
+        ErrorDialog(
+            message = errorMessage,
+            onRetry = onRefresh,
+            onCancel = onCancel,
+        )
     }
 }
 
@@ -109,6 +119,9 @@ private fun PreviewLoanProcessingContent() {
             nameErrorType = InputErrorType.NONE,
             lastNameErrorType = InputErrorType.NONE,
             phoneErrorType = InputErrorType.NONE,
+            errorMessage = "",
+            onRefresh = {},
+            onCancel = {},
         )
     }
 }
