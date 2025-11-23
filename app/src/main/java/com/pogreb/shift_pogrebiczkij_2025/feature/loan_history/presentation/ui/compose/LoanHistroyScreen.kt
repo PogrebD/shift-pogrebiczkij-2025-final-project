@@ -12,6 +12,7 @@ import androidx.compose.ui.res.stringResource
 import com.pogreb.shift_pogrebiczkij_2025.R
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.presentation.state.LoanHistoryState
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.presentation.viewmodel.LoanHistoryViewModel
+import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.FullScreenProgressIndicator
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.NavigationTopBar
 
 @Composable
@@ -44,7 +45,14 @@ internal fun LoanHistoryScreen(
                     isRefreshing = currentState.isRefreshing,
                     onItemClick = onItemClick,
                     onRefresh = viewModel::refresh,
+                    errorMessage = currentState.errorMassage,
+                    onCancel = {
+                        viewModel.clearDialog()
+                        onBackClick()
+                    },
                 )
+
+                is LoanHistoryState.Loading -> FullScreenProgressIndicator()
             }
         },
     )

@@ -108,4 +108,6 @@
     <string name="content_description_app_logo">app logo</string>
     <string name="content_description_sorry">Что-то пошло не так</string>
     <string name="content_description_onboarding">onboarding</string>
+    <string name="title_error">Ошибка</string>
+    <string name="label_try_again">Попробовать снова</string>
 </resources>

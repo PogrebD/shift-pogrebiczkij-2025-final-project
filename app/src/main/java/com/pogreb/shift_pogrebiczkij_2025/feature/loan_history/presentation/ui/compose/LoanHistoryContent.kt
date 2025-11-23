@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.domain.entity.Loan
+import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.ErrorDialog
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.LoanElement
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.LoanStatus
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
@@ -22,8 +23,10 @@ internal fun LoanHistoryContent(
     modifier: Modifier,
     loans: List<Loan>,
     isRefreshing: Boolean,
+    errorMessage: String,
     onItemClick: (Long) -> Unit,
     onRefresh: () -> Unit,
+    onCancel: () -> Unit,
 ) {
     val refreshState = rememberPullToRefreshState()
 
@@ -50,6 +53,12 @@ internal fun LoanHistoryContent(
                 )
             }
         }
+
+        ErrorDialog(
+            message = errorMessage,
+            onRetry = onRefresh,
+            onCancel = onCancel,
+        )
     }
 }
 
@@ -87,6 +96,8 @@ private fun PreviewLoanHistoryContent() {
             modifier = Modifier,
             isRefreshing = false,
             onRefresh = {},
+            errorMessage = "",
+            onCancel = {},
         )
     }
 }

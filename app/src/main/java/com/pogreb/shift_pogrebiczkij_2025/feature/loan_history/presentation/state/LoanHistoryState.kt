@@ -10,11 +10,7 @@ interface LoanHistoryState {
 
     data class Content(
         val loans: List<Loan>,
-        val isRefreshing: Boolean,
-    ) : LoanHistoryState
-
-    data class Error(
-        val massage: String,
-        val isRefreshing: Boolean,
+        val isRefreshing: Boolean = false,
+        val errorMassage: String = "",
     ) : LoanHistoryState
 }

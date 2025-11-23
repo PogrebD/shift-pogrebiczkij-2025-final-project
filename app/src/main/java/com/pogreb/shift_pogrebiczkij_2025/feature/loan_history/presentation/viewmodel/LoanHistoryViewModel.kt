@@ -1,6 +1,5 @@
 package com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.domain.usecase.GetLoansUseCase
@@ -19,7 +18,9 @@ class LoanHistoryViewModel @Inject constructor(
     val state: StateFlow<LoanHistoryState> = _state.asStateFlow()
 
     fun initialize() {
-        _state.update { LoanHistoryState.Loading }
+        _state.update {
+            LoanHistoryState.Loading
+        }
 
         viewModelScope.launch {
             try {
@@ -27,21 +28,29 @@ class LoanHistoryViewModel @Inject constructor(
                 _state.update {
                     LoanHistoryState.Content(
                         loans = loans,
-                        isRefreshing = false,
                     )
                 }
             } catch (e: Exception) {
-                Log.e("loans", e.message ?: "")
+                _state.update {
+                    LoanHistoryState.Content(
+                        loans = emptyList(),
+                        errorMassage = e.message ?: "",
+                    )
+                }
             }
         }
     }
 
     fun refresh() {
+        val currentState = _state.value as LoanHistoryState.Content
+        _state.update {
+            currentState.copy(
+                isRefreshing = true,
+                errorMassage = "",
+            )
+        }
         viewModelScope.launch {
             try {
-                _state.update {
-                    it.withRefreshing(true)
-                }
                 val loans = getLoansUseCase()
                 _state.update {
                     LoanHistoryState.Content(
@@ -50,15 +59,23 @@ class LoanHistoryViewModel @Inject constructor(
                     )
                 }
             } catch (e: Exception) {
+                _state.update {
+                    currentState.copy(
+                        isRefreshing = false,
+                        errorMassage = e.message ?: "",
+                    )
+                }
             }
         }
     }
 
-    private fun LoanHistoryState.withRefreshing(isRefreshing: Boolean): LoanHistoryState {
-        return when (this) {
-            is LoanHistoryState.Content -> this.copy(isRefreshing = isRefreshing)
-            is LoanHistoryState.Error -> this.copy(isRefreshing = isRefreshing)
-            else -> this
+    fun clearDialog() {
+        _state.update {
+            LoanHistoryState.Content(
+                loans = emptyList(),
+                isRefreshing = false,
+                errorMassage = "",
+            )
         }
     }
 }
