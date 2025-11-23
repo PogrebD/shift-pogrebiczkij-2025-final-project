@@ -40,11 +40,11 @@ class AuthorizationViewModel @Inject constructor(
         }
     }
 
-    fun login(authorizationData: AuthorizationData): Boolean {
-        var logged = false
+    fun login(authorizationData: AuthorizationData, onResult: (Boolean) -> Unit) {
         viewModelScope.launch {
             try {
-                logged = loginUseCase(authorizationData)
+                val logged = loginUseCase(authorizationData)
+                onResult(logged)
             } catch (e: Exception) {
                 _state.update {
                     when (val currentState = _state.value) {
@@ -59,13 +59,12 @@ class AuthorizationViewModel @Inject constructor(
                         else -> currentState
                     }
                 }
+                onResult(false)
             }
         }
-        return logged
     }
 
-    fun registration(authorizationData: AuthorizationData): Boolean {
-        var logged = false
+    fun registration(authorizationData: AuthorizationData, onResult: (Boolean) -> Unit) {
         viewModelScope.launch {
             try {
                 val user = registrationUseCase(authorizationData)
@@ -80,15 +79,16 @@ class AuthorizationViewModel @Inject constructor(
                         errorMessage = "",
                     )
                 }
-                logged = loginUseCase(authorizationData)
+                val logged = loginUseCase(authorizationData)
+                onResult(logged)
             } catch (e: Exception) {
                 _state.update {
                     val currentState = _state.value as AuthorizationState.RegistrationContent
                     currentState.copy(errorMessage = e.message ?: "")
                 }
+                onResult(false)
             }
         }
-        return logged
     }
 
     fun setLoginState() {

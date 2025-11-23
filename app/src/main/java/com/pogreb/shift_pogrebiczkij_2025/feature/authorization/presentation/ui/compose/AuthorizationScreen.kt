@@ -64,12 +64,14 @@ internal fun AuthorizationScreen(
                         errorMessage = currentState.errorMessage,
                         onRetryClick = viewModel::clearDialog,
                         onLoginClick = {
-                            val logged: Boolean =
-                                viewModel.login(currentState.authorizationData)
-
-                            if (logged) {
-                                onLoginClick()
-                            }
+                            viewModel.login(
+                                currentState.authorizationData,
+                                onResult = { logged ->
+                                    if (logged) {
+                                        onLoginClick()
+                                    }
+                                }
+                            )
                         },
                         onRegistrationTabClick = { viewModel.setRegistrationState() },
                         onLoginValueChange = { viewModel.updateLogin(it) },
@@ -99,12 +101,16 @@ internal fun AuthorizationScreen(
                         errorMessage = currentState.errorMessage,
                         onRetryClick = viewModel::clearDialog,
                         onRegistrationClick = {
-                            val logged: Boolean =
-                                viewModel.registration(currentState.registrationData.authorizationData)
+                            viewModel.registration(
+                                currentState.registrationData.authorizationData,
+                                onResult = { logged ->
+                                    if (logged) {
+                                        onRegistrationClick()
+                                    }
+                                }
+                            )
 
-                            if (logged) {
-                                onRegistrationClick()
-                            }
+
                         },
                         onLoginTabClick = { viewModel.setLoginState() },
                         onLoginValueChange = { viewModel.updateLogin(it) },
