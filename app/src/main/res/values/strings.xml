@@ -68,7 +68,8 @@
     <string name="label_loans_history">Мои займы</string>
     <string name="label_offers">Предложения для Вас</string>
     <string name="label_banks_near">Ближайшее отделение банка</string>
-    <string name="label_login">Войти</string>
+    <string name="label_login">Логин</string>
+    <string name="label_enter">Войти</string>
     <string name="label_conditions">Условия</string>
     <string name="label_registration">Зарегистрироваться</string>
     <string name="label_bank_addresses">Отделения банка</string>

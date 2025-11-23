@@ -13,6 +13,7 @@ interface AuthorizationState {
         val authorizationData: AuthorizationData,
         val loginErrorType: InputErrorType,
         val passwordErrorType: InputErrorType,
+        val errorMessage: String,
     ) : AuthorizationState
 
     data class RegistrationContent(
@@ -20,6 +21,7 @@ interface AuthorizationState {
         val loginErrorType: InputErrorType,
         val passwordErrorType: InputErrorType,
         val repeatPasswordErrorType: InputErrorType,
+        val errorMessage: String,
     ) : AuthorizationState
 
     data object AlreadyLogged : AuthorizationState

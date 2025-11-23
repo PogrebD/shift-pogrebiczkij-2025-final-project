@@ -61,12 +61,14 @@ internal fun AuthorizationScreen(
                         loginErrorType = currentState.loginErrorType,
                         passwordErrorType = currentState.passwordErrorType,
                         repeatPasswordErrorType = InputErrorType.NONE,
+                        errorMessage = currentState.errorMessage,
+                        onRetryClick = viewModel::clearDialog,
                         onLoginClick = {
                             val logged: Boolean =
                                 viewModel.login(currentState.authorizationData)
 
                             if (logged) {
-                                onLoginClick
+                                onLoginClick()
                             }
                         },
                         onRegistrationTabClick = { viewModel.setRegistrationState() },
@@ -94,12 +96,14 @@ internal fun AuthorizationScreen(
                         loginErrorType = currentState.loginErrorType,
                         passwordErrorType = currentState.passwordErrorType,
                         repeatPasswordErrorType = currentState.repeatPasswordErrorType,
+                        errorMessage = currentState.errorMessage,
+                        onRetryClick = viewModel::clearDialog,
                         onRegistrationClick = {
                             val logged: Boolean =
                                 viewModel.registration(currentState.registrationData.authorizationData)
 
                             if (logged) {
-                                onRegistrationClick
+                                onRegistrationClick()
                             }
                         },
                         onLoginTabClick = { viewModel.setLoginState() },
@@ -124,7 +128,7 @@ private fun AuthorizationLogo(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.inverseSurface)
+            .background(MaterialTheme.colorScheme.surface)
     ) {
         Column(
             modifier = Modifier
@@ -169,6 +173,6 @@ private fun Logo() {
 
 @Composable
 private fun getLogoPainter(darkTheme: Boolean = isSystemInDarkTheme()) = when {
-    darkTheme -> painterResource(R.drawable.logo_day)
-    else -> painterResource(R.drawable.logo_night)
+    darkTheme -> painterResource(R.drawable.logo_night)
+    else -> painterResource(R.drawable.logo_day)
 }

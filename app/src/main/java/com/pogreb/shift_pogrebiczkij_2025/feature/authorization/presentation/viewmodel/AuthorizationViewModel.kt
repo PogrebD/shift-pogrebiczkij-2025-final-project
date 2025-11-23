@@ -9,6 +9,7 @@ import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.domain.usecase.L
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.domain.usecase.RegistrationUseCase
 import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.state.AuthorizationState
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.InputErrorType
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -27,6 +28,8 @@ class AuthorizationViewModel @Inject constructor(
     suspend fun initialize() {
         _state.update { AuthorizationState.Loading }
 
+        delay(2000)
+
         val alreadyLogged = checkAlreadyLoggedUseCase()
         if (alreadyLogged) {
             _state.update {
@@ -43,7 +46,19 @@ class AuthorizationViewModel @Inject constructor(
             try {
                 logged = loginUseCase(authorizationData)
             } catch (e: Exception) {
+                _state.update {
+                    when (val currentState = _state.value) {
+                        is AuthorizationState.LoginContent -> currentState.copy(
+                            errorMessage = e.message ?: ""
+                        )
 
+                        is AuthorizationState.RegistrationContent -> currentState.copy(
+                            errorMessage = e.message ?: ""
+                        )
+
+                        else -> currentState
+                    }
+                }
             }
         }
         return logged
@@ -62,11 +77,15 @@ class AuthorizationViewModel @Inject constructor(
                         ),
                         loginErrorType = InputErrorType.NONE,
                         passwordErrorType = InputErrorType.NONE,
+                        errorMessage = "",
                     )
                 }
                 logged = loginUseCase(authorizationData)
             } catch (e: Exception) {
-
+                _state.update {
+                    val currentState = _state.value as AuthorizationState.RegistrationContent
+                    currentState.copy(errorMessage = e.message ?: "")
+                }
             }
         }
         return logged
@@ -83,6 +102,7 @@ class AuthorizationViewModel @Inject constructor(
                 ),
                 loginErrorType = InputErrorType.NONE,
                 passwordErrorType = InputErrorType.NONE,
+                errorMessage = "",
             )
         }
     }
@@ -101,8 +121,19 @@ class AuthorizationViewModel @Inject constructor(
                 ),
                 loginErrorType = InputErrorType.NONE,
                 passwordErrorType = InputErrorType.NONE,
-                repeatPasswordErrorType = InputErrorType.NONE
+                repeatPasswordErrorType = InputErrorType.NONE,
+                errorMessage = ""
             )
+        }
+    }
+
+    fun clearDialog() {
+        _state.update {
+            when (val currentState = _state.value) {
+                is AuthorizationState.LoginContent -> currentState.copy(errorMessage = "")
+                is AuthorizationState.RegistrationContent -> currentState.copy(errorMessage = "")
+                else -> currentState
+            }
         }
     }
 

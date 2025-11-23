@@ -1,6 +1,7 @@
 package com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.ui.compose
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pogreb.shift_pogrebiczkij_2025.R
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.AuthorizationTab
+import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.ErrorDialogWithoutDismiss
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.InputErrorType
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.OutlinedInput
 import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.PasswordInput
@@ -33,6 +35,7 @@ internal fun AuthorizationContent(
     loginErrorType: InputErrorType,
     passwordErrorType: InputErrorType,
     repeatPasswordErrorType: InputErrorType,
+    errorMessage: String,
     onLoginTabClick: () -> Unit = {},
     onRegistrationTabClick: () -> Unit = {},
     onLoginClick: () -> Unit = {},
@@ -40,13 +43,13 @@ internal fun AuthorizationContent(
     onLoginValueChange: (String) -> Unit,
     onPasswordValueChange: (String) -> Unit,
     onRepeatPasswordValueCChange: (String) -> Unit = {},
+    onRetryClick: () -> Unit,
 ) {
     var passwordHidden by remember { mutableStateOf(true) }
     var repeatPasswordHidden by remember { mutableStateOf(true) }
 
     Column(
         modifier = Modifier
-            .background(MaterialTheme.colorScheme.inverseSurface)
             .clip(
                 RoundedCornerShape(
                     topStart = 16.dp,
@@ -54,6 +57,14 @@ internal fun AuthorizationContent(
                 )
             )
             .background(MaterialTheme.colorScheme.surface)
+            .border(
+                width = 2.dp,
+                color = MaterialTheme.colorScheme.outline,
+                shape = RoundedCornerShape(
+                    topStart = 16.dp,
+                    topEnd = 16.dp
+                )
+            )
             .padding(horizontal = 16.dp)
     ) {
         AuthorizationTab(
@@ -94,6 +105,11 @@ internal fun AuthorizationContent(
             onLoginClick = onLoginClick,
             onRegistrationClick = onRegistrationClick,
         )
+
+        ErrorDialogWithoutDismiss(
+            message = errorMessage,
+            onRetry = onRetryClick,
+        )
     }
 }
 
@@ -114,7 +130,7 @@ fun ApplyButton(
     } else {
         PrimaryButton(
             onClick = { onLoginClick() },
-            text = stringResource(R.string.label_login),
+            text = stringResource(R.string.label_enter),
             modifier = Modifier
                 .padding(vertical = 16.dp)
         )
@@ -144,6 +160,8 @@ private fun PreviewAuthorizationContent() {
             repeatPasswordErrorType = InputErrorType.NONE,
             onLoginTabClick = {},
             onRegistrationTabClick = {},
+            errorMessage = "",
+            onRetryClick = {},
         )
     }
 }
