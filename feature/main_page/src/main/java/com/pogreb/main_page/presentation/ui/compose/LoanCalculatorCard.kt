@@ -36,7 +36,7 @@ import com.pogreb.design.theme.iconSecondary
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoanCalculatorCard(
+internal fun LoanCalculatorCard(
     loanAmount: Long,
     maxAmount: Long,
     percent: Double,
@@ -151,34 +151,7 @@ private fun LoanAmountSlider(
         colors = SliderDefaults.colors(
             thumbColor = MaterialTheme.colorScheme.inverseSurface,
         ),
-        thumb = {
-            Box(
-                modifier = Modifier
-                    .size(24.dp)
-                    .background(
-                        color = MaterialTheme.colorScheme.inverseSurface,
-                        shape = CircleShape
-                    )
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.small_arrow_left),
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.surface,
-                    modifier = Modifier
-                        .align(Alignment.CenterStart)
-                        .padding(start = 5.dp)
-                )
-
-                Icon(
-                    painter = painterResource(R.drawable.small_arrow_right),
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.surface,
-                    modifier = Modifier
-                        .align(Alignment.CenterEnd)
-                        .padding(end = 4.dp)
-                )
-            }
-        },
+        thumb = { CustomThumb() },
         track = { sliderState ->
             SliderDefaults.Track(
                 colors = SliderDefaults.colors(
@@ -205,6 +178,7 @@ private fun LoanAmountSlider(
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.bodySmall
         )
+
         Text(
             text = stringResource(R.string.pattern_amount, maxAmount.toString()),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -220,6 +194,36 @@ private fun LoanAmountSlider(
         thickness = 1.dp,
         color = MaterialTheme.colorScheme.bgDisable
     )
+}
+
+@Composable
+private fun CustomThumb() {
+    Box(
+        modifier = Modifier
+            .size(24.dp)
+            .background(
+                color = MaterialTheme.colorScheme.inverseSurface,
+                shape = CircleShape
+            )
+    ) {
+        Icon(
+            painter = painterResource(R.drawable.small_arrow_left),
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.surface,
+            modifier = Modifier
+                .align(Alignment.CenterStart)
+                .padding(start = 5.dp)
+        )
+
+        Icon(
+            painter = painterResource(R.drawable.small_arrow_right),
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.surface,
+            modifier = Modifier
+                .align(Alignment.CenterEnd)
+                .padding(end = 4.dp)
+        )
+    }
 }
 
 @Composable

@@ -12,5 +12,4 @@ class LoanModelConverter @Inject constructor() {
             status = model.status,
             date = model.date,
         )
-
 }

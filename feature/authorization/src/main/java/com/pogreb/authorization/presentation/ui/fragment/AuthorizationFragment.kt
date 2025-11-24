@@ -18,9 +18,7 @@ import javax.inject.Inject
 class AuthorizationFragment : Fragment() {
 
     companion object {
-        fun newInstance(): AuthorizationFragment {
-            return AuthorizationFragment()
-        }
+        fun newInstance(): AuthorizationFragment = AuthorizationFragment()
     }
 
     @Inject

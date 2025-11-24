@@ -9,7 +9,6 @@ interface MainPageRouter {
         fragmentManager: FragmentManager,
         id: Long
     )
-
     fun openLoanProcessing(
         fragmentManager: FragmentManager,
         percent: Double,

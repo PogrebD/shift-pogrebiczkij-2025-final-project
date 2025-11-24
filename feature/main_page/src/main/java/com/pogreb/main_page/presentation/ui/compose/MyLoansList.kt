@@ -21,14 +21,13 @@ import com.pogreb.design.theme.AppTheme
 import com.pogreb.main_page.domain.entity.Loan
 
 @Composable
-fun MyLoansList(
+internal fun MyLoansList(
     loans: List<Loan>,
     errorTextLoans: String,
     onRetryClick: () -> Unit,
     onViewAllClick: () -> Unit,
     onItemClick: (Long) -> Unit,
 ) {
-
     if (loans.isEmpty() && errorTextLoans.isEmpty()) {
         EmptyLoans()
     } else {
@@ -40,11 +39,10 @@ fun MyLoansList(
             onItemClick = onItemClick,
         )
     }
-
 }
 
 @Composable
-fun LoansCard(
+private fun LoansCard(
     loans: List<Loan>,
     errorTextLoans: String,
     onRetryClick: () -> Unit,
@@ -74,7 +72,7 @@ fun LoansCard(
 }
 
 @Composable
-fun MyLoansListContent(
+private fun MyLoansListContent(
     loans: List<Loan>,
     onViewAllClick: () -> Unit,
     onItemClick: (Long) -> Unit,
@@ -84,15 +82,10 @@ fun MyLoansListContent(
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        loans.forEach { loan ->
-            LoanElement(
-                id = loan.id,
-                amount = loan.amount,
-                status = loan.status,
-                date = loan.date,
-                onItemClick = onItemClick,
-            )
-        }
+        LoansList(
+            loans = loans,
+            onItemClick = onItemClick,
+        )
 
         SecondaryButton(
             onClick = onViewAllClick,
@@ -104,7 +97,23 @@ fun MyLoansListContent(
 }
 
 @Composable
-fun EmptyLoans() {
+private fun LoansList(
+    loans: List<Loan>,
+    onItemClick: (Long) -> Unit,
+) {
+    loans.forEach { loan ->
+        LoanElement(
+            id = loan.id,
+            amount = loan.amount,
+            status = loan.status,
+            date = loan.date,
+            onItemClick = onItemClick,
+        )
+    }
+}
+
+@Composable
+private fun EmptyLoans() {
     Column {
         Text(
             text = stringResource(R.string.body_my_loans),

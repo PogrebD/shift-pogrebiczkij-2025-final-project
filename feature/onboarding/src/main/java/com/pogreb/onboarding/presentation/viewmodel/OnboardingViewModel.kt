@@ -22,6 +22,7 @@ class OnboardingViewModel @Inject constructor() : ViewModel() {
 
     fun switchNextPage() {
         var currentPage = (_state.value as OnboardingState.Content).pageNumber
+
         _state.update {
             OnboardingState.Content(
                 pageNumber = ++currentPage
@@ -31,6 +32,7 @@ class OnboardingViewModel @Inject constructor() : ViewModel() {
 
     fun switchPreviousPage() {
         var currentPage = (_state.value as OnboardingState.Content).pageNumber
+
         _state.update {
             OnboardingState.Content(
                 pageNumber = --currentPage

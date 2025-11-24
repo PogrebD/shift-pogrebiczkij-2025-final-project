@@ -6,12 +6,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -58,7 +54,6 @@ internal fun FailureContent(
         onButtonClick = onBackMainClick
     )
 }
-
 
 @Composable
 private fun ResultContent(
@@ -113,25 +108,6 @@ private fun ResultContent(
                 .padding(top = 16.dp)
         )
     }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun ResultTopBar(onCloseClick: () -> Unit) {
-    TopAppBar(
-        title = {},
-        navigationIcon = {
-            IconButton(
-                onClick = onCloseClick,
-                content = {
-                    Icon(
-                        painterResource(R.drawable.cross),
-                        contentDescription = stringResource(R.string.content_description_close)
-                    )
-                }
-            )
-        }
-    )
 }
 
 @Preview(

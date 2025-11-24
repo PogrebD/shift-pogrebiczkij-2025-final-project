@@ -23,13 +23,12 @@ class LoanDetailsFragment : Fragment() {
 
         fun newInstance(
             loanId: Long
-        ): LoanDetailsFragment {
-            return LoanDetailsFragment().apply {
+        ): LoanDetailsFragment =
+            LoanDetailsFragment().apply {
                 arguments = bundleOf(
                     ARG_ID to loanId,
                 )
             }
-        }
     }
 
     private var loanId: Long = -1L

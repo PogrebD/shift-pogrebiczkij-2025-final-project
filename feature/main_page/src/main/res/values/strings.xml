@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="loan_repayment_card_text_part_one">Получите займ</string>
+    <string name="loan_repayment_card_text_part_two">в 2 клика</string>
+    <string name="loan_repayment_card_text_part_three">Деньги наличными</string>
+    <string name="loan_repayment_card_text_part_four">на любые цели</string>
+</resources>

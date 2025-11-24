@@ -1,7 +1,6 @@
 package com.pogreb.loan_processing.di
 
 import androidx.lifecycle.ViewModelProvider
-import com.pogreb.loan_processing.data.converter.LoanRequestConverter
 import com.pogreb.loan_processing.data.datasource.LoanProcessingApi
 import com.pogreb.loan_processing.data.datasource.RemoteLoanProcessingDataSource
 import com.pogreb.loan_processing.data.repository.LoanProcessingRepositoryImpl
@@ -20,10 +19,6 @@ interface LoanProcessingModule {
         @Provides
         fun provideLoanProcessingApi(retrofit: Retrofit) =
             retrofit.create(LoanProcessingApi::class.java)
-
-        @Provides
-        fun provideLoanRequestConverter() =
-            LoanRequestConverter()
 
         @Provides
         fun provideRemoteLoanProcessingDataSource(api: LoanProcessingApi): RemoteLoanProcessingDataSource =

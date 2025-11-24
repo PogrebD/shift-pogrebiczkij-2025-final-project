@@ -1,5 +1,6 @@
 package com.pogreb.authorization.presentation.ui.compose
 
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -39,91 +40,93 @@ internal fun AuthorizationScreen(
     }
 
     Scaffold { paddingValues ->
-        when (val currentState = state) {
-            is AuthorizationState.Loading -> AuthorizationLogoWithLoading()
+        Crossfade(targetState = state) { state ->
+            when (val currentState = state) {
+                is AuthorizationState.Loading -> AuthorizationLogoWithLoading()
 
-            is AuthorizationState.LoginContent -> {
-                Column(
-                    modifier = Modifier
-                        .padding(paddingValues),
-                    verticalArrangement = Arrangement.SpaceBetween
-                ) {
-                    AuthorizationLogo(
+                is AuthorizationState.LoginContent -> {
+                    Column(
                         modifier = Modifier
-                            .weight(1f),
-                    )
+                            .padding(paddingValues),
+                        verticalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        AuthorizationLogo(
+                            modifier = Modifier
+                                .weight(1f),
+                        )
 
-                    AuthorizationContent(
-                        signUpMode = false,
-                        loginText = currentState.authorizationData.name,
-                        passwordText = currentState.authorizationData.password,
-                        repeatPasswordText = "",
-                        loginErrorType = currentState.loginErrorType,
-                        passwordErrorType = currentState.passwordErrorType,
-                        repeatPasswordErrorType = InputErrorType.NONE,
-                        errorMessage = currentState.errorMessage,
-                        buttonEnabled = viewModel.getAvailabilityApplyButton(),
-                        onRetryClick = viewModel::clearDialog,
-                        onLoginClick = {
-                            viewModel.login(
-                                currentState.authorizationData,
-                                onResult = { logged ->
-                                    if (logged) {
-                                        onLoginClick()
+                        AuthorizationContent(
+                            signUpMode = false,
+                            loginText = currentState.authorizationData.name,
+                            passwordText = currentState.authorizationData.password,
+                            repeatPasswordText = "",
+                            loginErrorType = currentState.loginErrorType,
+                            passwordErrorType = currentState.passwordErrorType,
+                            repeatPasswordErrorType = InputErrorType.NONE,
+                            errorMessage = currentState.errorMessage,
+                            buttonEnabled = viewModel.getAvailabilityApplyButton(),
+                            onRetryClick = viewModel::clearDialog,
+                            onLoginClick = {
+                                viewModel.login(
+                                    currentState.authorizationData,
+                                    onResult = { logged ->
+                                        if (logged) {
+                                            onLoginClick()
+                                        }
                                     }
-                                }
-                            )
-                        },
-                        onRegistrationTabClick = { viewModel.setRegistrationState() },
-                        onLoginValueChange = { viewModel.updateLogin(it) },
-                        onPasswordValueChange = { viewModel.updatePassword(it) },
-                    )
+                                )
+                            },
+                            onRegistrationTabClick = { viewModel.setRegistrationState() },
+                            onLoginValueChange = { viewModel.updateLogin(it) },
+                            onPasswordValueChange = { viewModel.updatePassword(it) },
+                        )
+                    }
                 }
-            }
 
-            is AuthorizationState.RegistrationContent -> {
-                Column(
-                    modifier = Modifier
-                        .padding(paddingValues),
-                ) {
-                    AuthorizationLogo(
+                is AuthorizationState.RegistrationContent -> {
+                    Column(
                         modifier = Modifier
-                            .weight(1f),
-                    )
+                            .padding(paddingValues),
+                    ) {
+                        AuthorizationLogo(
+                            modifier = Modifier
+                                .weight(1f),
+                        )
 
-                    AuthorizationContent(
-                        signUpMode = true,
-                        loginText = currentState.registrationData.authorizationData.name,
-                        passwordText = currentState.registrationData.authorizationData.password,
-                        repeatPasswordText = currentState.registrationData.repeatPassword,
-                        loginErrorType = currentState.loginErrorType,
-                        passwordErrorType = currentState.passwordErrorType,
-                        repeatPasswordErrorType = currentState.repeatPasswordErrorType,
-                        errorMessage = currentState.errorMessage,
-                        buttonEnabled = viewModel.getAvailabilityApplyButton(),
-                        onRetryClick = viewModel::clearDialog,
-                        onRegistrationClick = {
-                            viewModel.registration(
-                                currentState.registrationData.authorizationData,
-                                onResult = { logged ->
-                                    if (logged) {
-                                        onRegistrationClick()
+                        AuthorizationContent(
+                            signUpMode = true,
+                            loginText = currentState.registrationData.authorizationData.name,
+                            passwordText = currentState.registrationData.authorizationData.password,
+                            repeatPasswordText = currentState.registrationData.repeatPassword,
+                            loginErrorType = currentState.loginErrorType,
+                            passwordErrorType = currentState.passwordErrorType,
+                            repeatPasswordErrorType = currentState.repeatPasswordErrorType,
+                            errorMessage = currentState.errorMessage,
+                            buttonEnabled = viewModel.getAvailabilityApplyButton(),
+                            onRetryClick = viewModel::clearDialog,
+                            onRegistrationClick = {
+                                viewModel.registration(
+                                    currentState.registrationData.authorizationData,
+                                    onResult = { logged ->
+                                        if (logged) {
+                                            onRegistrationClick()
+                                        }
                                     }
-                                }
-                            )
+                                )
 
 
-                        },
-                        onLoginTabClick = { viewModel.setLoginState() },
-                        onLoginValueChange = { viewModel.updateLogin(it) },
-                        onPasswordValueChange = { viewModel.updatePassword(it) },
-                        onRepeatPasswordValueCChange = { viewModel.updateRepeatPassword(it) },
-                    )
+                            },
+                            onLoginTabClick = { viewModel.setLoginState() },
+                            onLoginValueChange = { viewModel.updateLogin(it) },
+                            onPasswordValueChange = { viewModel.updatePassword(it) },
+                            onRepeatPasswordValueCChange = { viewModel.updateRepeatPassword(it) },
+                        )
+                    }
                 }
-            }
 
-            is AuthorizationState.AlreadyLogged -> {
-                onLoginClick()
+                is AuthorizationState.AlreadyLogged -> {
+                    onLoginClick()
+                }
             }
         }
     }

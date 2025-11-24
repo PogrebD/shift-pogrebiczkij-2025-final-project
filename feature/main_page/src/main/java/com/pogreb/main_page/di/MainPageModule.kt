@@ -20,7 +20,6 @@ interface MainPageModule {
         fun provideMainPageApi(retrofit: Retrofit) =
             retrofit.create(MainPageApi::class.java)
 
-
         @Provides
         fun provideRemoteMainPageDataSource(api: MainPageApi): RemoteMainPageDataSource =
             RemoteMainPageDataSource(api)

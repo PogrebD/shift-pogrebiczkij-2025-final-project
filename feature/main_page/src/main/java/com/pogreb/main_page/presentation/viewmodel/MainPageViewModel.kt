@@ -13,6 +13,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+private const val AMOUNT_INDEX = 0.7
+
 class MainPageViewModel @Inject constructor(
     private val getLoanConditionsUseCase: GetLoanConditionsUseCase,
     private val getRecentLoansUseCase: GetRecentLoansUseCase,
@@ -22,7 +24,7 @@ class MainPageViewModel @Inject constructor(
 
     fun initialize() {
         if (_state.value is MainPageState.Content) return
-        
+
         _state.update { MainPageState.Loading }
 
         var currentState = MainPageState.Content(
@@ -42,7 +44,7 @@ class MainPageViewModel @Inject constructor(
                 val loanConditions = getLoanConditionsUseCase()
                 currentState = currentState.copy(
                     loanConditions = loanConditions,
-                    loanAmount = ((loanConditions.maxAmount * 0.7).toLong()), //!!!!!
+                    loanAmount = ((loanConditions.maxAmount * AMOUNT_INDEX).toLong()),
                 )
 
                 _state.update {
@@ -54,9 +56,7 @@ class MainPageViewModel @Inject constructor(
                 )
 
                 _state.update {
-                    currentState.copy(
-                        errorTextConditions = e.message ?: ""
-                    )
+                    currentState
                 }
             }
 

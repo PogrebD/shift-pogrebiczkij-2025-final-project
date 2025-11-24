@@ -24,22 +24,8 @@ fun ErrorDialog(
             onDismissRequest = onCancel,
             title = { Title() },
             text = { Text(text = message) },
-            confirmButton = {
-                TertiaryButton(
-                    onClick = onRetry,
-                    text = stringResource(R.string.label_try_again),
-                    modifier = Modifier,
-                    enabled = true,
-                )
-            },
-            dismissButton = {
-                TertiaryButton(
-                    onClick = onRetry,
-                    text = stringResource(R.string.label_cancel),
-                    modifier = Modifier,
-                    enabled = true,
-                )
-            },
+            confirmButton = { ConfirmButton(onRetry = onRetry) },
+            dismissButton = { DismissButton(onRetry = onRetry) },
             containerColor = MaterialTheme.colorScheme.background
         )
     }
@@ -55,17 +41,30 @@ fun ErrorDialogWithoutDismiss(
             onDismissRequest = onRetry,
             title = { Title() },
             text = { Text(text = message) },
-            confirmButton = {
-                TertiaryButton(
-                    onClick = onRetry,
-                    text = stringResource(R.string.label_try_again),
-                    modifier = Modifier,
-                    enabled = true,
-                )
-            },
+            confirmButton = { ConfirmButton(onRetry = onRetry) },
             containerColor = MaterialTheme.colorScheme.background
         )
     }
+}
+
+@Composable
+private fun DismissButton(onRetry: () -> Unit) {
+    TertiaryButton(
+        onClick = onRetry,
+        text = stringResource(R.string.label_cancel),
+        modifier = Modifier,
+        enabled = true,
+    )
+}
+
+@Composable
+private fun ConfirmButton(onRetry: () -> Unit) {
+    TertiaryButton(
+        onClick = onRetry,
+        text = stringResource(R.string.label_try_again),
+        modifier = Modifier,
+        enabled = true,
+    )
 }
 
 @Composable

@@ -58,15 +58,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.fragment.ktx)
 
-    implementation(libs.retrofit.converter.kotlinxserialization)
-    implementation(libs.retrofit.converter.scalars)
-    implementation(libs.kotlinx.serialization.json)
-    implementation(libs.retrofit.core)
-
-    implementation(platform(libs.okhttp.bom))
-    implementation(libs.okhttp)
-    implementation(libs.logging.interceptor)
-
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)
 

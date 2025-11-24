@@ -1,4 +1,4 @@
-package com.pogreb.authorization.data.datasource.remote
+package com.pogreb.authorization.data.datasource
 
 import com.pogreb.authorization.domain.entity.AuthorizationData
 import javax.inject.Inject

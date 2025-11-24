@@ -20,13 +20,12 @@ class LoanHistoryViewModel @Inject constructor(
     fun initialize() {
         if (_state.value is LoanHistoryState.Content) return
 
-        _state.update {
-            LoanHistoryState.Loading
-        }
+        _state.update { LoanHistoryState.Loading }
 
         viewModelScope.launch {
             try {
                 val loans = getLoansUseCase()
+
                 _state.update {
                     LoanHistoryState.Content(
                         loans = loans,
@@ -45,15 +44,18 @@ class LoanHistoryViewModel @Inject constructor(
 
     fun refresh() {
         val currentState = _state.value as LoanHistoryState.Content
+
         _state.update {
             currentState.copy(
                 isRefreshing = true,
                 errorMassage = "",
             )
         }
+
         viewModelScope.launch {
             try {
                 val loans = getLoansUseCase()
+
                 _state.update {
                     LoanHistoryState.Content(
                         loans = loans,

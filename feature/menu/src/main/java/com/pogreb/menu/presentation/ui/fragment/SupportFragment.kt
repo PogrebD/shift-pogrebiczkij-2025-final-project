@@ -15,9 +15,7 @@ import com.pogreb.menu.databinding.FragmentSupportBinding
 class SupportFragment : Fragment() {
 
     companion object {
-        fun newInstance(): SupportFragment {
-            return SupportFragment()
-        }
+        fun newInstance(): SupportFragment = SupportFragment()
     }
 
     private lateinit var binding: FragmentSupportBinding

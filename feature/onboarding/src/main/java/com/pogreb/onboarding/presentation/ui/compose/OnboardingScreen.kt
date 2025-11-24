@@ -27,7 +27,6 @@ internal fun OnboardingScreen(
     }
 
     when (val currentState = state) {
-
         is OnboardingState.Content -> Scaffold(
             topBar = {
                 NavigationTopBar(

@@ -1,8 +1,7 @@
 package com.pogreb.authorization.data.repository
 
-import com.pogreb.authorization.data.datasource.remote.RemoteAuthorizationDataSource
+import com.pogreb.authorization.data.datasource.RemoteAuthorizationDataSource
 import com.pogreb.authorization.domain.entity.AuthorizationData
-import com.pogreb.authorization.domain.entity.User
 import com.pogreb.authorization.domain.repository.AuthorizationRepository
 import com.pogreb.core.network.TokenManager
 import javax.inject.Inject
@@ -20,10 +19,10 @@ class AuthorizationRepositoryImpl @Inject constructor(
         return false
     }
 
-    override suspend fun register(authorizationData: AuthorizationData): User =
+    override suspend fun register(authorizationData: AuthorizationData) =
         remoteDataSource.registration(authorizationData)
 
-    override suspend fun alreadyLogged(): Boolean {
-        return tokenManager.getToken() != null
-    }
+    override suspend fun alreadyLogged(): Boolean =
+        tokenManager.getToken() != null
+
 }

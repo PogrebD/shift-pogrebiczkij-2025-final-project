@@ -25,7 +25,6 @@ import com.pogreb.design.component.PasswordInput
 import com.pogreb.design.component.PrimaryButton
 import com.pogreb.design.theme.AppTheme
 
-
 @Composable
 internal fun AuthorizationContent(
     signUpMode: Boolean,
@@ -125,7 +124,7 @@ internal fun AuthorizationContent(
 }
 
 @Composable
-fun ApplyButton(
+private fun ApplyButton(
     buttonEnabled: Boolean,
     signUpMode: Boolean,
     onLoginClick: () -> Unit,

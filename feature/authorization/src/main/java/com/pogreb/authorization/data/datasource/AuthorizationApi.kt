@@ -1,7 +1,6 @@
-package com.pogreb.authorization.data.datasource.remote
+package com.pogreb.authorization.data.datasource
 
 import com.pogreb.authorization.domain.entity.AuthorizationData
-import com.pogreb.authorization.domain.entity.User
 import retrofit2.http.Body
 import retrofit2.http.POST
 
@@ -10,5 +9,5 @@ interface AuthorizationApi {
     suspend fun login(@Body authorizationData: AuthorizationData): String
 
     @POST("registration")
-    suspend fun registration(@Body authorizationData: AuthorizationData): User
+    suspend fun registration(@Body authorizationData: AuthorizationData)
 }

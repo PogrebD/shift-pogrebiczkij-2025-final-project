@@ -52,19 +52,25 @@ class LoanProcessingViewModel @Inject constructor(
 
     fun createLoan() {
         val currentState = _state.value as LoanProcessingState.Content
+
         viewModelScope.launch {
             try {
                 val loanResult = createNewLoanUseCase(
                     currentState.loanData,
                     currentState.userData
                 )
+
                 if (loanResult.status == LoanStatus.REJECTED) {
                     _state.update {
                         LoanProcessingState.FailureResult
                     }
                 } else {
                     val endDate =
-                        formatDateWithAddedDays(loanResult.date, currentState.loanData.period)
+                        formatDateWithAddedDays(
+                            loanResult.date,
+                            currentState.loanData.period
+                        )
+
                     _state.update {
                         LoanProcessingState.SuccessfulResult(
                             amount = currentState.loanData.amount,
@@ -82,22 +88,29 @@ class LoanProcessingViewModel @Inject constructor(
 
     fun refreshCreateLoan() {
         val currentState = _state.value as LoanProcessingState.Content
+
         _state.update {
             currentState.copy(errorMassage = "")
         }
+
         viewModelScope.launch {
             try {
                 val loanResult = createNewLoanUseCase(
                     currentState.loanData,
                     currentState.userData
                 )
+
                 if (loanResult.status == LoanStatus.REJECTED) {
                     _state.update {
                         LoanProcessingState.FailureResult
                     }
                 } else {
                     val endDate =
-                        formatDateWithAddedDays(loanResult.date, currentState.loanData.period)
+                        formatDateWithAddedDays(
+                            loanResult.date,
+                            currentState.loanData.period
+                        )
+
                     _state.update {
                         LoanProcessingState.SuccessfulResult(
                             amount = currentState.loanData.amount,
@@ -115,6 +128,7 @@ class LoanProcessingViewModel @Inject constructor(
 
     fun clearDialog() {
         val currentState = _state.value as LoanProcessingState.Content
+
         _state.update {
             currentState.copy(errorMassage = "")
         }

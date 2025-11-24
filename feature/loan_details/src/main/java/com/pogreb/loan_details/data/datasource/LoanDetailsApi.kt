@@ -6,7 +6,5 @@ import retrofit2.http.Path
 
 interface LoanDetailsApi {
     @GET("loans/{id}")
-    suspend fun getLoanDetails(
-        @Path("id") id: Long
-    ): LoanDetailsModel
+    suspend fun getLoanDetails(@Path("id") id: Long): LoanDetailsModel
 }

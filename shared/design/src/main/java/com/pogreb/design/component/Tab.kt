@@ -75,9 +75,7 @@ private fun LoginTextButton(modifier: Modifier, onLoginClick: () -> Unit, signUp
             )
         }
     )
-
 }
-
 
 @Composable
 private fun RegistrationTextButton(
@@ -104,25 +102,15 @@ private fun RegistrationTextButton(
 }
 
 @Composable
-private fun getLoginTextColor(
-    signUpMode: Boolean,
-) = when {
-    signUpMode ->
-        MaterialTheme.colorScheme.onSurfaceVariant
-
-    else ->
-        MaterialTheme.colorScheme.secondary
+private fun getLoginTextColor(signUpMode: Boolean) = when {
+    signUpMode -> MaterialTheme.colorScheme.onSurfaceVariant
+    else -> MaterialTheme.colorScheme.secondary
 }
 
 @Composable
-private fun getRegistrationTextColor(
-    signUpMode: Boolean,
-) = when {
-    signUpMode ->
-        MaterialTheme.colorScheme.secondary
-
-    else ->
-        MaterialTheme.colorScheme.onSurfaceVariant
+private fun getRegistrationTextColor(signUpMode: Boolean) = when {
+    signUpMode -> MaterialTheme.colorScheme.secondary
+    else -> MaterialTheme.colorScheme.onSurfaceVariant
 }
 
 

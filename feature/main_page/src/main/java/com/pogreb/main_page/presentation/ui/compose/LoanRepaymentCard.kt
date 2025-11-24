@@ -16,12 +16,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pogreb.design.theme.AppTheme
+import com.pogreb.main_page.R
 
 @Composable
-fun LoanRepaymentCard() {
+internal fun LoanRepaymentCard() {
     Box(
         modifier = Modifier
             .height(160.dp)
@@ -45,25 +47,28 @@ private fun LoanRepaymentCardText() {
             .padding(start = 16.dp, top = 27.dp)
     ) {
         Text(
-            text = "Получите займ",
+            text = stringResource(R.string.loan_repayment_card_text_part_one),
             modifier = Modifier
                 .padding(bottom = 4.dp),
             style = MaterialTheme.typography.headlineMedium,
         )
+
         Text(
-            text = "в 2 клика",
+            text = stringResource(R.string.loan_repayment_card_text_part_two),
             modifier = Modifier
                 .padding(bottom = 12.dp),
             style = MaterialTheme.typography.headlineMedium,
         )
+
         Text(
-            text = "Деньги наличными",
+            text = stringResource(R.string.loan_repayment_card_text_part_three),
             modifier = Modifier
                 .padding(bottom = 2.dp),
             style = MaterialTheme.typography.bodyMedium,
         )
+
         Text(
-            text = "на любые цели",
+            text = stringResource(R.string.loan_repayment_card_text_part_four),
             style = MaterialTheme.typography.bodyMedium,
         )
     }

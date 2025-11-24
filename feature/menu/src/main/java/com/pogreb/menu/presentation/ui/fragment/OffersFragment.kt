@@ -13,9 +13,7 @@ import javax.inject.Inject
 class OffersFragment : Fragment() {
 
     companion object {
-        fun newInstance(): OffersFragment {
-            return OffersFragment()
-        }
+        fun newInstance(): OffersFragment = OffersFragment()
     }
 
     @Inject

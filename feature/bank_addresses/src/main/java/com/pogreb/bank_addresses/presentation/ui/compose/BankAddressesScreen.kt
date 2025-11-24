@@ -10,7 +10,7 @@ import com.pogreb.design.R
 import com.pogreb.design.component.NavigationTopBar
 
 @Composable
-fun BankAddressesScreen(
+internal fun BankAddressesScreen(
     onBackToMainClick: () -> Unit,
 ) {
     Scaffold(

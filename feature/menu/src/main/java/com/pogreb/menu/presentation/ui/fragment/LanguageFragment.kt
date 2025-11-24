@@ -13,9 +13,7 @@ import com.pogreb.menu.databinding.FragmentLanguageBinding
 class LanguageFragment : Fragment() {
 
     companion object {
-        fun newInstance(): LanguageFragment {
-            return LanguageFragment()
-        }
+        fun newInstance(): LanguageFragment = LanguageFragment()
     }
 
     private lateinit var binding: FragmentLanguageBinding

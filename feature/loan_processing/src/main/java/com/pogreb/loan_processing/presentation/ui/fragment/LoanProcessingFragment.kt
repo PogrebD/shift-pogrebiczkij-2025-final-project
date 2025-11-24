@@ -27,15 +27,14 @@ class LoanProcessingFragment : Fragment() {
             percent: Double,
             period: Int,
             amount: Long,
-        ): LoanProcessingFragment {
-            return LoanProcessingFragment().apply {
+        ): LoanProcessingFragment =
+            LoanProcessingFragment().apply {
                 arguments = bundleOf(
                     ARG_PERCENT to percent,
                     ARG_PERIOD to period,
                     ARG_AMOUNT to amount,
                 )
             }
-        }
     }
 
     private var percent: Double = -1.0
@@ -59,6 +58,7 @@ class LoanProcessingFragment : Fragment() {
 
         val loanProcessingComponent = provider.provideLoanProcessingComponent()
         loanProcessingComponent.inject(this)
+
         super.onCreate(savedInstanceState)
     }
 

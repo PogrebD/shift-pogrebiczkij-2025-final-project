@@ -37,28 +37,36 @@ internal fun LoanHistoryContent(
         modifier = modifier
             .fillMaxSize(),
     ) {
-        LazyColumn(
-            contentPadding = PaddingValues(horizontal = 8.dp),
-        ) {
-            items(
-                items = loans,
-                key = { loan -> loan.id }
-            ) { loan ->
-                LoanElement(
-                    id = loan.id,
-                    amount = loan.amount,
-                    status = loan.status,
-                    date = loan.date,
-                    onItemClick = onItemClick,
-                )
-            }
-        }
+        LoansList(
+            loans = loans,
+            onItemClick = onItemClick,
+        )
 
         ErrorDialog(
             message = errorMessage,
             onRetry = onRefresh,
             onCancel = onCancel,
         )
+    }
+}
+
+@Composable
+private fun LoansList(loans: List<Loan>, onItemClick: (Long) -> Unit) {
+    LazyColumn(
+        contentPadding = PaddingValues(horizontal = 8.dp),
+    ) {
+        items(
+            items = loans,
+            key = { loan -> loan.id },
+        ) { loan ->
+            LoanElement(
+                id = loan.id,
+                amount = loan.amount,
+                status = loan.status,
+                date = loan.date,
+                onItemClick = onItemClick,
+            )
+        }
     }
 }
 

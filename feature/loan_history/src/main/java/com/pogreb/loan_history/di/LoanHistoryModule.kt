@@ -20,7 +20,6 @@ interface LoanHistoryModule {
         fun provideLoanHistoryApi(retrofit: Retrofit) =
             retrofit.create(LoanHistoryApi::class.java)
 
-
         @Provides
         fun provideRemoteLoanHistoryDataSource(api: LoanHistoryApi): RemoteLoanHistoryDataSource =
             RemoteLoanHistoryDataSource(api)

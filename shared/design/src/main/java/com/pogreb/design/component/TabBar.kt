@@ -106,25 +106,15 @@ private fun MainPageNavigationElement(onMainPageClick: () -> Unit, color: Color)
 }
 
 @Composable
-private fun getMainPageTextColor(
-    activeTab: ActiveTab,
-) = when (activeTab) {
-    ActiveTab.HOME ->
-        MaterialTheme.colorScheme.secondary
-
-    ActiveTab.MENU ->
-        MaterialTheme.colorScheme.onSurfaceVariant
+private fun getMainPageTextColor(activeTab: ActiveTab) = when (activeTab) {
+    ActiveTab.HOME -> MaterialTheme.colorScheme.secondary
+    ActiveTab.MENU -> MaterialTheme.colorScheme.onSurfaceVariant
 }
 
 @Composable
-private fun getMenuPageTextColor(
-    activeTab: ActiveTab,
-) = when (activeTab) {
-    ActiveTab.HOME ->
-        MaterialTheme.colorScheme.onSurfaceVariant
-
-    ActiveTab.MENU ->
-        MaterialTheme.colorScheme.secondary
+private fun getMenuPageTextColor(activeTab: ActiveTab) = when (activeTab) {
+    ActiveTab.HOME -> MaterialTheme.colorScheme.onSurfaceVariant
+    ActiveTab.MENU -> MaterialTheme.colorScheme.secondary
 }
 
 enum class ActiveTab {

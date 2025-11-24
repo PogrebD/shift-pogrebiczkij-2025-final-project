@@ -25,7 +25,7 @@ internal fun BankAddressesContent(
     onBackToMainClick: () -> Unit,
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(16.dp),
     ) {

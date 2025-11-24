@@ -18,9 +18,7 @@ import javax.inject.Inject
 class MenuFragment : Fragment() {
 
     companion object {
-        fun newInstance(): MenuFragment {
-            return MenuFragment()
-        }
+        fun newInstance(): MenuFragment = MenuFragment()
     }
 
     @Inject

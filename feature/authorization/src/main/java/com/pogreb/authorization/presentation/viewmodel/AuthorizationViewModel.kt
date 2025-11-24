@@ -71,18 +71,7 @@ class AuthorizationViewModel @Inject constructor(
     fun registration(authorizationData: AuthorizationData, onResult: (Boolean) -> Unit) {
         viewModelScope.launch {
             try {
-                val user = registrationUseCase(authorizationData)
-                _state.update {
-                    AuthorizationState.LoginContent(
-                        authorizationData = AuthorizationData(
-                            name = user.name,
-                            password = "",
-                        ),
-                        loginErrorType = InputErrorType.NONE,
-                        passwordErrorType = InputErrorType.NONE,
-                        errorMessage = "",
-                    )
-                }
+                registrationUseCase(authorizationData)
                 val logged = loginUseCase(authorizationData)
                 onResult(logged)
             } catch (e: Exception) {
@@ -141,7 +130,7 @@ class AuthorizationViewModel @Inject constructor(
         }
     }
 
-    fun getAvailabilityApplyButton(): Boolean = // выглядит страшно
+    fun getAvailabilityApplyButton(): Boolean =
         when (val currentState = _state.value) {
             is AuthorizationState.LoginContent ->
                 currentState.loginErrorType == InputErrorType.NONE
@@ -165,7 +154,7 @@ class AuthorizationViewModel @Inject constructor(
             when (currentState) {
                 is AuthorizationState.LoginContent -> {
                     var errorType = InputErrorType.NONE
-                    if (!validateLogin(login)) {
+                    if (!validateText(login)) {
                         errorType = InputErrorType.ONLY_LATIN_LETTERS_AND_NUMBERS
                     }
                     currentState.copy(
@@ -176,7 +165,7 @@ class AuthorizationViewModel @Inject constructor(
 
                 is AuthorizationState.RegistrationContent -> {
                     var errorType = InputErrorType.NONE
-                    if (!validateLogin(login)) {
+                    if (!validateText(login)) {
                         errorType = InputErrorType.ONLY_LATIN_LETTERS_AND_NUMBERS
                     }
                     currentState.copy(
@@ -199,7 +188,7 @@ class AuthorizationViewModel @Inject constructor(
             when (currentState) {
                 is AuthorizationState.LoginContent -> {
                     var errorType = InputErrorType.NONE
-                    if (!validatePassword(password)) {
+                    if (!validateText(password)) {
                         errorType = InputErrorType.ONLY_LATIN_LETTERS_AND_NUMBERS
                     }
                     currentState.copy(
@@ -210,7 +199,7 @@ class AuthorizationViewModel @Inject constructor(
 
                 is AuthorizationState.RegistrationContent -> {
                     var errorType = InputErrorType.NONE
-                    if (!validatePassword(password)) {
+                    if (!validateText(password)) {
                         errorType = InputErrorType.ONLY_LATIN_LETTERS_AND_NUMBERS
                     }
                     currentState.copy(
@@ -243,12 +232,7 @@ class AuthorizationViewModel @Inject constructor(
         }
     }
 
-    private fun validateLogin(login: String): Boolean {
-        val regex = Regex("^[a-zA-Z0-9]+$")
-        return regex.matches(login)
-    }
-
-    private fun validatePassword(login: String): Boolean {
+    private fun validateText(login: String): Boolean {
         val regex = Regex("^[a-zA-Z0-9]+$")
         return regex.matches(login)
     }
@@ -256,8 +240,6 @@ class AuthorizationViewModel @Inject constructor(
     private fun validateRepeatPassword(
         currentState: AuthorizationState.RegistrationContent,
         repeatPassword: String
-    ): Boolean {
-        return repeatPassword ==
-                currentState.registrationData.authorizationData.password
-    }
+    ): Boolean =
+        repeatPassword == currentState.registrationData.authorizationData.password
 }

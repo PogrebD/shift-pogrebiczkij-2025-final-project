@@ -15,9 +15,7 @@ import javax.inject.Inject
 class BankAddressesFragment : Fragment() {
 
     companion object {
-        fun newInstance(): BankAddressesFragment {
-            return BankAddressesFragment()
-        }
+        fun newInstance(): BankAddressesFragment = BankAddressesFragment()
     }
 
     @Inject

@@ -18,9 +18,7 @@ import javax.inject.Inject
 class MainPageFragment : Fragment() {
 
     companion object {
-        fun newInstance(): MainPageFragment {
-            return MainPageFragment()
-        }
+        fun newInstance(): MainPageFragment = MainPageFragment()
     }
 
     @Inject

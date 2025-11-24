@@ -94,7 +94,7 @@ fun getStatusColor(status: LoanStatus) = when (status) {
     LoanStatus.REJECTED -> MaterialTheme.colorScheme.error
 }
 
-fun formatDate(isoDate: String): String {
+private fun formatDate(isoDate: String): String {
     val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.getDefault())
     val outputFormat = SimpleDateFormat("d MMMM, EEE", Locale("ru"))
 

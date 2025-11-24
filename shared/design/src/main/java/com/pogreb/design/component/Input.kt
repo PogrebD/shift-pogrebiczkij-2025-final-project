@@ -181,10 +181,7 @@ private fun getPasswordPainter(passwordHidden: Boolean) = when {
 
 @Composable
 private fun getVisualTransformation(passwordHidden: Boolean) = when {
-    passwordHidden -> PasswordVisualTransformation(
-        mask = '*'
-    )
-
+    passwordHidden -> PasswordVisualTransformation(mask = '*')
     else -> VisualTransformation.None
 }
 

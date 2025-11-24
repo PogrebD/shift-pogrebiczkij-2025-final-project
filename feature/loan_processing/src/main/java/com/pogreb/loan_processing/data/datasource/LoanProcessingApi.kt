@@ -6,7 +6,6 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface LoanProcessingApi {
-
     @POST("loans")
     suspend fun createNewLoan(@Body loanRequest: LoanRequest): LoanResult
 }

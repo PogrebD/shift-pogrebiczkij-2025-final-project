@@ -12,17 +12,19 @@ class LoanProcessingRepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteLoanProcessingDataSource,
     private val converter: LoanRequestConverter
 ) : LoanProcessingRepository {
-
     override suspend fun createNewLoan(
         loanData: LoanData,
         userData: UserData,
     ): LoanResult {
-        val loanResult = remoteDataSource.createNewLoan(
-            converter.convertToLoanRequest(
-                loanData = loanData,
-                userData = userData
-            )
+        val loanRequest = converter.convertToLoanRequest(
+            loanData = loanData,
+            userData = userData
         )
+
+        val loanResult = remoteDataSource.createNewLoan(
+            loanRequest
+        )
+
         return loanResult
     }
 }

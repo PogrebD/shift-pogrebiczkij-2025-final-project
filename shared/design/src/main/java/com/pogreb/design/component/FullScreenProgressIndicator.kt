@@ -13,8 +13,7 @@ fun FullScreenProgressIndicator() {
         modifier = Modifier
             .fillMaxSize(),
         contentAlignment = Alignment.Center,
-
-        ) {
+    ) {
         CircularProgressIndicator()
     }
 }
