@@ -44,6 +44,19 @@ android {
 
 dependencies {
 
+    implementation(project(":feature:authorization"))
+    implementation(project(":feature:bank_addresses"))
+    implementation(project(":feature:loan_details"))
+    implementation(project(":feature:loan_history"))
+    implementation(project(":feature:loan_processing"))
+    implementation(project(":feature:main_page"))
+    implementation(project(":feature:menu"))
+    implementation(project(":feature:onboarding"))
+
+    implementation(project(":core"))
+
+    implementation(project(":shared:design"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

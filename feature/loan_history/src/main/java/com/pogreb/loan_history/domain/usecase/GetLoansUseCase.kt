@@ -1,0 +1,9 @@
+package com.pogreb.loan_history.domain.usecase
+
+import com.pogreb.loan_history.domain.entity.Loan
+import com.pogreb.loan_history.domain.repository.LoanHistoryRepository
+import javax.inject.Inject
+
+class GetLoansUseCase @Inject constructor(
+    private val repository: LoanHistoryRepository
+) : suspend () -> List<Loan> by repository::getAllLoans

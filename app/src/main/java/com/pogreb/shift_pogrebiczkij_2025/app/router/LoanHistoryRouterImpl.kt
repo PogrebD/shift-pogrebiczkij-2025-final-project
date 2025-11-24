@@ -1,9 +1,9 @@
 package com.pogreb.shift_pogrebiczkij_2025.app.router
 
 import androidx.fragment.app.FragmentManager
+import com.pogreb.loan_details.presentation.ui.fragment.LoanDetailsFragment
+import com.pogreb.loan_history.presentation.LoanHistoryRouter
 import com.pogreb.shift_pogrebiczkij_2025.R
-import com.pogreb.shift_pogrebiczkij_2025.feature.loan_details.presentation.ui.fragment.LoanDetailsFragment
-import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.presentation.LoanHistoryRouter
 import javax.inject.Inject
 
 class LoanHistoryRouterImpl @Inject constructor() : LoanHistoryRouter {

@@ -4,23 +4,23 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.mutableStateOf
 import androidx.fragment.app.FragmentManager
+import com.pogreb.authorization.presentation.ui.fragment.AuthorizationFragment
+import com.pogreb.bank_addresses.di.BankAddressesComponent
+import com.pogreb.design.component.ActiveTab
+import com.pogreb.design.component.TabBar
+import com.pogreb.design.theme.AppTheme
+import com.pogreb.loan_details.di.LoanDetailsComponent
+import com.pogreb.loan_history.di.LoanHistoryComponent
+import com.pogreb.loan_processing.di.LoanProcessingComponent
+import com.pogreb.main_page.di.MainPageComponent
+import com.pogreb.main_page.presentation.ui.fragment.MainPageFragment
+import com.pogreb.menu.di.MenuComponent
+import com.pogreb.menu.presentation.ui.fragment.MenuFragment
+import com.pogreb.onboarding.di.OnboardingComponent
+import com.pogreb.onboarding.presentation.ui.fragment.OnboardingFragment
 import com.pogreb.shift_pogrebiczkij_2025.R
 import com.pogreb.shift_pogrebiczkij_2025.app.di.ComponentProvider
 import com.pogreb.shift_pogrebiczkij_2025.databinding.ActivityMainBinding
-import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.presentation.ui.fragment.AuthorizationFragment
-import com.pogreb.shift_pogrebiczkij_2025.feature.bank_addresses.di.BankAddressesComponent
-import com.pogreb.shift_pogrebiczkij_2025.feature.loan_details.di.LoanDetailsComponent
-import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.di.LoanHistoryComponent
-import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.di.LoanProcessingComponent
-import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.di.MainPageComponent
-import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.presentation.ui.fragment.MainPageFragment
-import com.pogreb.shift_pogrebiczkij_2025.feature.menu.di.MenuComponent
-import com.pogreb.shift_pogrebiczkij_2025.feature.menu.presentation.ui.fragment.MenuFragment
-import com.pogreb.shift_pogrebiczkij_2025.feature.onboarding.di.OnboardingComponent
-import com.pogreb.shift_pogrebiczkij_2025.feature.onboarding.presentation.ui.fragment.OnboardingFragment
-import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.ActiveTab
-import com.pogreb.shift_pogrebiczkij_2025.shared.design.component.TabBar
-import com.pogreb.shift_pogrebiczkij_2025.shared.design.theme.AppTheme
 
 class MainActivity : AppCompatActivity(), ComponentProvider {
     private lateinit var binding: ActivityMainBinding

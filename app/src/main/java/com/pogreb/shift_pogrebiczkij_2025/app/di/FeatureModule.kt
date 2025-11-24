@@ -1,21 +1,21 @@
 package com.pogreb.shift_pogrebiczkij_2025.app.di
 
-import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.di.AuthorizationComponent
-import com.pogreb.shift_pogrebiczkij_2025.feature.authorization.di.DaggerAuthorizationComponent
-import com.pogreb.shift_pogrebiczkij_2025.feature.bank_addresses.di.BankAddressesComponent
-import com.pogreb.shift_pogrebiczkij_2025.feature.bank_addresses.di.DaggerBankAddressesComponent
-import com.pogreb.shift_pogrebiczkij_2025.feature.loan_details.di.DaggerLoanDetailsComponent
-import com.pogreb.shift_pogrebiczkij_2025.feature.loan_details.di.LoanDetailsComponent
-import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.di.DaggerLoanHistoryComponent
-import com.pogreb.shift_pogrebiczkij_2025.feature.loan_history.di.LoanHistoryComponent
-import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.di.DaggerLoanProcessingComponent
-import com.pogreb.shift_pogrebiczkij_2025.feature.loan_processing.di.LoanProcessingComponent
-import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.di.DaggerMainPageComponent
-import com.pogreb.shift_pogrebiczkij_2025.feature.main_page.di.MainPageComponent
-import com.pogreb.shift_pogrebiczkij_2025.feature.menu.di.DaggerMenuComponent
-import com.pogreb.shift_pogrebiczkij_2025.feature.menu.di.MenuComponent
-import com.pogreb.shift_pogrebiczkij_2025.feature.onboarding.di.DaggerOnboardingComponent
-import com.pogreb.shift_pogrebiczkij_2025.feature.onboarding.di.OnboardingComponent
+import com.pogreb.authorization.di.AuthorizationComponent
+import com.pogreb.authorization.di.DaggerAuthorizationComponent
+import com.pogreb.bank_addresses.di.BankAddressesComponent
+import com.pogreb.bank_addresses.di.DaggerBankAddressesComponent
+import com.pogreb.loan_details.di.DaggerLoanDetailsComponent
+import com.pogreb.loan_details.di.LoanDetailsComponent
+import com.pogreb.loan_history.di.DaggerLoanHistoryComponent
+import com.pogreb.loan_history.di.LoanHistoryComponent
+import com.pogreb.loan_processing.di.DaggerLoanProcessingComponent
+import com.pogreb.loan_processing.di.LoanProcessingComponent
+import com.pogreb.main_page.di.DaggerMainPageComponent
+import com.pogreb.main_page.di.MainPageComponent
+import com.pogreb.menu.di.DaggerMenuComponent
+import com.pogreb.menu.di.MenuComponent
+import com.pogreb.onboarding.di.DaggerOnboardingComponent
+import com.pogreb.onboarding.di.OnboardingComponent
 import dagger.Module
 import dagger.Provides
 
